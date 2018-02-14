@@ -10,3 +10,26 @@ Emulating DNA passage from organism to offspring through
 	* Paired mating
 	* Asexual replication
 	* Neucliotide mutations 
+
+	Package Tree
+
+com.ampro.Evolution
+
+1.)DNA
+1.a.)-<Codon
+1.b.)Gene
+-<Trait(K)
+->interpreter
+->-<DNAReader
+->-<Interpreter
+>Environment
+->Resources
+
+>Populations
+->Organisms
+->->Descriptors
+->->->Type
+->->Predators
+
+>util
+	
