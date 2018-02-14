@@ -62,9 +62,9 @@ public class EvolutionRunner extends SimpleEvolutionEmulator{
 
 	public static final boolean DEBUG = true;
 	public static final boolean DEBUG_CODON = true;
-	public static final boolean DEBUG_GENE = false;
+	public static final boolean DEBUG_GENE = true;
 	public static final boolean DEBUG_READER = false;
-	public static final boolean DEBUG_MATING = false;
+	public static final boolean DEBUG_MATING = true;
 
 	private static Population prev;
 
@@ -92,8 +92,8 @@ public class EvolutionRunner extends SimpleEvolutionEmulator{
 		Thread thr = new Thread(new SimpleEvolutionEmulator(environment_A));
 		Thread thr2 = new Thread(new SimpleEvolutionEmulator(environment_B));
 		thr.run();
-		System.out.println("HIIHIIHHI");
-		thr2.run();
+		//System.out.println("HIIHIIHHI");
+		//thr2.run();
 
 
 	}

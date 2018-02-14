@@ -46,8 +46,8 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 		codonScorer();
 		
 		ArrayList<String> n =  new ArrayList<String>();
-		n.add("String");
-		FileWriter.writeFile(FileWriter.workingDir.toString(), "fileName", n);
+		n.add("Enviro");
+		FileWriter.writeFile(FileWriter.workingDir.toString(), "Enviro_Log", n);
 
 		System.out.println(allPossibleCodons);
 		System.out.println(this.environment.getProducerScoredCodon());
