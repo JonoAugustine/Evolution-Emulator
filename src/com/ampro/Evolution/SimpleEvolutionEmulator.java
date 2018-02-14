@@ -33,13 +33,13 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 	Timer fullTimer;
 	Timer modTimer;
 
-	DataDisplay[] displays;
+	//DataDisplay[] displays;
 
 
 	@Override
 	public void run() {
 		//for (DataDisplay display : this.displays)
-		this.displays[0].display();
+		//this.displays[0].display();
 		this.fullTimer = new Timer();
 		this.modTimer = new Timer();
 
@@ -71,8 +71,8 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 			System.out.println();
 
 			//for (DataDisplay display : this.displays)
-			for(String name : this.displays[0].getSeriesNames())
-				this.displays[0].update(name, 0, new double[]{0, p.size()});
+			//for(String name : this.displays[0].getSeriesNames())
+				//this.displays[0].update(name, 0, new double[]{0, p.size()});
 		}
 
 		ToolBox.sleep(10);
@@ -119,7 +119,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 				System.out.println("Current Time<<<<>>>>" + ToolBox.getCurrntTime());
 				System.out.println();
 				ToolBox.sleep(1);
-				this.displays[0].update(p.getName(), i+1, new double[]{.3*p.size(),p.size()});
+				//this.displays[0].update(p.getName(), i+1, new double[]{.3*p.size(),p.size()});
 			}
 			cycleDurations[i] = cycleTimer.getElapsedTime();
 			System.out.println("Cycle " + (i+1) + " duration<<<<>>>>" + cycleTimer.reset());
@@ -232,14 +232,14 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 	 */
 	public SimpleEvolutionEmulator(Environment enviro) {
 		this.environment = enviro;
-		this.displays = new DataDisplay[this.environment.size()];
-		this.displays[0] = new DataDisplay("Population Size");
-		this.displays[0].setUp("Year", "Size (Organism)", this.environment.getPopulations().get(0).getName()
-				, new double[]{0,1}, new double[]{0,this.environment.getPopulations().get(0).size()});
-		for(int i=1; i < this.environment.size(); i++)
-			this.displays[0].addGraph(this.environment.getPopulations().get(i).getName(), new double[]{
-					0//				this.environment.getPopulations().get(i).size()
-			});
+		//this.displays = new DataDisplay[this.environment.size()];
+		//this.displays[0] = new DataDisplay("Population Size");
+		//this.displays[0].setUp("Year", "Size (Organism)", this.environment.getPopulations().get(0).getName()
+			//	, new double[]{0,1}, new double[]{0,this.environment.getPopulations().get(0).size()});
+		//for(int i=1; i < this.environment.size(); i++)
+			//this.displays[0].addGraph(this.environment.getPopulations().get(i).getName(), new double[]{
+				//	0//				this.environment.getPopulations().get(i).size()
+			//});
 	}
 
 	private void set() {
