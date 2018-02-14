@@ -12,7 +12,7 @@ import com.ampro.Evolution.Populations.Population;
 import com.ampro.Evolution.Populations.Organisms.Organism;
 import com.ampro.main.BioConstants;
 import com.ampro.util.Timer;
-import com.ampro.util.ToolBox;
+import com.ampro.util.*;
 
 /**
  * A class containing Essential data for Evolution Emulation
@@ -44,6 +44,10 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 		this.modTimer = new Timer();
 
 		codonScorer();
+		
+		ArrayList<String> n =  new ArrayList<String>();
+		n.add("String");
+		FileWriter.writeFile(FileWriter.workingDir.toString(), "fileName", n);
 
 		System.out.println(allPossibleCodons);
 		System.out.println(this.environment.getProducerScoredCodon());
@@ -100,7 +104,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 				for (Organism o : p) {
 					reader.organismScorer(o);
 					//System.out.println(o);
-					if(o.getFitness() < p.getAverageFitness() - 3*p.getScoreDeviation()
+					if(		   o.getFitness() < p.getAverageFitness() - 3*p.getScoreDeviation()
 							|| o.getFitness() > p.getAverageFitness() + 3*p.getScoreDeviation()
 							|| o.getAge() >= 20
 							|| o.getFitness() <= 0)
