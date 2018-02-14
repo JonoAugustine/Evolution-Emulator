@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class FileWriter {
 	
+	public static Path workingDir = Paths.get(".").toAbsolutePath().normalize();
+	
 	/**
 	 * Writes strings to .txt file to file_location with name fileName </br>
 	 * Writes string lines in order of ArrayList index
@@ -32,6 +34,7 @@ public class FileWriter {
 		} catch (IOException e) {
 			System.out.println("File Write failed");
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 	
