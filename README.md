@@ -11,13 +11,14 @@ Emulating DNA passage from organism to offspring through
 	* Asexual replication
 	* Neucliotide mutations 
 
-	Package Tree
+
+Package Tree
 
 com.ampro.Evolution
 
-1.)DNA
-1.a.)-<Codon
-1.b.)Gene
+DNA
+-<Codon
+-Gene
 -<Trait(K)
 ->interpreter
 ->-<DNAReader
