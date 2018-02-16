@@ -18,7 +18,6 @@ import com.ampro.util.*;
  * A class containing Essential data for Evolution Emulation
  * <p>
  *
-
  * 4 main methods:<br>
  * mutate(boolean DNA, String input, int seconds): <br>
  * geneAffectGenerator:<br>
@@ -32,6 +31,8 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 
 	Timer fullTimer;
 	Timer modTimer;
+	
+	FileWriter Log;
 
 	//DataDisplay[] displays;
 
@@ -40,22 +41,25 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 	public void run() {
 		//for (DataDisplay display : this.displays)
 		//this.displays[0].display();
+		
+		this.Log.addLines("Initiallizing Timers");
 		this.fullTimer = new Timer();
 		this.modTimer = new Timer();
 
+		this.Log.addLines("Generating Codon Scores");
 		codonScorer();
 		
-		ArrayList<String> n =  new ArrayList<String>();
-		n.add("Enviro");
-		FileWriter.writeFile(FileWriter.workingDir.toString(), "Enviro_Log", n);
-
 		System.out.println(allPossibleCodons);
 		System.out.println(this.environment.getProducerScoredCodon());
 		System.out.println(this.environment.getPredatorScoredCodon());
 		ToolBox.sleep(3);
+		
+		this.Log.addLines("Creating new DNA Reader");
 		DNAReader reader = new DNAReader(allPossibleCodons);
 
 		this.modTimer.reset();
+		
+		this.Log.addLines("Building Initial Population genes and scoring");
 		for (Population p : this.environment){
 			this.modTimer.reset();
 			for (Organism o : p) {
@@ -69,15 +73,16 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 			System.out.println("\n"+p);
 			for(Organism o: p)
 				System.out.println(o);
-
-			System.out.println("Cycle Duration>>>"+this.modTimer.reset());
+			
+			String timer = this.modTimer.reset();
+			this.Log.addLines("\t Population " + p.getName() + " | Duration " + timer);
+			System.out.println("Cycle Duration>>>"+timer);
 			System.out.println("Full Run Duration>>>"+this.fullTimer);
 			System.out.println();
 
-			//for (DataDisplay display : this.displays)
-			//for(String name : this.displays[0].getSeriesNames())
-				//this.displays[0].update(name, 0, new double[]{0, p.size()});
 		}
+		
+		this.Log.addLines("Initial populations built and scored.", "\t Run time at: " + this.fullTimer);
 
 		ToolBox.sleep(10);
 		//--
@@ -86,20 +91,42 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 
 		Timer cycleTimer = new Timer();
 		this.modTimer.reset();
-		for (int i = 0; i < 100; i++) {
+		
+		this.Log.addLines("Beginig environment emulation...");
+		/** The Meat and bones. F1 generations onwards */
+		for (int i = 0; i < 10; i++) {
+			
+			this.Log.addLines("\tYear " + (i+1) );
 			System.out.println("Cycle " + (i+1) + "\n");
+			
+			//For each population, mate and score all new organisms 
 			for (Population p : this.environment) {
+				this.Log.addLines("\t\tPopulation " + p + "...");
 				this.modTimer.reset();
-				if(p.isEmpty()) continue;
+				if(p.isEmpty()) {
+					this.Log.addLines("\t\tPupulation is empty" );
+					continue;
+				}
 				if(p.size() < 2){
 					for(Organism o : p)
 						o.die();
+					this.Log.addLines("\t\tPupulation died out" );
 					continue;
 				}
 				System.out.println(p);
+				
 				float preMate = p.getAverageFitness();
+				this.Log.addLines("\t\tAverage Fitness (before mating): " + preMate);
+				this.Log.addLines("\t\tMating Season beginning..."
+									, "\t\t\tNumber of Offspring = " + (p.size()/2)
+									, "\t\t\tChildren per pair = " + 4
+									, "\t\t\tMin Age of Parent = " + 5
+								);
 				p.addAll(p.matingSeason(p.size()/2, 4, 5));
+				this.Log.addLines("\t\tMating Season Completed.");
+				
 				float postMate = p.getAverageFitness();
+				this.Log.addLines("\t\tAverage Fitness (after mating): " + postMate);
 				p.sort(Population.truePopulationComparator);
 				for (Organism o : p) {
 					reader.organismScorer(o);
@@ -236,6 +263,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 	 */
 	public SimpleEvolutionEmulator(Environment enviro) {
 		this.environment = enviro;
+		this.Log = new FileWriter("EmulatorLog");
 		//this.displays = new DataDisplay[this.environment.size()];
 		//this.displays[0] = new DataDisplay("Population Size");
 		//this.displays[0].setUp("Year", "Size (Organism)", this.environment.getPopulations().get(0).getName()

@@ -66,10 +66,6 @@ public class DNAReader extends BioConstants{
 		double retu = 0;
 
 
-
-
-
-
 		return retu;
 	}
 
