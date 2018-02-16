@@ -45,7 +45,7 @@ public class Timer {
 
 	/**
 	 * Resets the starting time and returns the previous duration
-	 * @return
+	 * @return String lastTime
 	 */
 	public String reset(){
 		String lastTime = this.formattedTime();
