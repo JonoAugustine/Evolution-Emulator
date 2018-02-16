@@ -94,7 +94,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 		
 		this.Log.addLines("Beginig environment emulation...");
 		/** The Meat and bones. F1 generations onwards */
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			
 			this.Log.addLines("\tYear " + (i+1) );
 			System.out.println("Cycle " + (i+1) + "\n");
@@ -139,6 +139,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 					o.setAge(o.getAge()+1);
 				}
 				p.clean();
+				this.Log.addLines("\t\t" + p);
 				System.out.println(p.getName() + "\nsize><><" + p.size()
 				+"\nAvrage Fitness: \npre mating>>"+preMate);
 				System.out.println("post mating>>"+postMate);
@@ -160,6 +161,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 			System.out.println();
 		}
 
+		this.Log.addLines("Full Run Time : " + this.fullTimer);
 		System.out.println("\n\nDONE");
 		System.exit(0);
 		///////////////////// TODO !!Write the process//////////////////////////
