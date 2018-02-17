@@ -323,7 +323,7 @@ public class Population extends BioConstants implements Iterable<Organism>{
 			P_NEXT_NAME_LETTER_INDEX++;
 		}
 
-		this.name = "Pop:" + name;
+		this.name = "Population:" + name;
 	}
 
 	@Override

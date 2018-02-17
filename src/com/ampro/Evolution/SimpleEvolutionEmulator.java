@@ -50,6 +50,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 		codonScorer();
 		
 		System.out.println(allPossibleCodons);
+		//this.Log.addLines(allPossibleCodons); Not functional
 		System.out.println(this.environment.getProducerScoredCodon());
 		System.out.println(this.environment.getPredatorScoredCodon());
 		ToolBox.sleep(3);
@@ -94,14 +95,14 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 		
 		this.Log.addLines("Beginig environment emulation...");
 		/** The Meat and bones. F1 generations onwards */
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 50; i++) {
 			
 			this.Log.addLines("\tYear " + (i+1) );
 			System.out.println("Cycle " + (i+1) + "\n");
 			
 			//For each population, mate and score all new organisms 
 			for (Population p : this.environment) {
-				this.Log.addLines("\t\tPopulation " + p + "...");
+				this.Log.addLines("\t" + p + "...");
 				this.modTimer.reset();
 				if(p.isEmpty()) {
 					this.Log.addLines("\t\tPupulation is empty" );
@@ -116,17 +117,17 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 				System.out.println(p);
 				
 				float preMate = p.getAverageFitness();
-				this.Log.addLines("\t\tAverage Fitness (before mating): " + preMate);
-				this.Log.addLines("\t\tMating Season beginning..."
-									, "\t\t\tNumber of Offspring = " + (p.size()/2)
-									, "\t\t\tChildren per pair = " + 4
-									, "\t\t\tMin Age of Parent = " + 5
+				this.Log.addLines("\t\t\tAverage Fitness (before mating): " + preMate);
+				this.Log.addLines("\t\t\tMating Season beginning..."
+									, "\t\t\t\tNumber of Offspring = " + (p.size()/2)
+									, "\t\t\t\tChildren per pair = " + 4
+									, "\t\t\t\tMin Age of Parent = " + 5
 								);
 				p.addAll(p.matingSeason(p.size()/2, 4, 5));
-				this.Log.addLines("\t\tMating Season Completed.");
+				this.Log.addLines("\t\t\tMating Season Completed.");
 				
 				float postMate = p.getAverageFitness();
-				this.Log.addLines("\t\tAverage Fitness (after mating): " + postMate);
+				this.Log.addLines("\t\t\tAverage Fitness (after mating): " + postMate);
 				p.sort(Population.truePopulationComparator);
 				for (Organism o : p) {
 					reader.organismScorer(o);
@@ -146,17 +147,21 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 				System.out.println("post cull>>"+p.getAverageFitness());
 				populationCycleDurations.add(this.modTimer.getElapsedTime());
 				System.out.println("Avreage Population Cycle duration<<<<>>>>" + Timer.average(populationCycleDurations));
-				System.out.println(p.getName() + " Cycle "+i+" Duration<<<<>>>>"+this.modTimer.reset());
+				System.out.println(p.getName() + " Cycle "+i+" Duration<<<<>>>>"+this.modTimer);
+				this.Log.addLines("\t\t" + p.getName() + " Year "+i+" Duration = "+this.modTimer.reset());
 				System.out.println("Full Run Duration<<<>>>>"+this.fullTimer);
+				this.Log.addLines("\tFull Run: " + this.fullTimer, "");
 				System.out.println("Current Time<<<<>>>>" + ToolBox.getCurrntTime());
 				System.out.println();
 				ToolBox.sleep(1);
 				//this.displays[0].update(p.getName(), i+1, new double[]{.3*p.size(),p.size()});
 			}
 			cycleDurations[i] = cycleTimer.getElapsedTime();
-			System.out.println("Cycle " + (i+1) + " duration<<<<>>>>" + cycleTimer.reset());
+			System.out.println("Cycle " + (i+1) + " duration<<<<>>>>" + cycleTimer);
+			this.Log.addLines("\tYear " + (i+1) + " duration: " + cycleTimer.reset());
 			System.out.println("Avreage Cycle duration<<<<>>>>" + Timer.average(cycleDurations));
 			System.out.println("Full Run Duration<<<>>>>"+this.fullTimer);
+			this.Log.addLines("\tFull Run: " + this.fullTimer);
 			System.out.println("Current Time<<<<>>>>" + ToolBox.getCurrntTime());
 			System.out.println();
 		}

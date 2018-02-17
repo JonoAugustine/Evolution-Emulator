@@ -108,7 +108,7 @@ public class Environment extends BioConstants implements Iterable<Population>{
 	}
 
 	/**
-	 * @return the producerScoredCodon
+	 * @return List<\Codon> the producerScoredCodon
 	 */
 	public List<Codon> getProducerScoredCodon() {
 		return this.producerScoredCodon;

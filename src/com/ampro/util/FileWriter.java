@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
+import com.ampro.Evolution.Dna.Codon;
+
 /**
  * Contains 2 methods for writing and appending to txt files
  */
@@ -95,7 +97,7 @@ public class FileWriter {
 
 	/**
 	 * Appends strings to .txt file to file_location with name fileName </br>
-	 * Writes string lines in order of ArrayList index
+	 * Writes string lines in order of
 	 * @param file_location String
 	 * @param fileName String
 	 * @param lines ArrayList
@@ -113,4 +115,23 @@ public class FileWriter {
 			assert false;
 		}
 	}
+
+	/**
+	 * Appends strings to .txt file to file_location with name fileName </br>
+	 * Writes string lines in order of
+	 * @param ArrayList
+	 *
+	public void addLines(ArrayList<T> t) {
+		ArrayList<String> linesList = new ArrayList<>();
+		for(int i=0; i < t.size(); i++)
+			linesList.add(t.get(i).toString);
+			
+		try {
+			Files.write(this.file, linesList, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			System.out.println("File Write failed");
+			e.printStackTrace();
+			assert false;
+		}
+	}*/
 }

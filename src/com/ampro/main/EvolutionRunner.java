@@ -64,7 +64,7 @@ public class EvolutionRunner extends SimpleEvolutionEmulator{
 	public static final boolean DEBUG_CODON = true;
 	public static final boolean DEBUG_GENE = true;
 	public static final boolean DEBUG_READER = false;
-	public static final boolean DEBUG_MATING = true;
+	public static final boolean DEBUG_MATING = false;
 
 	private static Population prev;
 

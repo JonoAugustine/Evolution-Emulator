@@ -1,0 +1,2245 @@
+EMULATORLOG
++++++++++++++++
+Initiallizing Timers
+Generating Codon Scores
+Creating new DNA Reader
+Building Initial Population genes and scoring
+	 Population Population:A_00000 | Duration 0:0:0.046396841
+	 Population Population:A_00001 | Duration 0:0:0.01377147
+	 Population Population:A_00002 | Duration 0:0:0.038060806
+	 Population Population:A_00003 | Duration 0:0:0.01561525
+	 Population Population:A_00004 | Duration 0:0:0.011263986
+	 Population Population:A_00005 | Duration 0:0:0.016017484
+	 Population Population:A_00006 | Duration 0:0:0.009986176
+	 Population Population:A_00007 | Duration 0:0:0.015673963
+	 Population Population:A_00008 | Duration 0:0:0.06654314
+Initial populations built and scored.
+	 Run time at: 0:0:3.293514201
+Beginig environment emulation...
+	Year 1
+	Population:A_00000 |Size=10|AvgScore=55.486115|ScoreDev=31.188763...
+			Average Fitness (before mating): 55.486115
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 55.486115
+		Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662
+		Population:A_00000 Year 0 Duration = 0:0:0.078301621
+	Full Run: 0:0:13.403021161
+
+	Population:A_00001 |Size=10|AvgScore=30.234873|ScoreDev=39.62623...
+			Average Fitness (before mating): 30.234873
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 30.234873
+		Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509
+		Population:A_00001 Year 0 Duration = 0:0:0.025854873
+	Full Run: 0:0:14.449739643
+
+	Population:A_00002 |Size=10|AvgScore=43.67695|ScoreDev=30.601212...
+			Average Fitness (before mating): 43.67695
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.67695
+		Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223
+		Population:A_00002 Year 0 Duration = 0:0:0.029229547
+	Full Run: 0:0:15.494088122
+
+	Population:A_00003 |Size=10|AvgScore=45.19268|ScoreDev=41.07431...
+			Average Fitness (before mating): 45.19268
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.19268
+		Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035
+		Population:A_00003 Year 0 Duration = 0:0:0.022027277
+	Full Run: 0:0:16.530040759
+
+	Population:A_00004 |Size=10|AvgScore=40.928505|ScoreDev=43.946274...
+			Average Fitness (before mating): 40.928505
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.928505
+		Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885
+		Population:A_00004 Year 0 Duration = 0:0:0.028592829
+	Full Run: 0:0:17.573745957
+
+	Population:A_00005 |Size=10|AvgScore=46.224625|ScoreDev=49.128...
+			Average Fitness (before mating): 46.224625
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 46.224625
+		Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296
+		Population:A_00005 Year 0 Duration = 0:0:0.028467383
+	Full Run: 0:0:18.615554861
+
+	Population:A_00006 |Size=10|AvgScore=35.81182|ScoreDev=26.25845...
+			Average Fitness (before mating): 35.81182
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 35.81182
+		Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374
+		Population:A_00006 Year 0 Duration = 0:0:0.028618357
+	Full Run: 0:0:19.6587528
+
+	Population:A_00007 |Size=10|AvgScore=32.838314|ScoreDev=43.753643...
+			Average Fitness (before mating): 32.838314
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 32.838314
+		Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144
+		Population:A_00007 Year 0 Duration = 0:0:0.026000013
+	Full Run: 0:0:20.699656953
+
+	Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691...
+			Average Fitness (before mating): 49.05095
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.05095
+		Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691
+		Population:A_00008 Year 0 Duration = 0:0:0.026935761
+	Full Run: 0:0:21.736317419
+
+	Year 1 duration: 0:0:9.442098672
+	Full Run: 0:0:22.745018126
+	Year 2
+	Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662...
+			Average Fitness (before mating): 62.578106
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 62.578106
+		Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662
+		Population:A_00000 Year 1 Duration = 0:0:0.023697474
+	Full Run: 0:0:22.784966839
+
+	Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509...
+			Average Fitness (before mating): 45.22549
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.22549
+		Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509
+		Population:A_00001 Year 1 Duration = 0:0:0.024839626
+	Full Run: 0:0:23.827705656
+
+	Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223...
+			Average Fitness (before mating): 50.386463
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 50.386463
+		Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223
+		Population:A_00002 Year 1 Duration = 0:0:0.028178197
+	Full Run: 0:0:24.8731879
+
+	Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035...
+			Average Fitness (before mating): 52.073986
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 52.073986
+		Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035
+		Population:A_00003 Year 1 Duration = 0:0:0.020419074
+	Full Run: 0:0:25.908969871
+
+	Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885...
+			Average Fitness (before mating): 63.3142
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 63.3142
+		Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885
+		Population:A_00004 Year 1 Duration = 0:0:0.018585868
+	Full Run: 0:0:26.937774211
+
+	Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296...
+			Average Fitness (before mating): 69.88337
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 69.88337
+		Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296
+		Population:A_00005 Year 1 Duration = 0:0:0.030958821
+	Full Run: 0:0:27.99011411
+
+	Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374...
+			Average Fitness (before mating): 42.332623
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.332623
+		Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374
+		Population:A_00006 Year 1 Duration = 0:0:0.02797471
+	Full Run: 0:0:29.034609551
+
+	Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144...
+			Average Fitness (before mating): 43.68931
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.68931
+		Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144
+		Population:A_00007 Year 1 Duration = 0:0:0.020415062
+	Full Run: 0:0:30.068218808
+
+	Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691...
+			Average Fitness (before mating): 49.05095
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.05095
+		Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691
+		Population:A_00008 Year 1 Duration = 0:0:0.020206106
+	Full Run: 0:0:31.104817279
+
+	Year 2 duration: 0:0:9.37091107
+	Full Run: 0:0:32.112557805
+	Year 3
+	Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662...
+			Average Fitness (before mating): 62.578106
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 62.578106
+		Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662
+		Population:A_00000 Year 2 Duration = 0:0:0.019892123
+	Full Run: 0:0:32.148467412
+
+	Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509...
+			Average Fitness (before mating): 45.22549
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.22549
+		Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509
+		Population:A_00001 Year 2 Duration = 0:0:0.019381947
+	Full Run: 0:0:33.18201285
+
+	Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223...
+			Average Fitness (before mating): 50.386463
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 50.386463
+		Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223
+		Population:A_00002 Year 2 Duration = 0:0:0.02891994
+	Full Run: 0:0:34.225529148
+
+	Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035...
+			Average Fitness (before mating): 52.073986
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 52.073986
+		Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035
+		Population:A_00003 Year 2 Duration = 0:0:0.029665329
+	Full Run: 0:0:35.269833502
+
+	Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885...
+			Average Fitness (before mating): 63.3142
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 63.3142
+		Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885
+		Population:A_00004 Year 2 Duration = 0:0:0.029167188
+	Full Run: 0:0:36.318169303
+
+	Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296...
+			Average Fitness (before mating): 69.88337
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 69.88337
+		Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296
+		Population:A_00005 Year 2 Duration = 0:0:0.030027813
+	Full Run: 0:0:37.364667159
+
+	Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374...
+			Average Fitness (before mating): 42.332623
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.332623
+		Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374
+		Population:A_00006 Year 2 Duration = 0:0:0.043123547
+	Full Run: 0:0:38.430693559
+
+	Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144...
+			Average Fitness (before mating): 43.68931
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.68931
+		Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144
+		Population:A_00007 Year 2 Duration = 0:0:0.039563619
+	Full Run: 0:0:39.483226734
+
+	Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691...
+			Average Fitness (before mating): 49.05095
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.05095
+		Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691
+		Population:A_00008 Year 2 Duration = 0:0:0.022283277
+	Full Run: 0:0:40.521752132
+
+	Year 3 duration: 0:0:9.414195437
+	Full Run: 0:0:41.530347448
+	Year 4
+	Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662...
+			Average Fitness (before mating): 62.578106
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 62.578106
+		Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662
+		Population:A_00000 Year 3 Duration = 0:0:0.030515015
+	Full Run: 0:0:41.580584649
+
+	Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509...
+			Average Fitness (before mating): 45.22549
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.22549
+		Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509
+		Population:A_00001 Year 3 Duration = 0:0:0.026226109
+	Full Run: 0:0:42.627785592
+
+	Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223...
+			Average Fitness (before mating): 50.386463
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 50.386463
+		Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223
+		Population:A_00002 Year 3 Duration = 0:0:0.024806441
+	Full Run: 0:0:43.669430758
+
+	Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035...
+			Average Fitness (before mating): 52.073986
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 52.073986
+		Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035
+		Population:A_00003 Year 3 Duration = 0:0:0.029127439
+	Full Run: 0:0:44.723870073
+
+	Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885...
+			Average Fitness (before mating): 63.3142
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 63.3142
+		Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885
+		Population:A_00004 Year 3 Duration = 0:0:0.028100522
+	Full Run: 0:0:45.768093835
+
+	Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296...
+			Average Fitness (before mating): 69.88337
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 69.88337
+		Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296
+		Population:A_00005 Year 3 Duration = 0:0:0.020798333
+	Full Run: 0:0:46.802924742
+
+	Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374...
+			Average Fitness (before mating): 42.332623
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.332623
+		Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374
+		Population:A_00006 Year 3 Duration = 0:0:0.021576542
+	Full Run: 0:0:47.844921452
+
+	Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144...
+			Average Fitness (before mating): 43.68931
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.68931
+		Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144
+		Population:A_00007 Year 3 Duration = 0:0:0.034686497
+	Full Run: 0:0:48.896206719
+
+	Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691...
+			Average Fitness (before mating): 49.05095
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.05095
+		Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691
+		Population:A_00008 Year 3 Duration = 0:0:0.026209699
+	Full Run: 0:0:49.937195841
+
+	Year 4 duration: 0:0:9.415505339
+	Full Run: 0:0:50.945687226
+	Year 5
+	Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662...
+			Average Fitness (before mating): 62.578106
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 62.578106
+		Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662
+		Population:A_00000 Year 4 Duration = 0:0:0.026173961
+	Full Run: 0:0:50.989921198
+
+	Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509...
+			Average Fitness (before mating): 45.22549
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.22549
+		Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509
+		Population:A_00001 Year 4 Duration = 0:0:0.024515433
+	Full Run: 0:0:52.027717252
+
+	Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223...
+			Average Fitness (before mating): 50.386463
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 50.386463
+		Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223
+		Population:A_00002 Year 4 Duration = 0:0:0.030695892
+	Full Run: 0:0:53.07427309
+
+	Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035...
+			Average Fitness (before mating): 52.073986
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 52.073986
+		Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035
+		Population:A_00003 Year 4 Duration = 0:0:0.030912508
+	Full Run: 0:0:54.11577567
+
+	Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885...
+			Average Fitness (before mating): 63.3142
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 63.3142
+		Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885
+		Population:A_00004 Year 4 Duration = 0:0:0.029561034
+	Full Run: 0:0:55.162889091
+
+	Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296...
+			Average Fitness (before mating): 69.88337
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 69.88337
+		Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296
+		Population:A_00005 Year 4 Duration = 0:0:0.025601061
+	Full Run: 0:0:56.203169291
+
+	Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374...
+			Average Fitness (before mating): 42.332623
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.332623
+		Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374
+		Population:A_00006 Year 4 Duration = 0:0:0.029500134
+	Full Run: 0:0:57.249910747
+
+	Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144...
+			Average Fitness (before mating): 43.68931
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.68931
+		Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144
+		Population:A_00007 Year 4 Duration = 0:0:0.029774731
+	Full Run: 0:0:58.294694644
+
+	Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691...
+			Average Fitness (before mating): 49.05095
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.05095
+		Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691
+		Population:A_00008 Year 4 Duration = 0:0:0.0388846
+	Full Run: 0:0:59.346249769
+
+	Year 5 duration: 0:0:9.409885015
+	Full Run: 0:1:0.3591394620000017
+	Year 6
+	Population:A_00000 |Size=9|AvgScore=62.578106|ScoreDev=24.038662...
+			Average Fitness (before mating): 62.578106
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.323303
+		Population:A_00000 |Size=13|AvgScore=65.51976|ScoreDev=24.924925
+		Population:A_00000 Year 5 Duration = 0:0:0.030094184
+	Full Run: 0:1:0.40758612399999805
+
+	Population:A_00001 |Size=8|AvgScore=45.22549|ScoreDev=28.93509...
+			Average Fitness (before mating): 45.22549
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 30.150328
+		Population:A_00001 |Size=12|AvgScore=49.472504|ScoreDev=26.188595
+		Population:A_00001 Year 5 Duration = 0:0:0.032332905
+	Full Run: 0:1:1.4608916740000026
+
+	Population:A_00002 |Size=9|AvgScore=50.386463|ScoreDev=24.296223...
+			Average Fitness (before mating): 50.386463
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 34.88294
+		Population:A_00002 |Size=13|AvgScore=60.537422|ScoreDev=26.596846
+		Population:A_00002 Year 5 Duration = 0:0:0.034014771
+	Full Run: 0:1:2.515699308000002
+
+	Population:A_00003 |Size=9|AvgScore=52.073986|ScoreDev=37.43035...
+			Average Fitness (before mating): 52.073986
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.05122
+		Population:A_00003 |Size=13|AvgScore=56.49501|ScoreDev=32.979267
+		Population:A_00003 Year 5 Duration = 0:0:0.034651124
+	Full Run: 0:1:3.5697899959999972
+
+	Population:A_00004 |Size=7|AvgScore=63.3142|ScoreDev=32.97885...
+			Average Fitness (before mating): 63.3142
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.31994
+		Population:A_00004 |Size=10|AvgScore=53.78473|ScoreDev=33.40976
+		Population:A_00004 Year 5 Duration = 0:0:0.025289267
+	Full Run: 0:1:4.611626615000006
+
+	Population:A_00005 |Size=7|AvgScore=69.88337|ScoreDev=39.63296...
+			Average Fitness (before mating): 69.88337
+			Mating Season beginning...
+				Number of Offspring = 3
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 48.918358
+		Population:A_00005 |Size=10|AvgScore=88.68194|ScoreDev=49.624126
+		Population:A_00005 Year 5 Duration = 0:0:0.028659929
+	Full Run: 0:1:5.652764523000002
+
+	Population:A_00006 |Size=9|AvgScore=42.332623|ScoreDev=18.46374...
+			Average Fitness (before mating): 42.332623
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 29.3072
+		Population:A_00006 |Size=13|AvgScore=46.76103|ScoreDev=25.036037
+		Population:A_00006 Year 5 Duration = 0:0:0.029706903
+	Full Run: 0:1:6.692670569000001
+
+	Population:A_00007 |Size=8|AvgScore=43.68931|ScoreDev=42.363144...
+			Average Fitness (before mating): 43.68931
+			Mating Season beginning...
+				Number of Offspring = 4
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 29.126205
+		Population:A_00007 |Size=12|AvgScore=34.128178|ScoreDev=37.62934
+		Population:A_00007 Year 5 Duration = 0:0:0.037692487
+	Full Run: 0:1:7.748089027999995
+
+	Population:A_00008 |Size=10|AvgScore=49.05095|ScoreDev=30.398691...
+			Average Fitness (before mating): 49.05095
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 32.700634
+		Population:A_00008 |Size=15|AvgScore=56.055885|ScoreDev=32.288826
+		Population:A_00008 Year 5 Duration = 0:0:0.03053252
+	Full Run: 0:1:8.795489810999996
+
+	Year 6 duration: 0:0:9.449425295
+	Full Run: 0:1:9.801752320999995
+	Year 7
+	Population:A_00000 |Size=13|AvgScore=65.51976|ScoreDev=24.924925...
+			Average Fitness (before mating): 65.51976
+			Mating Season beginning...
+				Number of Offspring = 6
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.82931
+		Population:A_00000 |Size=19|AvgScore=73.96974|ScoreDev=30.53279
+		Population:A_00000 Year 6 Duration = 0:0:0.035163123
+	Full Run: 0:1:9.858119657000003
+
+	Population:A_00001 |Size=12|AvgScore=49.472504|ScoreDev=26.188595...
+			Average Fitness (before mating): 49.472504
+			Mating Season beginning...
+				Number of Offspring = 6
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 34.92177
+		Population:A_00001 |Size=16|AvgScore=55.245533|ScoreDev=26.963108
+		Population:A_00001 Year 6 Duration = 0:0:0.026367237
+	Full Run: 0:1:10.904010697999993
+
+	Population:A_00002 |Size=13|AvgScore=60.537422|ScoreDev=26.596846...
+			Average Fitness (before mating): 60.537422
+			Mating Season beginning...
+				Number of Offspring = 6
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.721474
+		Population:A_00002 |Size=18|AvgScore=57.631855|ScoreDev=25.081444
+		Population:A_00002 Year 6 Duration = 0:0:0.020230174
+	Full Run: 0:1:11.937917526999996
+
+	Population:A_00003 |Size=13|AvgScore=56.49501|ScoreDev=32.979267...
+			Average Fitness (before mating): 56.49501
+			Mating Season beginning...
+				Number of Offspring = 6
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 38.65448
+		Population:A_00003 |Size=18|AvgScore=59.617622|ScoreDev=32.559204
+		Population:A_00003 Year 6 Duration = 0:0:0.047912783
+	Full Run: 0:1:13.001820441999996
+
+	Population:A_00004 |Size=10|AvgScore=53.78473|ScoreDev=33.40976...
+			Average Fitness (before mating): 53.78473
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 38.417664
+		Population:A_00004 |Size=14|AvgScore=62.35705|ScoreDev=35.50861
+		Population:A_00004 Year 6 Duration = 0:0:0.035403807
+	Full Run: 0:1:14.053482415999994
+
+	Population:A_00005 |Size=10|AvgScore=88.68194|ScoreDev=49.624126...
+			Average Fitness (before mating): 88.68194
+			Mating Season beginning...
+				Number of Offspring = 5
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 59.121292
+		Population:A_00005 |Size=14|AvgScore=84.49359|ScoreDev=44.52713
+		Population:A_00005 Year 6 Duration = 0:0:0.035449755
+	Full Run: 0:1:15.108827211999994
+
+	Population:A_00006 |Size=13|AvgScore=46.76103|ScoreDev=25.036037...
+			Average Fitness (before mating): 46.76103
+			Mating Season beginning...
+				Number of Offspring = 6
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 31.994389
+		Population:A_00006 |Size=18|AvgScore=47.58121|ScoreDev=24.599466
+		Population:A_00006 Year 6 Duration = 0:0:0.031039413
+	Full Run: 0:1:16.161177686000002
+
+	Population:A_00007 |Size=12|AvgScore=34.128178|ScoreDev=37.62934...
+			Average Fitness (before mating): 34.128178
+			Mating Season beginning...
+				Number of Offspring = 6
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 22.752117
+		Population:A_00007 |Size=16|AvgScore=29.264494|ScoreDev=20.072102
+		Population:A_00007 Year 6 Duration = 0:0:0.041432927
+	Full Run: 0:1:17.216304408
+
+	Population:A_00008 |Size=15|AvgScore=56.055885|ScoreDev=32.288826...
+			Average Fitness (before mating): 56.055885
+			Mating Season beginning...
+				Number of Offspring = 7
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.039917
+		Population:A_00008 |Size=20|AvgScore=51.711174|ScoreDev=31.657314
+		Population:A_00008 Year 6 Duration = 0:0:0.024635045
+	Full Run: 0:1:18.263056074999994
+
+	Year 7 duration: 0:0:9.468139892
+	Full Run: 0:1:19.274907182000007
+	Year 8
+	Population:A_00000 |Size=19|AvgScore=73.96974|ScoreDev=30.53279...
+			Average Fitness (before mating): 73.96974
+			Mating Season beginning...
+				Number of Offspring = 9
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 52.05278
+		Population:A_00000 |Size=27|AvgScore=72.597374|ScoreDev=27.044422
+		Population:A_00000 Year 7 Duration = 0:0:0.04387477
+	Full Run: 0:1:19.346035341999993
+
+	Population:A_00001 |Size=16|AvgScore=55.245533|ScoreDev=26.963108...
+			Average Fitness (before mating): 55.245533
+			Mating Season beginning...
+				Number of Offspring = 8
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.830357
+		Population:A_00001 |Size=23|AvgScore=53.614113|ScoreDev=26.296707
+		Population:A_00001 Year 7 Duration = 0:0:0.034019512
+	Full Run: 0:1:20.403357388000003
+
+	Population:A_00002 |Size=18|AvgScore=57.631855|ScoreDev=25.081444...
+			Average Fitness (before mating): 57.631855
+			Mating Season beginning...
+				Number of Offspring = 9
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 39.89898
+		Population:A_00002 |Size=25|AvgScore=59.293247|ScoreDev=29.553682
+		Population:A_00002 Year 7 Duration = 0:0:0.046899723
+	Full Run: 0:1:21.475857444
+
+	Population:A_00003 |Size=18|AvgScore=59.617622|ScoreDev=32.559204...
+			Average Fitness (before mating): 59.617622
+			Mating Season beginning...
+				Number of Offspring = 9
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 39.745083
+		Population:A_00003 |Size=27|AvgScore=61.353584|ScoreDev=31.508131
+		Population:A_00003 Year 7 Duration = 0:0:0.056837762
+	Full Run: 0:1:22.550041918999995
+
+	Population:A_00004 |Size=14|AvgScore=62.35705|ScoreDev=35.50861...
+			Average Fitness (before mating): 62.35705
+			Mating Season beginning...
+				Number of Offspring = 7
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.649937
+		Population:A_00004 |Size=20|AvgScore=66.31148|ScoreDev=38.647617
+		Population:A_00004 Year 7 Duration = 0:0:0.033318248
+	Full Run: 0:1:23.604295252
+
+	Population:A_00005 |Size=14|AvgScore=84.49359|ScoreDev=44.52713...
+			Average Fitness (before mating): 84.49359
+			Mating Season beginning...
+				Number of Offspring = 7
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 59.145515
+		Population:A_00005 |Size=20|AvgScore=77.574356|ScoreDev=40.472347
+		Population:A_00005 Year 7 Duration = 0:0:0.032509406
+	Full Run: 0:1:24.652841104000004
+
+	Population:A_00006 |Size=18|AvgScore=47.58121|ScoreDev=24.599466...
+			Average Fitness (before mating): 47.58121
+			Mating Season beginning...
+				Number of Offspring = 9
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 32.940838
+		Population:A_00006 |Size=25|AvgScore=47.82033|ScoreDev=25.986506
+		Population:A_00006 Year 7 Duration = 0:0:0.038266481
+	Full Run: 0:1:25.704471352
+
+	Population:A_00007 |Size=16|AvgScore=29.264494|ScoreDev=20.072102...
+			Average Fitness (before mating): 29.264494
+			Mating Season beginning...
+				Number of Offspring = 8
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 20.357908
+		Population:A_00007 |Size=21|AvgScore=32.101227|ScoreDev=22.00096
+		Population:A_00007 Year 7 Duration = 0:0:0.029718572
+	Full Run: 0:1:26.753464292000004
+
+	Population:A_00008 |Size=20|AvgScore=51.711174|ScoreDev=31.657314...
+			Average Fitness (before mating): 51.711174
+			Mating Season beginning...
+				Number of Offspring = 10
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 35.66288
+		Population:A_00008 |Size=27|AvgScore=55.39765|ScoreDev=29.842001
+		Population:A_00008 Year 7 Duration = 0:0:0.03645078
+	Full Run: 0:1:27.809787502000006
+
+	Year 8 duration: 0:0:9.546138471
+	Full Run: 0:1:28.815992030000004
+	Year 9
+	Population:A_00000 |Size=27|AvgScore=72.597374|ScoreDev=27.044422...
+			Average Fitness (before mating): 72.597374
+			Mating Season beginning...
+				Number of Offspring = 13
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 50.259724
+		Population:A_00000 |Size=39|AvgScore=74.56851|ScoreDev=29.420513
+		Population:A_00000 Year 8 Duration = 0:0:0.033868538
+	Full Run: 0:1:28.867387793000006
+
+	Population:A_00001 |Size=23|AvgScore=53.614113|ScoreDev=26.296707...
+			Average Fitness (before mating): 53.614113
+			Mating Season beginning...
+				Number of Offspring = 11
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.367413
+		Population:A_00001 |Size=33|AvgScore=54.989628|ScoreDev=26.57433
+		Population:A_00001 Year 8 Duration = 0:0:0.029496851
+	Full Run: 0:1:29.919357186
+
+	Population:A_00002 |Size=25|AvgScore=59.293247|ScoreDev=29.553682...
+			Average Fitness (before mating): 59.293247
+			Mating Season beginning...
+				Number of Offspring = 12
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 41.175865
+		Population:A_00002 |Size=35|AvgScore=58.64241|ScoreDev=27.348354
+		Population:A_00002 Year 8 Duration = 0:0:0.047161558
+	Full Run: 0:1:30.983850505000007
+
+	Population:A_00003 |Size=27|AvgScore=61.353584|ScoreDev=31.508131...
+			Average Fitness (before mating): 61.353584
+			Mating Season beginning...
+				Number of Offspring = 13
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.47556
+		Population:A_00003 |Size=39|AvgScore=64.6352|ScoreDev=33.478603
+		Population:A_00003 Year 8 Duration = 0:0:0.050607707
+	Full Run: 0:1:32.060238692
+
+	Population:A_00004 |Size=20|AvgScore=66.31148|ScoreDev=38.647617...
+			Average Fitness (before mating): 66.31148
+			Mating Season beginning...
+				Number of Offspring = 10
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.732056
+		Population:A_00004 |Size=29|AvgScore=68.91711|ScoreDev=37.98212
+		Population:A_00004 Year 8 Duration = 0:0:0.037428465
+	Full Run: 0:1:33.115645846999996
+
+	Population:A_00005 |Size=20|AvgScore=77.574356|ScoreDev=40.472347...
+			Average Fitness (before mating): 77.574356
+			Mating Season beginning...
+				Number of Offspring = 10
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 53.499557
+		Population:A_00005 |Size=28|AvgScore=77.14992|ScoreDev=41.020332
+		Population:A_00005 Year 8 Duration = 0:0:0.033380242
+	Full Run: 0:1:34.164316782
+
+	Population:A_00006 |Size=25|AvgScore=47.82033|ScoreDev=25.986506...
+			Average Fitness (before mating): 47.82033
+			Mating Season beginning...
+				Number of Offspring = 12
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.208565
+		Population:A_00006 |Size=35|AvgScore=47.673717|ScoreDev=25.410406
+		Population:A_00006 Year 8 Duration = 0:0:0.028425809
+	Full Run: 0:1:35.212520207
+
+	Population:A_00007 |Size=21|AvgScore=32.101227|ScoreDev=22.00096...
+			Average Fitness (before mating): 32.101227
+			Mating Season beginning...
+				Number of Offspring = 10
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 22.470858
+		Population:A_00007 |Size=28|AvgScore=32.70498|ScoreDev=22.426329
+		Population:A_00007 Year 8 Duration = 0:0:0.02786932
+	Full Run: 0:1:36.260853821
+
+	Population:A_00008 |Size=27|AvgScore=55.39765|ScoreDev=29.842001...
+			Average Fitness (before mating): 55.39765
+			Mating Season beginning...
+				Number of Offspring = 13
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 38.35222
+		Population:A_00008 |Size=39|AvgScore=54.472607|ScoreDev=29.712667
+		Population:A_00008 Year 8 Duration = 0:0:0.043268685
+	Full Run: 0:1:37.321815658000006
+
+	Year 9 duration: 0:0:9.514134136
+	Full Run: 0:1:38.336248642
+	Year 10
+	Population:A_00000 |Size=39|AvgScore=74.56851|ScoreDev=29.420513...
+			Average Fitness (before mating): 74.56851
+			Mating Season beginning...
+				Number of Offspring = 19
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 51.020557
+		Population:A_00000 |Size=56|AvgScore=73.42798|ScoreDev=29.400486
+		Population:A_00000 Year 9 Duration = 0:0:0.048074331
+	Full Run: 0:1:38.412255383
+
+	Population:A_00001 |Size=33|AvgScore=54.989628|ScoreDev=26.57433...
+			Average Fitness (before mating): 54.989628
+			Mating Season beginning...
+				Number of Offspring = 16
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.80537
+		Population:A_00001 |Size=47|AvgScore=48.701572|ScoreDev=28.508114
+		Population:A_00001 Year 9 Duration = 0:0:0.032040438
+	Full Run: 0:1:39.467081979
+
+	Population:A_00002 |Size=35|AvgScore=58.64241|ScoreDev=27.348354...
+			Average Fitness (before mating): 58.64241
+			Mating Season beginning...
+				Number of Offspring = 17
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.244793
+		Population:A_00002 |Size=51|AvgScore=54.05861|ScoreDev=26.057535
+		Population:A_00002 Year 9 Duration = 0:0:0.045988044
+	Full Run: 0:1:40.53723683
+
+	Population:A_00003 |Size=39|AvgScore=64.6352|ScoreDev=33.478603...
+			Average Fitness (before mating): 64.6352
+			Mating Season beginning...
+				Number of Offspring = 19
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.224087
+		Population:A_00003 |Size=57|AvgScore=62.82897|ScoreDev=35.303555
+		Population:A_00003 Year 9 Duration = 0:0:0.034900559
+	Full Run: 0:1:41.58867708299999
+
+	Population:A_00004 |Size=29|AvgScore=68.91711|ScoreDev=37.98212...
+			Average Fitness (before mating): 68.91711
+			Mating Season beginning...
+				Number of Offspring = 14
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 47.585625
+		Population:A_00004 |Size=42|AvgScore=67.83025|ScoreDev=35.40604
+		Population:A_00004 Year 9 Duration = 0:0:0.054305845
+	Full Run: 0:1:42.667489974000006
+
+	Population:A_00005 |Size=28|AvgScore=77.14992|ScoreDev=41.020332...
+			Average Fitness (before mating): 77.14992
+			Mating Season beginning...
+				Number of Offspring = 14
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 52.68775
+		Population:A_00005 |Size=40|AvgScore=82.639145|ScoreDev=42.085293
+		Population:A_00005 Year 9 Duration = 0:0:0.033558931
+	Full Run: 0:1:43.718690274
+
+	Population:A_00006 |Size=35|AvgScore=47.673717|ScoreDev=25.410406...
+			Average Fitness (before mating): 47.673717
+			Mating Season beginning...
+				Number of Offspring = 17
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 32.717255
+		Population:A_00006 |Size=50|AvgScore=47.601166|ScoreDev=24.193687
+		Population:A_00006 Year 9 Duration = 0:0:0.045730585
+	Full Run: 0:1:44.787607792
+
+	Population:A_00007 |Size=28|AvgScore=32.70498|ScoreDev=22.426329...
+			Average Fitness (before mating): 32.70498
+			Mating Season beginning...
+				Number of Offspring = 14
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 22.335108
+		Population:A_00007 |Size=38|AvgScore=35.95613|ScoreDev=22.750713
+		Population:A_00007 Year 9 Duration = 0:0:0.036937252
+	Full Run: 0:1:45.851226628999996
+
+	Population:A_00008 |Size=39|AvgScore=54.472607|ScoreDev=29.712667...
+			Average Fitness (before mating): 54.472607
+			Mating Season beginning...
+				Number of Offspring = 19
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.27073
+		Population:A_00008 |Size=57|AvgScore=54.290848|ScoreDev=30.40126
+		Population:A_00008 Year 9 Duration = 0:0:0.040224404
+	Full Run: 0:1:46.912425502000005
+
+	Year 10 duration: 0:0:9.591001137
+	Full Run: 0:1:47.92653064700001
+	Year 11
+	Population:A_00000 |Size=56|AvgScore=73.42798|ScoreDev=29.400486...
+			Average Fitness (before mating): 73.42798
+			Mating Season beginning...
+				Number of Offspring = 28
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.541767
+		Population:A_00000 |Size=83|AvgScore=70.501595|ScoreDev=30.066679
+		Population:A_00000 Year 10 Duration = 0:0:0.060931204
+	Full Run: 0:1:48.011818652
+
+	Population:A_00001 |Size=47|AvgScore=48.701572|ScoreDev=28.508114...
+			Average Fitness (before mating): 48.701572
+			Mating Season beginning...
+				Number of Offspring = 23
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.173534
+		Population:A_00001 |Size=66|AvgScore=49.72456|ScoreDev=28.629507
+		Population:A_00001 Year 10 Duration = 0:0:0.048416029
+	Full Run: 0:1:49.080689492000005
+
+	Population:A_00002 |Size=51|AvgScore=54.05861|ScoreDev=26.057535...
+			Average Fitness (before mating): 54.05861
+			Mating Season beginning...
+				Number of Offspring = 25
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.759853
+		Population:A_00002 |Size=74|AvgScore=58.67266|ScoreDev=26.499075
+		Population:A_00002 Year 10 Duration = 0:0:0.056135039
+	Full Run: 0:1:50.1550264
+
+	Population:A_00003 |Size=57|AvgScore=62.82897|ScoreDev=35.303555...
+			Average Fitness (before mating): 62.82897
+			Mating Season beginning...
+				Number of Offspring = 28
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.633945
+		Population:A_00003 |Size=83|AvgScore=60.451126|ScoreDev=34.47115
+		Population:A_00003 Year 10 Duration = 0:0:0.056594891
+	Full Run: 0:1:51.231689915000004
+
+	Population:A_00004 |Size=42|AvgScore=67.83025|ScoreDev=35.40604...
+			Average Fitness (before mating): 67.83025
+			Mating Season beginning...
+				Number of Offspring = 21
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.949528
+		Population:A_00004 |Size=62|AvgScore=65.37044|ScoreDev=34.128853
+		Population:A_00004 Year 10 Duration = 0:0:0.038056794
+	Full Run: 0:1:52.294060844
+
+	Population:A_00005 |Size=40|AvgScore=82.639145|ScoreDev=42.085293...
+			Average Fitness (before mating): 82.639145
+			Mating Season beginning...
+				Number of Offspring = 20
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 56.026535
+		Population:A_00005 |Size=59|AvgScore=84.74381|ScoreDev=42.812744
+		Population:A_00005 Year 10 Duration = 0:0:0.035765197
+	Full Run: 0:1:53.347127533999995
+
+	Population:A_00006 |Size=50|AvgScore=47.601166|ScoreDev=24.193687...
+			Average Fitness (before mating): 47.601166
+			Mating Season beginning...
+				Number of Offspring = 25
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 32.162952
+		Population:A_00006 |Size=73|AvgScore=49.283924|ScoreDev=24.791803
+		Population:A_00006 Year 10 Duration = 0:0:0.062052205
+	Full Run: 0:1:54.429677947
+
+	Population:A_00007 |Size=38|AvgScore=35.95613|ScoreDev=22.750713...
+			Average Fitness (before mating): 35.95613
+			Mating Season beginning...
+				Number of Offspring = 19
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 24.398804
+		Population:A_00007 |Size=49|AvgScore=37.288025|ScoreDev=23.278217
+		Population:A_00007 Year 10 Duration = 0:0:0.041856311
+	Full Run: 0:1:55.49687458
+
+	Population:A_00008 |Size=57|AvgScore=54.290848|ScoreDev=30.40126...
+			Average Fitness (before mating): 54.290848
+			Mating Season beginning...
+				Number of Offspring = 28
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.840218
+		Population:A_00008 |Size=84|AvgScore=54.57127|ScoreDev=30.147509
+		Population:A_00008 Year 10 Duration = 0:0:0.075744177
+	Full Run: 0:1:56.594587686
+
+	Year 11 duration: 0:0:9.679389219
+	Full Run: 0:1:57.600728395999994
+	Year 12
+	Population:A_00000 |Size=83|AvgScore=70.501595|ScoreDev=30.066679...
+			Average Fitness (before mating): 70.501595
+			Mating Season beginning...
+				Number of Offspring = 41
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 47.574245
+		Population:A_00000 |Size=122|AvgScore=73.09439|ScoreDev=30.937548
+		Population:A_00000 Year 11 Duration = 0:0:0.144182517
+	Full Run: 0:1:57.769992316
+
+	Population:A_00001 |Size=66|AvgScore=49.72456|ScoreDev=28.629507...
+			Average Fitness (before mating): 49.72456
+			Mating Season beginning...
+				Number of Offspring = 33
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.48797
+		Population:A_00001 |Size=97|AvgScore=51.250095|ScoreDev=29.889917
+		Population:A_00001 Year 11 Duration = 0:0:0.076053054
+	Full Run: 0:1:58.866239805999996
+
+	Population:A_00002 |Size=74|AvgScore=58.67266|ScoreDev=26.499075...
+			Average Fitness (before mating): 58.67266
+			Mating Season beginning...
+				Number of Offspring = 37
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 39.4707
+		Population:A_00002 |Size=108|AvgScore=56.788574|ScoreDev=29.22875
+		Population:A_00002 Year 11 Duration = 0:0:0.097584377
+	Full Run: 0:1:59.98191118
+
+	Population:A_00003 |Size=83|AvgScore=60.451126|ScoreDev=34.47115...
+			Average Fitness (before mating): 60.451126
+			Mating Season beginning...
+				Number of Offspring = 41
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.79222
+		Population:A_00003 |Size=119|AvgScore=60.758175|ScoreDev=33.843224
+		Population:A_00003 Year 11 Duration = 0:0:0.121759571
+	Full Run: 0:2:1.1264397700000046
+
+	Population:A_00004 |Size=62|AvgScore=65.37044|ScoreDev=34.128853...
+			Average Fitness (before mating): 65.37044
+			Mating Season beginning...
+				Number of Offspring = 31
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.053993
+		Population:A_00004 |Size=90|AvgScore=66.94826|ScoreDev=34.863125
+		Population:A_00004 Year 11 Duration = 0:0:0.064179702
+	Full Run: 0:2:2.210594009999994
+
+	Population:A_00005 |Size=59|AvgScore=84.74381|ScoreDev=42.812744...
+			Average Fitness (before mating): 84.74381
+			Mating Season beginning...
+				Number of Offspring = 29
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 57.46994
+		Population:A_00005 |Size=87|AvgScore=87.59345|ScoreDev=44.05455
+		Population:A_00005 Year 11 Duration = 0:0:0.061792194
+	Full Run: 0:2:3.294905060000005
+
+	Population:A_00006 |Size=73|AvgScore=49.283924|ScoreDev=24.791803...
+			Average Fitness (before mating): 49.283924
+			Mating Season beginning...
+				Number of Offspring = 36
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.312283
+		Population:A_00006 |Size=104|AvgScore=51.187992|ScoreDev=26.380505
+		Population:A_00006 Year 11 Duration = 0:0:0.097388183
+	Full Run: 0:2:4.416830555999994
+
+	Population:A_00007 |Size=49|AvgScore=37.288025|ScoreDev=23.278217...
+			Average Fitness (before mating): 37.288025
+			Mating Season beginning...
+				Number of Offspring = 24
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 25.376572
+		Population:A_00007 |Size=68|AvgScore=37.04016|ScoreDev=22.188908
+		Population:A_00007 Year 11 Duration = 0:0:0.055767085
+	Full Run: 0:2:5.494894775999995
+
+	Population:A_00008 |Size=84|AvgScore=54.57127|ScoreDev=30.147509...
+			Average Fitness (before mating): 54.57127
+			Mating Season beginning...
+				Number of Offspring = 42
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.671894
+		Population:A_00008 |Size=122|AvgScore=54.248173|ScoreDev=29.715538
+		Population:A_00008 Year 11 Duration = 0:0:0.149206237
+	Full Run: 0:2:6.6855182590000055
+
+	Year 12 duration: 0:0:10.092815927
+	Full Run: 0:2:7.699874661999999
+	Year 13
+	Population:A_00000 |Size=122|AvgScore=73.09439|ScoreDev=30.937548...
+			Average Fitness (before mating): 73.09439
+			Mating Season beginning...
+				Number of Offspring = 61
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 48.729595
+		Population:A_00000 |Size=183|AvgScore=71.22327|ScoreDev=30.628067
+		Population:A_00000 Year 12 Duration = 0:0:0.399089633
+	Full Run: 0:2:8.134576694000003
+
+	Population:A_00001 |Size=97|AvgScore=51.250095|ScoreDev=29.889917...
+			Average Fitness (before mating): 51.250095
+			Mating Season beginning...
+				Number of Offspring = 48
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 34.522633
+		Population:A_00001 |Size=142|AvgScore=53.946217|ScoreDev=30.719284
+		Population:A_00001 Year 12 Duration = 0:0:0.178021881
+	Full Run: 0:2:9.33445737400001
+
+	Population:A_00002 |Size=108|AvgScore=56.788574|ScoreDev=29.22875...
+			Average Fitness (before mating): 56.788574
+			Mating Season beginning...
+				Number of Offspring = 54
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 38.0942
+		Population:A_00002 |Size=158|AvgScore=61.777622|ScoreDev=31.583988
+		Population:A_00002 Year 12 Duration = 0:0:0.245630592
+	Full Run: 0:2:10.599883086000006
+
+	Population:A_00003 |Size=119|AvgScore=60.758175|ScoreDev=33.843224...
+			Average Fitness (before mating): 60.758175
+			Mating Season beginning...
+				Number of Offspring = 59
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.848717
+		Population:A_00003 |Size=176|AvgScore=61.124123|ScoreDev=33.561817
+		Population:A_00003 Year 12 Duration = 0:0:0.347779932
+	Full Run: 0:2:11.971817791000007
+
+	Population:A_00004 |Size=90|AvgScore=66.94826|ScoreDev=34.863125...
+			Average Fitness (before mating): 66.94826
+			Mating Season beginning...
+				Number of Offspring = 45
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.96525
+		Population:A_00004 |Size=133|AvgScore=66.61155|ScoreDev=33.80538
+		Population:A_00004 Year 12 Duration = 0:0:0.179417116
+	Full Run: 0:2:13.183493418000012
+
+	Population:A_00005 |Size=87|AvgScore=87.59345|ScoreDev=44.05455...
+			Average Fitness (before mating): 87.59345
+			Mating Season beginning...
+				Number of Offspring = 43
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 59.074654
+		Population:A_00005 |Size=126|AvgScore=82.420746|ScoreDev=43.201103
+		Population:A_00005 Year 12 Duration = 0:0:0.143493651
+	Full Run: 0:2:14.347737630000012
+
+	Population:A_00006 |Size=104|AvgScore=51.187992|ScoreDev=26.380505...
+			Average Fitness (before mating): 51.187992
+			Mating Season beginning...
+				Number of Offspring = 52
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 34.345493
+		Population:A_00006 |Size=151|AvgScore=50.57838|ScoreDev=27.781652
+		Population:A_00006 Year 12 Duration = 0:0:0.213032571
+	Full Run: 0:2:15.580629138999996
+
+	Population:A_00007 |Size=68|AvgScore=37.04016|ScoreDev=22.188908...
+			Average Fitness (before mating): 37.04016
+			Mating Season beginning...
+				Number of Offspring = 34
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 24.937931
+		Population:A_00007 |Size=99|AvgScore=36.595192|ScoreDev=21.180416
+		Population:A_00007 Year 12 Duration = 0:0:0.072520477
+	Full Run: 0:2:16.676029131000007
+
+	Population:A_00008 |Size=122|AvgScore=54.248173|ScoreDev=29.715538...
+			Average Fitness (before mating): 54.248173
+			Mating Season beginning...
+				Number of Offspring = 61
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.36416
+		Population:A_00008 |Size=178|AvgScore=54.360325|ScoreDev=29.546545
+		Population:A_00008 Year 12 Duration = 0:0:0.332443656
+	Full Run: 0:2:18.028296350999995
+
+	Year 13 duration: 0:0:11.342051666
+	Full Run: 0:2:19.043569905
+	Year 14
+	Population:A_00000 |Size=183|AvgScore=71.22327|ScoreDev=30.628067...
+			Average Fitness (before mating): 71.22327
+			Mating Season beginning...
+				Number of Offspring = 91
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 47.743073
+		Population:A_00000 |Size=271|AvgScore=73.33977|ScoreDev=32.575733
+		Population:A_00000 Year 13 Duration = 0:0:1.183749053
+	Full Run: 0:2:20.26114446400001
+
+	Population:A_00001 |Size=142|AvgScore=53.946217|ScoreDev=30.719284...
+			Average Fitness (before mating): 53.946217
+			Mating Season beginning...
+				Number of Offspring = 71
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.133785
+		Population:A_00001 |Size=211|AvgScore=55.93243|ScoreDev=33.11552
+		Population:A_00001 Year 13 Duration = 0:0:0.532278386
+	Full Run: 0:2:21.813754038000013
+
+	Population:A_00002 |Size=158|AvgScore=61.777622|ScoreDev=31.583988...
+			Average Fitness (before mating): 61.777622
+			Mating Season beginning...
+				Number of Offspring = 79
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 41.359592
+		Population:A_00002 |Size=228|AvgScore=62.983982|ScoreDev=32.06101
+		Population:A_00002 Year 13 Duration = 0:0:0.687869298
+	Full Run: 0:2:23.515271547999987
+
+	Population:A_00003 |Size=176|AvgScore=61.124123|ScoreDev=33.561817...
+			Average Fitness (before mating): 61.124123
+			Mating Season beginning...
+				Number of Offspring = 88
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.904358
+		Population:A_00003 |Size=263|AvgScore=63.566895|ScoreDev=33.673744
+		Population:A_00003 Year 13 Duration = 0:0:0.981391523
+	Full Run: 0:2:25.516791135000005
+
+	Population:A_00004 |Size=133|AvgScore=66.61155|ScoreDev=33.80538...
+			Average Fitness (before mating): 66.61155
+			Mating Season beginning...
+				Number of Offspring = 66
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.74412
+		Population:A_00004 |Size=196|AvgScore=67.13405|ScoreDev=34.86047
+		Population:A_00004 Year 13 Duration = 0:0:0.442538831
+	Full Run: 0:2:26.976604839000004
+
+	Population:A_00005 |Size=126|AvgScore=82.420746|ScoreDev=43.201103...
+			Average Fitness (before mating): 82.420746
+			Mating Season beginning...
+				Number of Offspring = 63
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 55.239433
+		Population:A_00005 |Size=188|AvgScore=81.77575|ScoreDev=43.684605
+		Population:A_00005 Year 13 Duration = 0:0:0.352709932
+	Full Run: 0:2:28.34393045600001
+
+	Population:A_00006 |Size=151|AvgScore=50.57838|ScoreDev=27.781652...
+			Average Fitness (before mating): 50.57838
+			Mating Season beginning...
+				Number of Offspring = 75
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.943714
+		Population:A_00006 |Size=221|AvgScore=49.415825|ScoreDev=27.443138
+		Population:A_00006 Year 13 Duration = 0:0:0.60290184
+	Full Run: 0:2:29.956618996000003
+
+	Population:A_00007 |Size=99|AvgScore=36.595192|ScoreDev=21.180416...
+			Average Fitness (before mating): 36.595192
+			Mating Season beginning...
+				Number of Offspring = 49
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 24.64574
+		Population:A_00007 |Size=143|AvgScore=37.863056|ScoreDev=22.336882
+		Population:A_00007 Year 13 Duration = 0:0:0.173561944
+	Full Run: 0:2:31.148734716000007
+
+	Population:A_00008 |Size=178|AvgScore=54.360325|ScoreDev=29.546545...
+			Average Fitness (before mating): 54.360325
+			Mating Season beginning...
+				Number of Offspring = 89
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.376457
+		Population:A_00008 |Size=262|AvgScore=55.18761|ScoreDev=28.539215
+		Population:A_00008 Year 13 Duration = 0:0:1.007667226
+	Full Run: 0:2:33.17503777100001
+
+	Year 14 duration: 0:0:15.145467985
+	Full Run: 0:2:34.18101729599999
+	Year 15
+	Population:A_00000 |Size=271|AvgScore=73.33977|ScoreDev=32.575733...
+			Average Fitness (before mating): 73.33977
+			Mating Season beginning...
+				Number of Offspring = 135
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.07426
+		Population:A_00000 |Size=402|AvgScore=73.44298|ScoreDev=32.064014
+		Population:A_00000 Year 14 Duration = 0:0:4.169056787
+	Full Run: 0:2:38.377496681
+
+	Population:A_00001 |Size=211|AvgScore=55.93243|ScoreDev=33.11552...
+			Average Fitness (before mating): 55.93243
+			Mating Season beginning...
+				Number of Offspring = 105
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.46585
+		Population:A_00001 |Size=307|AvgScore=56.634563|ScoreDev=33.471848
+		Population:A_00001 Year 14 Duration = 0:0:1.817468587
+	Full Run: 0:2:41.212792981999996
+
+	Population:A_00002 |Size=228|AvgScore=62.983982|ScoreDev=32.06101...
+			Average Fitness (before mating): 62.983982
+			Mating Season beginning...
+				Number of Offspring = 114
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.112457
+		Population:A_00002 |Size=334|AvgScore=60.185852|ScoreDev=31.688759
+		Population:A_00002 Year 14 Duration = 0:0:2.291232449
+	Full Run: 0:2:44.52231591500001
+
+	Population:A_00003 |Size=263|AvgScore=63.566895|ScoreDev=33.673744...
+			Average Fitness (before mating): 63.566895
+			Mating Season beginning...
+				Number of Offspring = 131
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.53968
+		Population:A_00003 |Size=382|AvgScore=66.48034|ScoreDev=36.9689
+		Population:A_00003 Year 14 Duration = 0:0:3.816117477
+	Full Run: 0:2:49.35356253500001
+
+	Population:A_00004 |Size=196|AvgScore=67.13405|ScoreDev=34.86047...
+			Average Fitness (before mating): 67.13405
+			Mating Season beginning...
+				Number of Offspring = 98
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.908783
+		Population:A_00004 |Size=288|AvgScore=68.72032|ScoreDev=34.900673
+		Population:A_00004 Year 14 Duration = 0:0:1.432598605
+	Full Run: 0:2:51.80578267499999
+
+	Population:A_00005 |Size=188|AvgScore=81.77575|ScoreDev=43.684605...
+			Average Fitness (before mating): 81.77575
+			Mating Season beginning...
+				Number of Offspring = 94
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 54.711178
+		Population:A_00005 |Size=278|AvgScore=83.94502|ScoreDev=44.64595
+		Population:A_00005 Year 14 Duration = 0:0:1.224719577
+	Full Run: 0:2:54.048558251
+
+	Population:A_00006 |Size=221|AvgScore=49.415825|ScoreDev=27.443138...
+			Average Fitness (before mating): 49.415825
+			Mating Season beginning...
+				Number of Offspring = 110
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.093628
+		Population:A_00006 |Size=324|AvgScore=48.79972|ScoreDev=26.937155
+		Population:A_00006 Year 14 Duration = 0:0:2.0521995
+	Full Run: 0:2:57.13277485099999
+
+	Population:A_00007 |Size=143|AvgScore=37.863056|ScoreDev=22.336882...
+			Average Fitness (before mating): 37.863056
+			Mating Season beginning...
+				Number of Offspring = 71
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 25.419798
+		Population:A_00007 |Size=200|AvgScore=39.25093|ScoreDev=23.617
+		Population:A_00007 Year 14 Duration = 0:0:0.535717242
+	Full Run: 0:2:58.676771239000004
+
+	Population:A_00008 |Size=262|AvgScore=55.18761|ScoreDev=28.539215...
+			Average Fitness (before mating): 55.18761
+			Mating Season beginning...
+				Number of Offspring = 131
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.885597
+		Population:A_00008 |Size=384|AvgScore=55.00619|ScoreDev=29.163029
+		Population:A_00008 Year 14 Duration = 0:0:3.667010066
+	Full Run: 0:3:3.361467527000002
+
+	Year 15 duration: 0:0:30.187077779
+	Full Run: 0:3:4.3763585400000125
+	Year 16
+	Population:A_00000 |Size=402|AvgScore=73.44298|ScoreDev=32.064014...
+			Average Fitness (before mating): 73.44298
+			Mating Season beginning...
+				Number of Offspring = 201
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 49.043316
+		Population:A_00000 |Size=597|AvgScore=73.31965|ScoreDev=33.531036
+		Population:A_00000 Year 15 Duration = 0:0:16.48323585
+	Full Run: 0:3:20.891782884999998
+
+	Population:A_00001 |Size=307|AvgScore=56.634563|ScoreDev=33.471848...
+			Average Fitness (before mating): 56.634563
+			Mating Season beginning...
+				Number of Offspring = 153
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.87976
+		Population:A_00001 |Size=452|AvgScore=55.56777|ScoreDev=32.998123
+		Population:A_00001 Year 15 Duration = 0:0:6.442571287
+	Full Run: 0:3:28.352472895000005
+
+	Population:A_00002 |Size=334|AvgScore=60.185852|ScoreDev=31.688759...
+			Average Fitness (before mating): 60.185852
+			Mating Season beginning...
+				Number of Offspring = 167
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.204147
+		Population:A_00002 |Size=495|AvgScore=60.794537|ScoreDev=31.13431
+		Population:A_00002 Year 15 Duration = 0:0:8.75806791
+	Full Run: 0:3:38.13110100700001
+
+	Population:A_00003 |Size=382|AvgScore=66.48034|ScoreDev=36.9689...
+			Average Fitness (before mating): 66.48034
+			Mating Season beginning...
+				Number of Offspring = 191
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.39771
+		Population:A_00003 |Size=565|AvgScore=64.853584|ScoreDev=37.076965
+		Population:A_00003 Year 15 Duration = 0:0:13.80243754
+	Full Run: 0:3:52.951136518
+
+	Population:A_00004 |Size=288|AvgScore=68.72032|ScoreDev=34.900673...
+			Average Fitness (before mating): 68.72032
+			Mating Season beginning...
+				Number of Offspring = 144
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 45.919846
+		Population:A_00004 |Size=430|AvgScore=66.64091|ScoreDev=34.89998
+		Population:A_00004 Year 15 Duration = 0:0:5.158416391
+	Full Run: 0:3:59.127899187
+
+	Population:A_00005 |Size=278|AvgScore=83.94502|ScoreDev=44.64595...
+			Average Fitness (before mating): 83.94502
+			Mating Season beginning...
+				Number of Offspring = 139
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 56.097878
+		Population:A_00005 |Size=414|AvgScore=84.793236|ScoreDev=44.149967
+		Population:A_00005 Year 15 Duration = 0:0:4.507550714
+	Full Run: 0:4:4.652207304000001
+
+	Population:A_00006 |Size=324|AvgScore=48.79972|ScoreDev=26.937155...
+			Average Fitness (before mating): 48.79972
+			Mating Season beginning...
+				Number of Offspring = 162
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 32.600227
+		Population:A_00006 |Size=481|AvgScore=49.810455|ScoreDev=27.402504
+		Population:A_00006 Year 15 Duration = 0:0:7.713271614
+	Full Run: 0:4:13.388431367999999
+
+	Population:A_00007 |Size=200|AvgScore=39.25093|ScoreDev=23.617...
+			Average Fitness (before mating): 39.25093
+			Mating Season beginning...
+				Number of Offspring = 100
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 26.254805
+		Population:A_00007 |Size=288|AvgScore=40.475594|ScoreDev=24.631592
+		Population:A_00007 Year 15 Duration = 0:0:1.533946396
+	Full Run: 0:4:15.940778378000005
+
+	Population:A_00008 |Size=384|AvgScore=55.00619|ScoreDev=29.163029...
+			Average Fitness (before mating): 55.00619
+			Mating Season beginning...
+				Number of Offspring = 192
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.73457
+		Population:A_00008 |Size=567|AvgScore=55.781116|ScoreDev=29.470049
+		Population:A_00008 Year 15 Duration = 0:0:14.170309435
+	Full Run: 0:4:31.132501347000016
+
+	Year 16 duration: 0:1:27.771413443
+	Full Run: 0:4:32.144120523000026
+	Year 17
+	Population:A_00000 |Size=597|AvgScore=73.31965|ScoreDev=33.531036...
+			Average Fitness (before mating): 73.31965
+			Mating Season beginning...
+				Number of Offspring = 298
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 48.96178
+		Population:A_00000 |Size=885|AvgScore=73.310165|ScoreDev=34.596687
+		Population:A_00000 Year 16 Duration = 0:1:9.458209147999995
+	Full Run: 0:5:41.628596621999975
+
+	Population:A_00001 |Size=452|AvgScore=55.56777|ScoreDev=32.998123...
+			Average Fitness (before mating): 55.56777
+			Mating Season beginning...
+				Number of Offspring = 226
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.0999
+		Population:A_00001 |Size=670|AvgScore=55.983406|ScoreDev=32.598427
+		Population:A_00001 Year 16 Duration = 0:0:25.198852305
+	Full Run: 0:6:7.858094494999989
+
+	Population:A_00002 |Size=495|AvgScore=60.794537|ScoreDev=31.13431...
+			Average Fitness (before mating): 60.794537
+			Mating Season beginning...
+				Number of Offspring = 247
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 40.611732
+		Population:A_00002 |Size=728|AvgScore=61.6153|ScoreDev=31.677002
+		Population:A_00002 Year 16 Duration = 0:0:34.787103086
+	Full Run: 0:6:43.67041209000001
+
+	Population:A_00003 |Size=565|AvgScore=64.853584|ScoreDev=37.076965...
+			Average Fitness (before mating): 64.853584
+			Mating Season beginning...
+				Number of Offspring = 282
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.31238
+		Population:A_00003 |Size=840|AvgScore=63.537243|ScoreDev=35.960983
+		Population:A_00003 Year 16 Duration = 0:0:56.630537041
+	Full Run: 0:7:41.32159138399999
+
+	Population:A_00004 |Size=430|AvgScore=66.64091|ScoreDev=34.89998...
+			Average Fitness (before mating): 66.64091
+			Mating Season beginning...
+				Number of Offspring = 215
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.496258
+		Population:A_00004 |Size=641|AvgScore=66.86829|ScoreDev=35.63875
+		Population:A_00004 Year 16 Duration = 0:0:21.182756781
+	Full Run: 0:8:3.526041766999981
+
+	Population:A_00005 |Size=414|AvgScore=84.793236|ScoreDev=44.149967...
+			Average Fitness (before mating): 84.793236
+			Mating Season beginning...
+				Number of Offspring = 207
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 56.62
+		Population:A_00005 |Size=616|AvgScore=85.01786|ScoreDev=44.187954
+		Population:A_00005 Year 16 Duration = 0:0:18.388802239
+	Full Run: 0:8:22.940370674000008
+
+	Population:A_00006 |Size=481|AvgScore=49.810455|ScoreDev=27.402504...
+			Average Fitness (before mating): 49.810455
+			Mating Season beginning...
+				Number of Offspring = 240
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.27615
+		Population:A_00006 |Size=711|AvgScore=50.3996|ScoreDev=27.40175
+		Population:A_00006 Year 16 Duration = 0:0:31.785191111
+	Full Run: 0:8:55.754434318999984
+
+	Population:A_00007 |Size=288|AvgScore=40.475594|ScoreDev=24.631592...
+			Average Fitness (before mating): 40.475594
+			Mating Season beginning...
+				Number of Offspring = 144
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 27.046335
+		Population:A_00007 |Size=406|AvgScore=39.73249|ScoreDev=24.876455
+		Population:A_00007 Year 16 Duration = 0:0:5.211813109
+	Full Run: 0:9:1.9881251890000158
+
+	Population:A_00008 |Size=567|AvgScore=55.781116|ScoreDev=29.470049...
+			Average Fitness (before mating): 55.781116
+			Mating Season beginning...
+				Number of Offspring = 283
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.253113
+		Population:A_00008 |Size=833|AvgScore=55.331364|ScoreDev=29.017315
+		Population:A_00008 Year 16 Duration = 0:0:57.238792994
+	Full Run: 0:10:0.25772420700002385
+
+	Year 17 duration: 0:5:29.125198063000028
+	Full Run: 0:10:1.2696037580000166
+	Year 18
+	Population:A_00000 |Size=885|AvgScore=73.310165|ScoreDev=34.596687...
+			Average Fitness (before mating): 73.310165
+			Mating Season beginning...
+				Number of Offspring = 442
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 48.92873
+		Population:A_00000 |Size=1311|AvgScore=72.44139|ScoreDev=34.63932
+		Population:A_00000 Year 17 Duration = 0:4:54.10482821900001
+	Full Run: 0:14:55.406212040000014
+
+	Population:A_00001 |Size=670|AvgScore=55.983406|ScoreDev=32.598427...
+			Average Fitness (before mating): 55.983406
+			Mating Season beginning...
+				Number of Offspring = 335
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.359444
+		Population:A_00001 |Size=995|AvgScore=56.014816|ScoreDev=31.338554
+		Population:A_00001 Year 17 Duration = 0:1:37.990850382000005
+	Full Run: 0:16:34.43430308100005
+
+	Population:A_00002 |Size=728|AvgScore=61.6153|ScoreDev=31.677002...
+			Average Fitness (before mating): 61.6153
+			Mating Season beginning...
+				Number of Offspring = 364
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 41.114517
+		Population:A_00002 |Size=1081|AvgScore=63.148727|ScoreDev=31.65941
+		Population:A_00002 Year 17 Duration = 0:2:11.21229666299999
+	Full Run: 0:18:46.675472277999916
+
+	Population:A_00003 |Size=840|AvgScore=63.537243|ScoreDev=35.960983...
+			Average Fitness (before mating): 63.537243
+			Mating Season beginning...
+				Number of Offspring = 420
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.391808
+		Population:A_00003 |Size=1245|AvgScore=64.106544|ScoreDev=35.227345
+		Population:A_00003 Year 17 Duration = 0:3:46.394849228
+	Full Run: 0:22:34.09488106399999
+
+	Population:A_00004 |Size=641|AvgScore=66.86829|ScoreDev=35.63875...
+			Average Fitness (before mating): 66.86829
+			Mating Season beginning...
+				Number of Offspring = 320
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 44.648518
+		Population:A_00004 |Size=959|AvgScore=65.65681|ScoreDev=35.603943
+		Population:A_00004 Year 17 Duration = 0:1:18.075145385
+	Full Run: 0:23:53.206240922000006
+
+	Population:A_00005 |Size=616|AvgScore=85.01786|ScoreDev=44.187954...
+			Average Fitness (before mating): 85.01786
+			Mating Season beginning...
+				Number of Offspring = 308
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 56.739983
+		Population:A_00005 |Size=912|AvgScore=84.11899|ScoreDev=43.614773
+		Population:A_00005 Year 17 Duration = 0:1:6.3260451219999965
+	Full Run: 0:25:0.567650102000016
+
+	Population:A_00006 |Size=711|AvgScore=50.3996|ScoreDev=27.40175...
+			Average Fitness (before mating): 50.3996
+			Mating Season beginning...
+				Number of Offspring = 355
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.647057
+		Population:A_00006 |Size=1044|AvgScore=50.628174|ScoreDev=28.100798
+		Population:A_00006 Year 17 Duration = 0:1:50.009506997
+	Full Run: 0:26:51.615214986999945
+
+	Population:A_00007 |Size=406|AvgScore=39.73249|ScoreDev=24.876455...
+			Average Fitness (before mating): 39.73249
+			Mating Season beginning...
+				Number of Offspring = 203
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 26.531893
+		Population:A_00007 |Size=583|AvgScore=40.417023|ScoreDev=24.817596
+		Population:A_00007 Year 17 Duration = 0:0:14.48919933
+	Full Run: 0:27:7.133601561999967
+
+	Population:A_00008 |Size=833|AvgScore=55.331364|ScoreDev=29.017315...
+			Average Fitness (before mating): 55.331364
+			Mating Season beginning...
+				Number of Offspring = 416
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 36.902344
+		Population:A_00008 |Size=1232|AvgScore=55.68736|ScoreDev=29.983492
+		Population:A_00008 Year 17 Duration = 0:3:46.358720089
+	Full Run: 0:30:54.52150123799993
+
+	Year 18 duration: 0:20:54.26329602800001
+	Full Run: 0:30:55.53506739699992
+	Year 19
+	Population:A_00000 |Size=1311|AvgScore=72.44139|ScoreDev=34.63932...
+			Average Fitness (before mating): 72.44139
+			Mating Season beginning...
+				Number of Offspring = 655
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 48.331127
+		Population:A_00000 |Size=1956|AvgScore=73.28721|ScoreDev=35.007942
+		Population:A_00000 Year 18 Duration = 0:20:5.071260535999954
+	Full Run: 0:51:0.678191636000065
+
+	Population:A_00001 |Size=995|AvgScore=56.014816|ScoreDev=31.338554...
+			Average Fitness (before mating): 56.014816
+			Mating Season beginning...
+				Number of Offspring = 497
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.38078
+		Population:A_00001 |Size=1473|AvgScore=56.201305|ScoreDev=31.5665
+		Population:A_00001 Year 18 Duration = 0:6:14.102056713000025
+	Full Run: 0:57:15.806011689000115
+
+	Population:A_00002 |Size=1081|AvgScore=63.148727|ScoreDev=31.65941...
+			Average Fitness (before mating): 63.148727
+			Mating Season beginning...
+				Number of Offspring = 540
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.13813
+		Population:A_00002 |Size=1601|AvgScore=64.07903|ScoreDev=32.1583
+		Population:A_00002 Year 18 Duration = 0:8:27.76400732100001
+	Full Run: 1:5:44.59929997600011
+
+	Population:A_00003 |Size=1245|AvgScore=64.106544|ScoreDev=35.227345...
+			Average Fitness (before mating): 64.106544
+			Mating Season beginning...
+				Number of Offspring = 622
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.772053
+		Population:A_00003 |Size=1844|AvgScore=64.11568|ScoreDev=35.264034
+		Population:A_00003 Year 18 Duration = 0:14:35.70516094599998
+	Full Run: 1:20:21.365164570999696
+
+	Population:A_00004 |Size=959|AvgScore=65.65681|ScoreDev=35.603943...
+			Average Fitness (before mating): 65.65681
+			Mating Season beginning...
+				Number of Offspring = 479
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.816895
+		Population:A_00004 |Size=1425|AvgScore=65.785835|ScoreDev=36.42957
+		Population:A_00004 Year 18 Duration = 0:5:10.407490944000017
+	Full Run: 1:25:32.80248458299957
+
+	Population:A_00005 |Size=912|AvgScore=84.11899|ScoreDev=43.614773...
+			Average Fitness (before mating): 84.11899
+			Mating Season beginning...
+				Number of Offspring = 456
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 56.120346
+		Population:A_00005 |Size=1354|AvgScore=84.041916|ScoreDev=43.085396
+		Population:A_00005 Year 18 Duration = 0:4:15.003039540000003
+	Full Run: 1:29:48.83816991599997
+
+	Population:A_00006 |Size=1044|AvgScore=50.628174|ScoreDev=28.100798...
+			Average Fitness (before mating): 50.628174
+			Mating Season beginning...
+				Number of Offspring = 522
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.77368
+		Population:A_00006 |Size=1546|AvgScore=50.82665|ScoreDev=28.016056
+		Population:A_00006 Year 18 Duration = 0:7:13.694745916999977
+	Full Run: 1:37:3.58533340699978
+
+	Population:A_00007 |Size=583|AvgScore=40.417023|ScoreDev=24.817596...
+			Average Fitness (before mating): 40.417023
+			Mating Season beginning...
+				Number of Offspring = 291
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 26.99098
+		Population:A_00007 |Size=848|AvgScore=42.14858|ScoreDev=25.19106
+		Population:A_00007 Year 18 Duration = 0:0:47.628732645
+	Full Run: 1:37:52.25541765700018
+
+	Population:A_00008 |Size=1232|AvgScore=55.68736|ScoreDev=29.983492...
+			Average Fitness (before mating): 55.68736
+			Mating Season beginning...
+				Number of Offspring = 616
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.145008
+		Population:A_00008 |Size=1816|AvgScore=56.133514|ScoreDev=30.21036
+		Population:A_00008 Year 18 Duration = 0:13:58.69041069699995
+	Full Run: 1:51:52.00317957399966
+
+	Year 19 duration: 1:20:57.4829302549997
+	Full Run: 1:51:53.024450521999825
+	Year 20
+	Population:A_00000 |Size=1956|AvgScore=73.28721|ScoreDev=35.007942...
+			Average Fitness (before mating): 73.28721
+			Mating Season beginning...
+				Number of Offspring = 978
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 48.874798
+		Population:A_00000 |Size=2911|AvgScore=73.277885|ScoreDev=35.02478
+		Population:A_00000 Year 19 Duration = 1:31:29.03395168299994
+	Full Run: 3:23:22.133374371000173
+
+	Population:A_00001 |Size=1473|AvgScore=56.201305|ScoreDev=31.5665...
+			Average Fitness (before mating): 56.201305
+			Mating Season beginning...
+				Number of Offspring = 736
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.492992
+		Population:A_00001 |Size=2173|AvgScore=57.107292|ScoreDev=31.531382
+		Population:A_00001 Year 19 Duration = 0:28:45.091848088000006
+	Full Run: 3:52:8.282617804999973
+
+	Population:A_00002 |Size=1601|AvgScore=64.07903|ScoreDev=32.1583...
+			Average Fitness (before mating): 64.07903
+			Mating Season beginning...
+				Number of Offspring = 800
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.746056
+		Population:A_00002 |Size=2370|AvgScore=64.52136|ScoreDev=32.94798
+		Population:A_00002 Year 19 Duration = 0:40:26.428762620999805
+	Full Run: 4:32:35.772610296000494
+
+	Population:A_00003 |Size=1844|AvgScore=64.11568|ScoreDev=35.264034...
+			Average Fitness (before mating): 64.11568
+			Mating Season beginning...
+				Number of Offspring = 922
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 42.743782
+		Population:A_00003 |Size=2734|AvgScore=65.87962|ScoreDev=35.73484
+		Population:A_00003 Year 19 Duration = 1:11:50.57058826299999
+	Full Run: 5:44:27.415182239001297
+
+	Population:A_00004 |Size=1425|AvgScore=65.785835|ScoreDev=36.42957...
+			Average Fitness (before mating): 65.785835
+			Mating Season beginning...
+				Number of Offspring = 712
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 43.88802
+		Population:A_00004 |Size=2122|AvgScore=66.042145|ScoreDev=36.97838
+		Population:A_00004 Year 19 Duration = 0:25:8.638390614999935
+	Full Run: 6:9:37.115850792000856
+
+	Population:A_00005 |Size=1354|AvgScore=84.041916|ScoreDev=43.085396...
+			Average Fitness (before mating): 84.041916
+			Mating Season beginning...
+				Number of Offspring = 677
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 56.055542
+		Population:A_00005 |Size=2007|AvgScore=85.15214|ScoreDev=43.440212
+		Population:A_00005 Year 19 Duration = 0:20:25.49141981699995
+	Full Run: 6:30:3.6452683269999397
+
+	Population:A_00006 |Size=1546|AvgScore=50.82665|ScoreDev=28.016056...
+			Average Fitness (before mating): 50.82665
+			Mating Season beginning...
+				Number of Offspring = 773
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 33.89905
+		Population:A_00006 |Size=2274|AvgScore=50.439354|ScoreDev=27.864084
+		Population:A_00006 Year 19 Duration = 0:35:7.505224472000009
+	Full Run: 7:5:12.209686342001078
+
+	Population:A_00007 |Size=848|AvgScore=42.14858|ScoreDev=25.19106...
+			Average Fitness (before mating): 42.14858
+			Mating Season beginning...
+				Number of Offspring = 424
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 28.12116
+		Population:A_00007 |Size=1226|AvgScore=42.292065|ScoreDev=25.798578
+		Population:A_00007 Year 19 Duration = 0:3:12.403899290999988
+	Full Run: 7:8:25.65733641499901
+
+	Population:A_00008 |Size=1816|AvgScore=56.133514|ScoreDev=30.21036...
+			Average Fitness (before mating): 56.133514
+			Mating Season beginning...
+				Number of Offspring = 908
+				Children per pair = 4
+				Min Age of Parent = 5
+			Mating Season Completed.
+			Average Fitness (after mating): 37.436085
+		Population:A_00008 |Size=2697|AvgScore=55.96023|ScoreDev=29.875074
+		Population:A_00008 Year 19 Duration = 1:7:31.616825378000158
+	Full Run: 8:15:58.33853513500071
+
+	Year 20 duration: 6:24:6.334664142999827
+	Full Run: 8:15:59.36169216499911
+	Year 21
+	Population:A_00000 |Size=2911|AvgScore=73.277885|ScoreDev=35.02478...
+			Average Fitness (before mating): 73.277885
+			Mating Season beginning...
+				Number of Offspring = 1455
+				Children per pair = 4
+				Min Age of Parent = 5
