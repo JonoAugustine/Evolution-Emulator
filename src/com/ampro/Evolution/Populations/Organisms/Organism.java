@@ -21,14 +21,11 @@ import com.ampro.util.StringParsing;
  * <h2>------Naming Related------</h2>
  *
  *	String name: lowerCase name of the Organism
- *
- *	<br>-------------------------------------</br>
- *
+ * *
  *	<h2>-----Genetics Related Variables----</h2>
  *	String geneticCode: upperCase gene sequence of the Organism <br>
  *	static int chromosomesNum: <br>
  *	ArrayList<Chromosome> chromosomes: The collection of the Organism's Chromosomes
- *	<br>------------------------<br>
  *
  *	<br> final boolean sexual: Whether the organism reproduces asexually or not <br>
  *

@@ -12,7 +12,7 @@ import com.ampro.util.ToolBox;
  * A codon is a sequence of DNA bases
  * that is CODON_LENGTH bases long
  *
- * @author Götten Töter
+ * @author Jonathan Augustine
  */
 public class Codon extends BioConstants{
 

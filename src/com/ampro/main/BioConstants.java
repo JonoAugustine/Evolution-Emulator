@@ -11,7 +11,7 @@ import com.ampro.Evolution.Dna.Codon;
 
 /**
  *	Contains all constants for each class
- * @author Götten Töter
+ * @author Jonathan Augustine
  *
  */
 public class BioConstants
