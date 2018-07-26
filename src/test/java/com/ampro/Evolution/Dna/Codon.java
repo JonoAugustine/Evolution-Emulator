@@ -17,7 +17,6 @@ import com.ampro.util.ToolBox;
  */
 public class Codon extends BioConstants{
 
-
 	private String bases;
 	private float score; //Score from -100?/0? to 100
 	protected int function = 0; // 0 if neither, -1 if stop, 1 is start

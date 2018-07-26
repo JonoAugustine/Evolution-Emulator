@@ -108,7 +108,7 @@ public class Population extends BioConstants implements Iterable<Organism>{
 
 			/*
 			if(pairs.isEmpty()){
-				for(int A=0; A < ToolBox.permute(this.population.size(), 2); A++)
+				for(int A=0; A < ToolBox.permuteSize(this.population.size(), 2); A++)
 					for(int k=A+1; k < this.population.size(); k++)
 						pairs.add(new int[]{A,k});
 				if(maxChildrenPerPair != 0){

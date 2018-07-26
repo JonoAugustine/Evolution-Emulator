@@ -1,120 +1,132 @@
 package com.ampro.evemu.dna
 
-import com.ampro.util.ToolBox
-import java.util.Comparator
+/**
+ * This file contains elements representing the basis of all
+ * DNA-sequence-objects
+ *
+ * @author Jonathan Augustine
+ * @since 3.0
+ */
 
-enum class DNA : Comparable<DNA> {
+import com.ampro.evemu.BIO_CONSTANTS
+import com.ampro.evemu.constants.CODON_LENGTH
+import java.util.*
+
+enum class DNA {
     A, T, C, G;
-    val comparator: Comparator<DNA> = Comparator { x, y ->
-        return@Comparator when(x) {
-            A -> when(y) {
-                A -> 0
-                else -> 1
-            }
-            T -> when(y) {
-                A -> -1
-                T -> 0
-                else -> 1
-            }
-            C -> when(y) {
-                A, T -> -1
-                C -> 0
-                else -> 1
-            }
-            G -> when(y) {
-                A, T, C -> -1
-                G -> 0
-                null -> 1
-            }
-            null -> when(y) {
-                null -> 0
-                else -> -1
+    companion object {
+        val comparator: Comparator<DNA> = Comparator { x, y ->
+            return@Comparator when (x) {
+                A -> when (y) {
+                    A -> 0
+                    else -> 1
+                }
+                T -> when (y) {
+                    A -> -1
+                    T -> 0
+                    else -> 1
+                }
+                C -> when (y) {
+                    A, T -> -1
+                    C -> 0
+                    else -> 1
+                }
+                G -> when (y) {
+                    A, T, C -> -1
+                    G -> 0
+                    null -> 1
+                }
+                null -> when (y) {
+                    null -> 0
+                    else -> -1
+                }
             }
         }
     }
 }
-enum class RNA { A, U, C, G }
-enum class CodonFunction { NOTHING, STOP, START }
-
-/** The length of all Codons */
-var CODON_LENGTH: Int = 0
-
-data class Codon(val bases: Array<DNA>) : Iterable<DNA> {
+enum class RNA {
+    A, U, C, G;
 
     companion object {
-        var scoreComparator: Comparator<Codon> = Comparator { o1, o2 -> (100000000 * (o1.score - o2.score)).toInt() }
-
-        /**Based on order ATCG */
-        var baseComparator: Comparator<Codon> = object : Comparator<Codon> {
-            override fun compare(o1: Codon, o2: Codon): Int {
-                var retu = 0
-                val b1 = o1.bases.trim { it <= ' ' }.split("".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                val b2 = o2.bases.trim { it <= ' ' }.split("".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                for (i in b1.indices) {
-                    retu = this.compareBase(b1[i], b2[i])
-                    if (retu != 0)
-                        return retu
+        val comparator: Comparator<RNA> = Comparator { x, y ->
+            return@Comparator when (x) {
+                A -> when (y) {
+                    A -> 0
+                    else -> 1
                 }
-                return retu
-            }
-
-            /**
-             * Returns -1,0,1 Based on order ATCG
-             * @return
-             */
-            fun compareBase(s1: String, s2: String): Int {
-                if (s1.length > 1 || s2.length > 1)
-                    ToolBox.systmError("Comparator Failure", "$s1 vs $s2")
-                var retu = 0
-                if (s1 == "A") {
-                    if (s2 == "A")
-                        retu = 0
-                    if (s2 == "T")
-                        retu = -1
-                    if (s2 == "C")
-                        retu = -1
-                    if (s2 == "G")
-                        retu = -1
-                } else if (s1 == "T") {
-                    if (s2 == "A")
-                        retu = 1
-                    if (s2 == "T")
-                        retu = 0
-                    if (s2 == "C")
-                        retu = -1
-                    if (s2 == "G")
-                        retu = -1
-                } else if (s1 == "C") {
-                    if (s2 == "A")
-                        retu = 1
-                    if (s2 == "T")
-                        retu = 1
-                    if (s2 == "C")
-                        retu = 0
-                    if (s2 == "G")
-                        retu = -1
-                } else if (s1 == "G") {
-                    if (s2 == "A")
-                        retu = 1
-                    if (s2 == "T")
-                        retu = 1
-                    if (s2 == "C")
-                        retu = 1
-                    if (s2 == "G")
-                        retu = 0
-                } else {
-                    ToolBox.systmError("Comparator Failure", "$s1 vs $s2")
-                    retu = 0
+                U -> when (y) {
+                    A -> -1
+                    U -> 0
+                    else -> 1
                 }
-                return retu
-
+                C -> when (y) {
+                    A, U -> -1
+                    C -> 0
+                    else -> 1
+                }
+                G -> when (y) {
+                    A, U, C -> -1
+                    G -> 0
+                    null -> 1
+                }
+                null -> when (y) {
+                    null -> 0
+                    else -> -1
+                }
             }
+        }
+    }
+}
+enum class CodonFunction { NOTHING, STOP, START }
+
+/** An Object representing a Codon, a series of DNA Bases */
+data class Codon(var bases: Array<DNA>,
+                 var function: CodonFunction = CodonFunction.NOTHING)
+    : Iterable<DNA>, Comparable<Codon> {
+
+    constructor(bases: List<DNA>,
+                function: CodonFunction = CodonFunction.NOTHING)
+    : this(bases.toTypedArray(), function)
+
+    init {
+        if (bases.size != CODON_LENGTH) {
+            throw IllegalArgumentException("Invalid codon length")
         }
     }
 
     var score: Float = 0f
-    var function: CodonFunction = CodonFunction.NOTHING
 
+    val isStop : Boolean get() = this.function == CodonFunction.STOP
+    val isStart: Boolean get() = this.function == CodonFunction.START
+
+    operator fun get(x: Int) : DNA = bases[x]
+    operator fun set(x: Int, base: DNA) { bases[x] = base }
+    fun length() = bases.size
+
+    companion object {
+        var scoreComparator: Comparator<Codon> = Comparator {
+            o1, o2 -> (100000000 * (o1.score - o2.score)).toInt()
+        }
+
+        /**Based on order ATCG */
+        var baseComparator: Comparator<Codon> = object : Comparator<Codon> {
+            override fun compare(x: Codon, y: Codon): Int {
+                x.forEachIndexed { index, base ->
+                    val result = DNA.comparator.compare(base, y[index])
+                    if (result != 0) {
+                        return result
+                    }
+                }
+                return 0
+            }
+        }
+    }
+
+    override fun compareTo(other: Codon): Int {
+        return baseComparator.compare(this, other)
+    }
+
+    /** @return true if every DNA base is the same */
     override fun equals(other: Any?): Boolean {
         return if (other is Codon) {
             other.bases.forEachIndexed { index, base ->
@@ -128,6 +140,59 @@ data class Codon(val bases: Array<DNA>) : Iterable<DNA> {
 
     override fun iterator(): Iterator<DNA> = bases.iterator()
 
+    override fun toString(): String {
+        val sb = StringBuilder()
+        bases.forEach { sb.append(it) }
+        return sb.toString()
+    }
+
+    override fun hashCode(): Int {
+        var result = Arrays.hashCode(bases)
+        result = 31 * result + score.hashCode()
+        result = 31 * result + function.hashCode()
+        return result
+    }
+
 }
 
+data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
 
+    var genes: ArrayList<Gene>? = null
+    var score: Float = 0f
+
+    init {
+        if (!BIO_CONSTANTS.chromatidLengthRange.includes(bases.size)) {
+            throw IllegalArgumentException("Chromatid size out of Range : " +
+                    "${BIO_CONSTANTS.chromatidLengthRange}")
+        }
+    }
+
+    operator fun get(x: Int) : DNA = bases[x]
+    operator fun set(x: Int, base: DNA) { bases[x] = base }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        bases.forEach { sb.append(it) }
+        return sb.toString()
+    }
+
+    override fun iterator(): Iterator<DNA> = bases.iterator()
+
+}
+
+data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
+
+    var score: Float = 0f
+
+    init {
+        if (chromatids.size != BIO_CONSTANTS.chromasomeSize) {
+            throw IllegalArgumentException("Chromosome missized")
+        }
+    }
+
+    operator fun get(x: Int) : Chromatid = chromatids[x]
+    operator fun set(x: Int, chromatid: Chromatid) { chromatids[x] = chromatid }
+
+    override fun iterator(): Iterator<Chromatid> = chromatids.iterator()
+
+}

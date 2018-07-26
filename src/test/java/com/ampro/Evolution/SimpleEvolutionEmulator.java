@@ -31,7 +31,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 
 	Timer fullTimer;
 	Timer modTimer;
-	
+
 	FileWriter Log;
 
 	//DataDisplay[] displays;
@@ -41,25 +41,25 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 	public void run() {
 		//for (DataDisplay display : this.displays)
 		//this.displays[0].display();
-		
+
 		this.Log.addLines("Initiallizing Timers");
 		this.fullTimer = new Timer();
 		this.modTimer = new Timer();
 
 		this.Log.addLines("Generating Codon Scores");
 		codonScorer();
-		
+
 		System.out.println(allPossibleCodons);
-		//this.Log.addLines(allPossibleCodons); Not functional
+		//this.Log.addLines(codons); Not functional
 		System.out.println(this.environment.getProducerScoredCodon());
 		System.out.println(this.environment.getPredatorScoredCodon());
 		ToolBox.sleep(3);
-		
+
 		this.Log.addLines("Creating new DNA Reader");
 		DNAReader reader = new DNAReader(allPossibleCodons);
 
 		this.modTimer.reset();
-		
+
 		this.Log.addLines("Building Initial Population genes and scoring");
 		for (Population p : this.environment){
 			this.modTimer.reset();
@@ -74,7 +74,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 			System.out.println("\n"+p);
 			for(Organism o: p)
 				System.out.println(o);
-			
+
 			String timer = this.modTimer.reset();
 			this.Log.addLines("\t Population " + p.getName() + " | Duration " + timer);
 			System.out.println("Cycle Duration>>>"+timer);
@@ -82,7 +82,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 			System.out.println();
 
 		}
-		
+
 		this.Log.addLines("Initial populations built and scored.", "\t Run time at: " + this.fullTimer);
 
 		ToolBox.sleep(10);
@@ -92,15 +92,15 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 
 		Timer cycleTimer = new Timer();
 		this.modTimer.reset();
-		
+
 		this.Log.addLines("Beginig environment emulation...");
 		/** The Meat and bones. F1 generations onwards */
 		for (int i = 0; i < 50; i++) {
-			
+
 			this.Log.addLines("\tYear " + (i+1) );
 			System.out.println("Cycle " + (i+1) + "\n");
-			
-			//For each population, mate and score all new organisms 
+
+			//For each population, mate and score all new organisms
 			for (Population p : this.environment) {
 				this.Log.addLines("\t" + p + "...");
 				this.modTimer.reset();
@@ -115,7 +115,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 					continue;
 				}
 				System.out.println(p);
-				
+
 				float preMate = p.getAverageFitness();
 				this.Log.addLines("\t\t\tAverage Fitness (before mating): " + preMate);
 				this.Log.addLines("\t\t\tMating Season beginning..."
@@ -125,7 +125,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 								);
 				p.addAll(p.matingSeason(p.size()/2, 4, 5));
 				this.Log.addLines("\t\t\tMating Season Completed.");
-				
+
 				float postMate = p.getAverageFitness();
 				this.Log.addLines("\t\t\tAverage Fitness (after mating): " + postMate);
 				p.sort(Population.truePopulationComparator);
@@ -314,14 +314,14 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 		boolean searchingforPerfectBeing = true;
 		outerloop:
 			for (int i = 1; searchingforPerfectBeing; i++) {
-				//dna readers
+				//bases readers
 				if (i % 100 + i == 0) {
 					System.out.println("Generating New DNA Readers");
 					// Generate new Readers
 					System.out.println();
 				}
 
-				//alter dna length
+				//alter bases length
 				if (i % 1000 == 0) {
 					DNA_LENGTH = DNA_LENGTH
 							+ new Random().nextInt(DNA_LENGTH / 10)

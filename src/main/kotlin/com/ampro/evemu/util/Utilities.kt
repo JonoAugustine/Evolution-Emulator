@@ -2,8 +2,14 @@ package com.ampro.evemu.util
 
 import java.math.BigInteger
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
+/** @return The current local date and time. dd-MM-yyyy HH:mm:ss */
+val NOW: String
+    get() = LocalDateTime.now().format(
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
 
 /**
  * A Timer object contains a start-time (long) that is defined upon creation.<br></br>
@@ -106,13 +112,52 @@ fun timerAverage(timers: Array<Timer>): String {
     return "$hours:$min:$seconds"
 }
 
+fun <T> permute(list: List<T>) : List<List<T>> {
+    if(list.size==1) return listOf(list)
+    val perms=mutableListOf<List<T>>()
+    val sub=list[0]
+    for(perm in permute(list.drop(1))) {
+        for (i in 0..perm.size) {
+            val newPerm = perm.toMutableList()
+            newPerm.add(i, sub)
+            perms.add(newPerm)
+        }
+    }
+    return perms
+}
+
+inline fun <reified T> permute(src: Array<T>, size: Int) : List<List<T>> {
+    val n = src.size
+    val idx = IntArray(size)
+    val perm = arrayOfNulls<T>(size)
+    val out = ArrayList<List<T>>()
+    while (true) {
+        for (i in 0 until size)
+            perm[i] = src[idx[i]]
+        out.add(perm.toList() as List<T>)
+        // generate the next permutation
+        var i = idx.size - 1
+        while (i >= 0) {
+            idx[i]++
+            if (idx[i] < n)
+                break
+            idx[i] = 0
+            i--
+        }
+        // if the first index wrapped around then we're done
+        if (i < 0)
+            break
+    }
+    return out
+}
+
 /**
  * Returns the number of permutations of the pool of size "size"
  * @param size
  * @param pool
  * @return number of permutations
  */
-fun permute(pool: Int, size: Int): Int {
+fun permuteSize(pool: Int, size: Int): Int {
     if (size == 0) return 0
     return try {
         factorial(pool).divide(factorial(pool - size)).toInt()
@@ -127,10 +172,6 @@ fun factorial(i: Int): BigInteger {
         retu = retu.multiply(BigInteger.valueOf(k.toLong()))
     }
     return retu
-}
-
-fun getCurrentTime(): String {
-    return SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().time)
 }
 
 /**

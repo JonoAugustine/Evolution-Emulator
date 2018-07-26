@@ -10,7 +10,7 @@ import java.util.Scanner;
 import com.ampro.Evolution.Dna.Codon;
 
 /**
- *	Contains all constants for each class
+ *	Contains all BIO_CONSTANTS for each class
  * @author Jonathan Augustine
  *
  */

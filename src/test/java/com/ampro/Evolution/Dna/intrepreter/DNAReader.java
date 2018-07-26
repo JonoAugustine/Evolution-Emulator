@@ -101,7 +101,7 @@ public class DNAReader extends BioConstants{
 	}
 
 	/**
-	 * Returns a List of each Codon in the organism's dna sequence
+	 * Returns a List of each Codon in the organism's bases sequence
 	 * in order of appearance
 	 *
 	 * TODO make codon diessection based on chromosomes

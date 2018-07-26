@@ -28,7 +28,7 @@ import jdk.internal.org.objectweb.asm.tree.analysis.Interpreter;
  * organisms exhibit the "perfect" or near-perfect sequence 6.1.opt-2) Change
  * the Trait scores after V number of Fn generations <br>
  * <h2>TODO Overall Additions to make <br>
- * -=-Convert anything with dna sequences to work for choromosomes
+ * -=-Convert anything with bases sequences to work for choromosomes
  * <br> -Male Female? <br>
  * - "Inept" modifier <br>
  * - Modular Trait base length <br>
@@ -70,8 +70,6 @@ public class EvolutionRunner extends SimpleEvolutionEmulator{
 
 
 	public static void main(String[] args) {
-
-		BioConstants.setUp();
 
 		Environment environment_A = new Environment();
 		for(int i=0; i < 9; i++)
