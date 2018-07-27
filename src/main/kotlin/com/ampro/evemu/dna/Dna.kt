@@ -11,6 +11,8 @@ package com.ampro.evemu.dna
 import com.ampro.evemu.BIO_CONSTANTS
 import com.ampro.evemu.constants.CODON_LENGTH
 import java.util.*
+import com.ampro.evemu.util.IntRange
+import com.ampro.evemu.util.random
 
 enum class DNA {
     A, T, C, G;
@@ -185,7 +187,7 @@ data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
     var score: Float = 0f
 
     init {
-        if (chromatids.size != BIO_CONSTANTS.chromasomeSize) {
+        if (chromatids.size != BIO_CONSTANTS.chromosomeSize) {
             throw IllegalArgumentException("Chromosome missized")
         }
     }
@@ -195,4 +197,25 @@ data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
 
     override fun iterator(): Iterator<Chromatid> = chromatids.iterator()
 
+}
+
+/**
+ * Generates a random Array of chromosomes<br></br>
+ * Each with chromatids of length within CHROMATID_LENGTH_RANGE[0]
+ *
+ * @param quantity The number of chromosomes to generate
+ * @param size The number of chromatids per chromosome
+ * @param chromaRange The size range of each chromatid
+ * @return Array of Chromosomes
+ */
+fun generateChromosomes(quantity: Int = BIO_CONSTANTS.startingChromosomes,
+                        size: Int = BIO_CONSTANTS.chromosomeSize,
+                        chromaRange: IntRange = BIO_CONSTANTS.chromatidLengthRange)
+        : Array<Chromosome> {
+
+    return Array<Chromosome>(quantity) {
+        Chromosome(Array<Chromatid>(size) {
+            Chromatid(Array(chromaRange.random()) { DNA.values()[random(0, 3)] })
+        })
+    }
 }

@@ -121,7 +121,7 @@ public class Organism extends BioConstants
 	 *
 	 * @return ArrayList<\Chromosome>
 	 */
-	protected void generateChromosomes(){
+	protected void generateChromosomes() {
 
 		ArrayList<Chromosome> chromos = new ArrayList<>();
 
@@ -317,8 +317,7 @@ public class Organism extends BioConstants
 	 * getName<br>
 	 * getFitness<br>
 	 */
-	public int compareTo(Organism o)
-	{
+	public int compareTo(Organism o) {
 		return Comparator.comparing(Organism::isAlive)
 				.thenComparing(Organism::getGeneration)
 				.thenComparingInt(Organism::getAge)

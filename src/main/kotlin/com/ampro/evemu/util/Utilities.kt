@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 /** @return The current local date and time. dd-MM-yyyy HH:mm:ss */
 val NOW: String
@@ -196,3 +197,6 @@ private fun isInteger(input: String): Boolean = try {
 } catch (e: Exception) {
     false
 }
+
+fun random(min: Int, max: Int) : Int
+        = ThreadLocalRandom.current().nextInt(min, max + 1)

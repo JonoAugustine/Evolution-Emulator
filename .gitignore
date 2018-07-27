@@ -27,3 +27,4 @@ hs_err_pid*
 .idea/
 Evolution Emulator 2.0.iml
 bin/com/
+/bin/

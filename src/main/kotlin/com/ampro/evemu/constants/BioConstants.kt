@@ -5,6 +5,8 @@ import com.ampro.evemu.dna.CodonFunction
 import com.ampro.evemu.dna.DNA
 import com.ampro.evemu.scan
 import com.ampro.evemu.util.NOW
+import com.ampro.evemu.util.IntRange
+import com.ampro.evemu.util.DoubleRange
 import com.ampro.evemu.util.permute
 import kotlinx.coroutines.experimental.async
 import java.util.*
@@ -28,10 +30,10 @@ var CODON_LENGTH: Int = 0
 /** A collection of biological BIO_CONSTANTS for all animals */
 data class BioConstants(var name: String? = "unnamed $NOW",
                         val codonLength: Int,
-                        val codonScoreRange: FloatRange = FloatRange(-1f, 1f),
+                        val codonScoreRange: DoubleRange = DoubleRange(-1.0, 1.0),
                         val startCodons: Int = 3, val stopCodons: Int = 1,
                         val chromatidLengthRange: IntRange = IntRange(100, 100),
-                        val chromasomeSize: Int = 2,
+                        val chromosomeSize: Int = 2,
                         val startingChromosomes: Int = 4,
                         val startingDnaLength: Int = 60,
                         val minGeneLength: Int, val codons: Array<Codon>) {
@@ -58,10 +60,10 @@ data class BioConstants(var name: String? = "unnamed $NOW",
 
             println("Score range 'min max': ")
             var split = scan.nextLine().split("[,\\s+]".toRegex())
-            val scoreRange: FloatRange = try {
-                FloatRange(split[0].toFloat(), split[1].toFloat())
+            val scoreRange: DoubleRange = try {
+                DoubleRange(split[0].toDouble(), split[1].toDouble())
             } catch (e: Exception) {
-                FloatRange(-1f, 1f)
+                DoubleRange(-1.0, 1.0)
             }
             val codons = codonperms.await()
             println("Number of start codons: ")
@@ -164,7 +166,7 @@ data class BioConstants(var name: String? = "unnamed $NOW",
 
             println("Chromatid Length Range: ${con.chromatidLengthRange}")
 
-            println("Chromosome Size: ${con.chromasomeSize}")
+            println("Chromosome Size: ${con.chromosomeSize}")
 
             println("Starting Number of Chromosomes: ${con.startingChromosomes}")
 
