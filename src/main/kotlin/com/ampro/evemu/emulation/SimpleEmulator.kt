@@ -1,9 +1,9 @@
 package com.ampro.evemu.emulation
 
-class SimpleEmulator(val environment: Environment) {
+import com.ampro.evemu.util.InternalLog
 
-    val log = ArrayList<String>(100_000)
+class SimpleEmulator(val name: String = "SEmu", val environment: Environment) {
 
-
+    val log = InternalLog(name)
 
 }

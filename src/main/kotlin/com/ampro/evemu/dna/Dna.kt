@@ -97,10 +97,12 @@ data class Codon(var bases: Array<DNA>,
         }
     }
 
-    var score: Float = 0f
+    var score: Double = 0.0
 
     val isStop : Boolean get() = this.function == CodonFunction.STOP
     val isStart: Boolean get() = this.function == CodonFunction.START
+
+    fun clone() : Codon = Codon(bases, function).also { it.score = this.score }
 
     companion object {
         var scoreComparator: Comparator<Codon> = Comparator {
