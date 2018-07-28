@@ -12,6 +12,7 @@ import com.ampro.evemu.BIO_CONSTANTS
 import com.ampro.evemu.constants.CODON_LENGTH
 import java.util.*
 import com.ampro.evemu.util.IntRange
+import com.ampro.evemu.util.elog
 import com.ampro.evemu.util.random
 
 enum class DNA {
@@ -101,10 +102,6 @@ data class Codon(var bases: Array<DNA>,
     val isStop : Boolean get() = this.function == CodonFunction.STOP
     val isStart: Boolean get() = this.function == CodonFunction.START
 
-    operator fun get(x: Int) : DNA = bases[x]
-    operator fun set(x: Int, base: DNA) { bases[x] = base }
-    fun length() = bases.size
-
     companion object {
         var scoreComparator: Comparator<Codon> = Comparator {
             o1, o2 -> (100000000 * (o1.score - o2.score)).toInt()
@@ -124,9 +121,11 @@ data class Codon(var bases: Array<DNA>,
         }
     }
 
-    override fun compareTo(other: Codon): Int {
-        return baseComparator.compare(this, other)
-    }
+    override fun compareTo(other: Codon): Int = baseComparator.compare(this, other)
+
+    operator fun get(x: Int) : DNA = bases[x]
+    operator fun set(x: Int, base: DNA) { bases[x] = base }
+    val length get() =  bases.size
 
     /** @return true if every DNA base is the same */
     override fun equals(other: Any?): Boolean {
@@ -163,18 +162,20 @@ data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
     var score: Float = 0f
 
     init {
-        if (!BIO_CONSTANTS.chromatidLengthRange.includes(bases.size)) {
+        if (!BIO_CONSTANTS.chromatidLengthRange.contains(bases.size)) {
             throw IllegalArgumentException("Chromatid size out of Range : " +
                     "${BIO_CONSTANTS.chromatidLengthRange}")
         }
     }
+
+    val size: Int get() = bases.size
 
     operator fun get(x: Int) : DNA = bases[x]
     operator fun set(x: Int, base: DNA) { bases[x] = base }
 
     override fun toString(): String {
         val sb = StringBuilder()
-        bases.forEach { sb.append(it) }
+        bases.forEach { sb.append(it.name) }
         return sb.toString()
     }
 
@@ -192,11 +193,18 @@ data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
         }
     }
 
+    val size: Int get() = chromatids.size
+
     operator fun get(x: Int) : Chromatid = chromatids[x]
     operator fun set(x: Int, chromatid: Chromatid) { chromatids[x] = chromatid }
 
     override fun iterator(): Iterator<Chromatid> = chromatids.iterator()
 
+    override fun toString(): String {
+        val sb = StringBuilder("[")
+        chromatids.forEach { sb.append("[$it]") }
+        return sb.append("]").toString()
+    }
 }
 
 /**
@@ -213,8 +221,7 @@ fun generateChromosomes(quantity: Int = BIO_CONSTANTS.startingChromosomes,
                         chromaRange: IntRange = BIO_CONSTANTS.chromatidLengthRange)
         : Array<Chromosome> {
 
-    return Array<Chromosome>(quantity) {
-        Chromosome(Array<Chromatid>(size) {
+    return Array(quantity) {Chromosome(Array(size) {
             Chromatid(Array(chromaRange.random()) { DNA.values()[random(0, 3)] })
         })
     }

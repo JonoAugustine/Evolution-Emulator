@@ -3,20 +3,41 @@ package com.ampro.evemu.organism
 import com.ampro.evemu.BIO_CONSTANTS
 import com.ampro.evemu.dna.Chromosome
 import com.ampro.evemu.dna.generateChromosomes
+import com.ampro.evemu.FIXED_POOL
+import com.ampro.evemu.dna.Chromatid
+import com.ampro.evemu.dna.DNA
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.util.SequentialNamer
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.runBlocking
 import java.util.*
 
+class SimpleOrganism(generation: Int = 0,
+                     name: String = organismNamer.next("F$generation"), //ORG_F#_ID
+                     parents: Array<Organism>? = null,
+                     reproductiveType: ReproductiveType = CLONE,
+                     chromosomes: Array<Chromosome> = generateChromosomes())
+
+    : Organism(generation, name, parents, reproductiveType, chromosomes) {
+
+    override fun clone(): Organism = SimpleOrganism(generation, name, parents,
+            reproductiveType, chromosomes)
+
+}
 
 /**
  * A Class representing an Organism.
  */
 abstract class Organism(val generation: Int,
-                        val name: String = "${generation}_${organismNamer.next()}", //Gen#_ID
-                        val parents: Array<Organism?>,
+                        val name: String = organismNamer.next("F$generation"), //ORG_Gen#_ID
+                        val parents: Array<Organism>? = null,
                         val reproductiveType: ReproductiveType = CLONE,
                         val chromosomes: Array<Chromosome> = generateChromosomes())
     : Comparable<Organism> {
+
+    companion object {
+        val organismNamer = SequentialNamer("ORG", letterLength = 4)
+    }
 
     //Macro data
     var alive: Boolean = true
@@ -25,14 +46,27 @@ abstract class Organism(val generation: Int,
     /** How fit this organism is for its Environment */
     var fitness: Double = 0.0
 
+    /** The number of base-pairs in the Organism genetic sequence */
+    val baseCount: Int get() = runBlocking<Int> {
+        //An array of async jobs counting the number of bases across all chromosomes
+        val jobs = Array(chromosomes.size) { chromosomeIndex ->
+            async(FIXED_POOL) {
+                var count = 0
+                chromosomes[chromosomeIndex].chromatids.forEach {
+                    count += it.size
+                }
+                count
+            }
+        }
+        jobs.let { var count = 0; it.forEach{ count+=it.await() }; count }
+    }
+
     fun getChromosomeSize(): Int = BIO_CONSTANTS.chromosomeSize
 
     /** @return a random Int within the defined IntRange */
     fun getChromoatidLength(): Int = BIO_CONSTANTS.chromatidLengthRange.random()
 
-    fun die() {
-        this.alive = false
-    }
+    fun die() { this.alive = false }
 
     abstract fun clone(): Organism
 
@@ -46,10 +80,11 @@ abstract class Organism(val generation: Int,
     }
 
     override fun toString(): String {
-        return "$name | ${if (alive) "alive" else "dead"}, age=$age, " +
-                "Reproductive=$reproductiveType, fitness=$fitness | [$chromosomes]"
+        return "$name | ${if (alive) "alive" else "dead"} age=$age, " +
+                "Reproductive=$reproductiveType fitness=$fitness | " +
+                "[${chromosomes.let { var s = ""; it.forEach {s += it}; s}}]"
     }
 
 }
 
-val organismNamer: SequentialNamer = SequentialNamer()
+enum class ReproductiveType {SEX, CLONE, EITHER}

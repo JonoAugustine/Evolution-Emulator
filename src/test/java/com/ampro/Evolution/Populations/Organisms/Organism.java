@@ -66,7 +66,6 @@ public class Organism extends BioConstants
 	protected Type type;
 	private Organism[] parents;
 
-
 	/**
 	 *  * Constructs an Organism object with name "name" and genetics "geneticCode"
 	 * </br>

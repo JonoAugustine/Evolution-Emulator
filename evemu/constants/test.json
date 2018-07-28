@@ -11,7 +11,7 @@
     "min": 100,
     "max": 100
   },
-  "chromasomeSize": 2,
+  "chromosomeSize": 2,
   "startingChromosomes": 4,
   "startingDnaLength": 1000,
   "minGeneLength": 1000,

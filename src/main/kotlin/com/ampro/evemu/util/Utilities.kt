@@ -1,7 +1,6 @@
 package com.ampro.evemu.util
 
 import java.math.BigInteger
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -20,12 +19,12 @@ val NOW: String
  */
 class Timer(private var startTime: Long = System.nanoTime()) {
 
-    var stopped: Boolean = false
+    var runnin: Boolean = true
 
     private var elapsedTime: Long = -1
 
     fun getElapsedTime() : Long {
-        return if (stopped) {
+        return if (!runnin) {
             elapsedTime
         } else {
             System.nanoTime() - startTime
@@ -60,6 +59,7 @@ class Timer(private var startTime: Long = System.nanoTime()) {
 
     /**
      * Resets the starting time and returns the previous duration
+     *
      * @return the last duration formatted
      */
     fun reset() : String {
@@ -70,11 +70,12 @@ class Timer(private var startTime: Long = System.nanoTime()) {
 
     /**
      * Stop the timer (set the end time)
+     *
      * @return The formatted duration
      */
     fun stop() : String {
         this.elapsedTime = System.nanoTime()
-        this.stopped = true
+        this.runnin = false
         return this.formattedTime()
     }
 
@@ -133,17 +134,13 @@ inline fun <reified T> permute(src: Array<T>, size: Int) : List<List<T>> {
     val perm = arrayOfNulls<T>(size)
     val out = ArrayList<List<T>>()
     while (true) {
-        for (i in 0 until size)
-            perm[i] = src[idx[i]]
+        for (k in 0 until size) perm[k] = src[idx[k]]
         out.add(perm.toList() as List<T>)
         // generate the next permutation
         var i = idx.size - 1
         while (i >= 0) {
-            idx[i]++
-            if (idx[i] < n)
-                break
-            idx[i] = 0
-            i--
+            if (++idx[i] < n) break
+            idx[i--] = 0
         }
         // if the first index wrapped around then we're done
         if (i < 0)
@@ -198,5 +195,5 @@ private fun isInteger(input: String): Boolean = try {
     false
 }
 
-fun random(min: Int, max: Int) : Int
+fun random(min: Int = 0, max: Int) : Int
         = ThreadLocalRandom.current().nextInt(min, max + 1)

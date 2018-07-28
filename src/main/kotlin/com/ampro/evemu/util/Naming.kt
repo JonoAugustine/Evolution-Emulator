@@ -1,45 +1,35 @@
 package com.ampro.evemu.util
 
-class SequentialNamer(val prefix: String = "") {
+import com.ampro.evemu.constants.ALPHABET
 
-    /**The current highest first index letter for Organism name generation */
-    var nextNameLetterIndex = 0
-    var nextNameIndex = 0
-    /**The current highest number for Organism name generation */
-    var nextNameNumber = 0
+/** An object to name things sequentially */
+class SequentialNamer(val prefix: String = "", val maxInt: Int = 99_000,
+                      letterLength: Int = 2) {
 
-    /**
-     * @return The next formatted name in the sequence. A_0
-     */
-    fun next() : String {
-        var name = ""
-        if (this.generation != null)
-            name += this.generation + "-"
-        try {
-            name += ALPHABET.substring(NEXT_NAME_LETTER_INDEX, NEXT_NAME_LETTER_INDEX + 1)
-        } catch (e: IndexOutOfBoundsException) {
-            name += ALPHABET.substring(NEXT_NAME_LETTER_INDEX)
-            NEXT_NAME_LETTER_INDEX = 0
-            try {
-                name += "_" + ALPHABET.substring(NEXT_NAME_LETTER_INDEX, NEXT_NAME_LETTER_INDEX + 1)
-            } catch (e2: IndexOutOfBoundsException) {
-                name += "_" + ALPHABET.substring(NEXT_NAME_LETTER_INDEX)
-                NEXT_NAME_LETTER_INDEX = 0
-                NEXT_NAME_NUMBER = 0
+    private val let = permute(ALPHABET.toCharArray().toTypedArray(), letterLength)
+    private val letters = Array(let.size) { index -> let[index].joinToString(separator = "") }
+
+    var nextLetterIndex : Int = 0
+    var nextNumber : Int = 0
+
+    @Throws(NoSuchElementException::class)
+    fun next(secondPrefix: Any = "") : String {
+        val sb = StringBuilder("${prefix}_${secondPrefix}_")
+        return synchronized(this) {
+            if (nextNumber !in 0..maxInt) {
+                nextNumber = 0
+                if (++nextLetterIndex !in 0 until letters.size) {
+                    throw NoSuchElementException("Exhausted Letter Names")
+                }
             }
-
+            sb.append(letters[nextLetterIndex])//.append("_")
+                .append(nextNumber++)
+            sb.toString()
         }
+    }
 
-
-        name += "_"
-        for (i in 5 downTo String("" + NEXT_NAME_NUMBER + "").length + 1)
-            name += "0"
-        name += NEXT_NAME_NUMBER++
-        if (NEXT_NAME_NUMBER === 99999) {
-            NEXT_NAME_NUMBER = 0
-            NEXT_NAME_LETTER_INDEX++
-        }
-
-        return name
+    fun reset() {
+        nextLetterIndex = 0
+        nextNumber = 0
     }
 }

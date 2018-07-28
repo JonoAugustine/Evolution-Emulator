@@ -3,24 +3,79 @@ package com.ampro.evemu
 import com.ampro.evemu.constants.BioConstants
 import com.ampro.evemu.constants.DIR_CONST
 import com.ampro.evemu.constants.DIR_ROOT
-import com.google.gson.Gson
+import com.ampro.evemu.organism.Organism
+import com.ampro.evemu.organism.SimpleOrganism
+import com.ampro.evemu.util.elog
+import com.ampro.evemu.util.slog
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.*
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.system.measureTimeMillis
 
 
 val scan = Scanner(System.`in`)
-
+var FIXED_POOL = newFixedThreadPoolContext(16, "FixedPool")
 var BIO_CONSTANTS: BioConstants = loadOrBuild()
 
-fun main(args: Array<String>) {
-    //Build environments
+val CACHED_POOL =  Executors.newCachedThreadPool().asCoroutineDispatcher()
 
+fun main(args: Array<String>) = runBlocking {
+    //Build environments
     //Start emulator coroutines
+    //Fixedy stuff
+    test()
+
+
+
+
+
+    FIXED_POOL.close()
+}
+
+internal suspend fun test(testSize: Int = 10_000) {
+    val prodMap = ConcurrentHashMap<String, AtomicInteger>(mapOf(
+            "FixedPool-1" to AtomicInteger(), "FixedPool-2" to AtomicInteger(),
+            "FixedPool-3" to AtomicInteger(), "FixedPool-4" to AtomicInteger(),
+            "FixedPool-5" to AtomicInteger(), "FixedPool-6" to AtomicInteger(),
+            "FixedPool-7" to AtomicInteger(), "FixedPool-8" to AtomicInteger(),
+            "FixedPool-9" to AtomicInteger(), "FixedPool-10" to AtomicInteger(),
+            "FixedPool-11" to AtomicInteger(), "FixedPool-12" to AtomicInteger(),
+            "FixedPool-13" to AtomicInteger(), "FixedPool-14" to AtomicInteger(),
+            "FixedPool-15" to AtomicInteger(), "FixedPool-16" to AtomicInteger()
+    ))
+    val arr = arrayOfNulls<Organism>(testSize)
+    val time = measureTimeMillis {
+        val jobs = List(testSize) {index: Int ->
+            // launch a lot of coroutines and list their jobs
+            async (FIXED_POOL) {
+                prodMap[Thread.currentThread().name]?.incrementAndGet()
+                arr[index] = SimpleOrganism()
+            }
+        }
+        runBlocking { jobs.awaitAll() }
+    }
+    arr.forEach { slog(it?: "null") }
+    println("${time / 1000} sec")
+    println(prodMap.toSortedMap(kotlin.Comparator { n, n2 ->
+        prodMap[n2]!!.toInt() - prodMap[n]!!.toInt()
+    }).toString())
+    var min: Int = testSize
+    var max: Int = 0
+    println("Max-Min dif=" + prodMap.let {
+        it.forEach { val value = it.value.toInt()
+            if (value < min) min = value
+            else if (value > max) max = value
+        }
+        max - min
+    }
+            + "\nDif % of max=${((max-min).toDouble()/testSize.toDouble()) * 100}")
 }
 
 fun loadOrBuild() : BioConstants {

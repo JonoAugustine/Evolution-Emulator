@@ -42,11 +42,7 @@ public class Population extends BioConstants implements Iterable<Organism>{
 	 * getName<br>
 	 * getFitness<br>
 	 */
-	public static Comparator<Organism> truePopulationComparator = new Comparator<Organism>(){
-		@Override public int compare(Organism o1, Organism o2){
-			return o1.compareTo(o2);
-		}
-	};
+	public static Comparator<Organism> truePopulationComparator = Organism::compareTo;
 
 	/**
 	 * Constructs a new Population object
@@ -213,9 +209,9 @@ public class Population extends BioConstants implements Iterable<Organism>{
 
 	private float standardDeviation(){
 		float sum = 0;
-		for(int i=0; i < this.population.size(); i++)
-			sum += (this.population.get(i).getFitness() - this.averageFitness())
-			*(this.population.get(i).getFitness() - this.averageFitness());
+		for (Organism organism : this.population)
+			sum += (organism.getFitness() - this.averageFitness()) * (organism
+					.getFitness() - this.averageFitness());
 		float varience = sum / this.population.size();
 		float deviation = (float) Math.sqrt(varience);
 		return deviation;
@@ -339,9 +335,7 @@ public class Population extends BioConstants implements Iterable<Organism>{
 	public String toString() {
 		return this.name + " |Size=" +this.size()
 		+"|AvgScore="+this.getAverageFitness()
-		+"|ScoreDev="+this.getScoreDeviation()
-		;
-
+		+"|ScoreDev="+this.getScoreDeviation();
 	}
 
 	/**
@@ -350,6 +344,5 @@ public class Population extends BioConstants implements Iterable<Organism>{
 	public boolean isEmpty() {
 		return this.population.isEmpty() || this.population.size() == 0;
 	}
-
 
 }
