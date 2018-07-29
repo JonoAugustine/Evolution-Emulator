@@ -1,11 +1,9 @@
 package com.ampro.evemu.organism
 
-import com.ampro.evemu.BIO_CONSTANTS
+import com.ampro.evemu.BIO_C
 import com.ampro.evemu.dna.Chromosome
 import com.ampro.evemu.dna.generateChromosomes
 import com.ampro.evemu.FIXED_POOL
-import com.ampro.evemu.dna.Chromatid
-import com.ampro.evemu.dna.DNA
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.util.SequentialNamer
 import kotlinx.coroutines.experimental.async
@@ -29,7 +27,7 @@ class SimpleOrganism(generation: Int = 0,
  * A Class representing an Organism.
  */
 abstract class Organism(val generation: Int,
-                        val name: String = organismNamer.next("F$generation"), //ORG_Gen#_ID
+                        val name: String = organismNamer.next("F$generation"),
                         val parents: Array<Organism>? = null,
                         val reproductiveType: ReproductiveType = CLONE,
                         val chromosomes: Array<Chromosome> = generateChromosomes())
@@ -61,10 +59,10 @@ abstract class Organism(val generation: Int,
         jobs.let { var count = 0; it.forEach{ count+=it.await() }; count }
     }
 
-    fun getChromosomeSize(): Int = BIO_CONSTANTS.chromosomeSize
+    fun getChromosomeSize(): Int = BIO_C.chromosomeSize
 
     /** @return a random Int within the defined IntRange */
-    fun getChromoatidLength(): Int = BIO_CONSTANTS.chromatidLengthRange.random()
+    fun getChromoatidLength(): Int = BIO_C.chromatidLengthRange.random()
 
     fun die() { this.alive = false }
 

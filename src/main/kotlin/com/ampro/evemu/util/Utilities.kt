@@ -6,6 +6,19 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
+fun <E> ArrayList<E>.addAll(arr: Array<E>) = arr.forEach { this.add(it) }
+fun <E> ArrayList<E>.addAll(insert: Int, arr: Array<E>) {
+    if (this.size - insert < arr.size)
+        throw IndexOutOfBoundsException("""
+            ArrayList Size: ${this.size}
+            Insert index: $insert
+            Insert size: ${arr.size}
+            """.trimIndent()
+        )
+    var idx = insert
+    arr.forEach { this.add(idx++, it) }
+}
+
 /** @return The current local date and time. dd-MM-yyyy HH:mm:ss */
 val NOW: String
     get() = LocalDateTime.now().format(
@@ -151,6 +164,7 @@ inline fun <reified T> permute(src: Array<T>, size: Int) : List<List<T>> {
 
 /**
  * Returns the number of permutations of the pool of size "size"
+ *
  * @param size
  * @param pool
  * @return number of permutations

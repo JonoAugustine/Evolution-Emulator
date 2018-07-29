@@ -17,11 +17,10 @@ import com.ampro.main.BioConstants;
  * A base object for different types of environments<p>
  * An environment contains the resource availabilities
  * and a "difficulty" level
- * defining how often cataclismic die-off events occur
+ * defining how often cataclysmic die-off events occur
  * <br>
  *
  * @author Jonathan Augustine
- *
  */
 public class Environment extends BioConstants implements Iterable<Population>{
 
@@ -38,7 +37,7 @@ public class Environment extends BioConstants implements Iterable<Population>{
 		this.populations = populations;
 	}
 
-	public Environment(){
+	public Environment() {
 		this.populations = new ArrayList<>();
 	}
 
@@ -62,7 +61,7 @@ public class Environment extends BioConstants implements Iterable<Population>{
 	 * @param {@link Organism}
 	 * @return {@link DNAReader}
 	 */
-	public DNAReader reader(Organism orgo){
+	public DNAReader reader(Organism orgo) {
 		if(orgo instanceof Predator)
 			return this.DnaReaders[2];
 		if(orgo instanceof Producer)

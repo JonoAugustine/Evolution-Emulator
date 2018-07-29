@@ -5,7 +5,6 @@ import com.ampro.evemu.constants.DIR_CONST
 import com.ampro.evemu.constants.DIR_ROOT
 import com.ampro.evemu.organism.Organism
 import com.ampro.evemu.organism.SimpleOrganism
-import com.ampro.evemu.util.elog
 import com.ampro.evemu.util.slog
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.experimental.*
@@ -22,7 +21,7 @@ import kotlin.system.measureTimeMillis
 
 val scan = Scanner(System.`in`)
 var FIXED_POOL = newFixedThreadPoolContext(16, "FixedPool")
-var BIO_CONSTANTS: BioConstants = loadOrBuild()
+var BIO_C: BioConstants = loadOrBuild()
 
 val CACHED_POOL =  Executors.newCachedThreadPool().asCoroutineDispatcher()
 
@@ -31,10 +30,6 @@ fun main(args: Array<String>) = runBlocking {
     //Start emulator coroutines
     //Fixedy stuff
     test()
-
-
-
-
 
     FIXED_POOL.close()
 }
@@ -90,7 +85,7 @@ fun loadOrBuild() : BioConstants {
         if (file.exists()) {
             try {
                 val reader = FileReader(file)
-                BIO_CONSTANTS = gson.fromJson(reader, BioConstants::class.java)
+                BIO_C = gson.fromJson(reader, BioConstants::class.java)
                 set = true
             } catch (e: Exception) {
                 System.err.println("Failed to load file '$filename'.\n${e.cause}")
@@ -118,7 +113,7 @@ fun loadOrBuild() : BioConstants {
         }
         scan.close()
         build
-    } else BIO_CONSTANTS
+    } else BIO_C
 }
 
 fun buildDirs() {
