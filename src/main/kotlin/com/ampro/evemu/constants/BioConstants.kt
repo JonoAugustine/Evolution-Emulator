@@ -1,8 +1,8 @@
 package com.ampro.evemu.constants
 
-import com.ampro.evemu.dna.Codon
-import com.ampro.evemu.dna.CodonFunction
-import com.ampro.evemu.dna.RNA
+import com.ampro.evemu.ribonucleic.Codon
+import com.ampro.evemu.ribonucleic.CodonFunction
+import com.ampro.evemu.ribonucleic.RNA
 import com.ampro.evemu.scan
 import com.ampro.evemu.util.*
 import com.ampro.evemu.util.IntRange
@@ -16,30 +16,29 @@ const val ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 /** digits 0 to 9  */
 const val DIGITS = "0123456789"
 
-
-/**The current highest first index letter for Population name generation */
-var P_NEXT_NAME_LETTER_INDEX = 0
-var P_NEXT_NAME__INDEX = 0
-/**The current highest number for Population name generation */
-var P_NEXT_NAME_NUMBER = 0
-
 var CODON_LENGTH: Int = 0
 
 /** A collection of biological BIO_C for all animals */
 data class BioConstants(var name: String? = "unnamed $NOW",
                         val codonLength: Int,
                         val codonScoreRange: DoubleRange = DoubleRange(-1.0, 1.0),
-                        val startCodons: Int = 3, val stopCodons: Int = 1,
+                        val nStartCodons: Int = 3, val nStopCodons: Int = 1,
                         val intronSignal: Pair<Array<RNA>, Array<RNA>>
                         = Pair(arrayOf(RNA.G, RNA.U), arrayOf(RNA.A, RNA.G)),
-                        val chromatidLengthRange: IntRange = IntRange(100, 100),
+                        val chromatidLengthRange: IntRange = IntRange(1000, 1000),
                         val chromosomeSize: Int = 2,
                         val startingChromosomes: Int = 4,
                         val startingDnaLength: Int = 60,
                         val minGeneLength: Int, val codons: Array<Codon>) {
+
+    var startCodons: Array<Codon>
+    var stopCodons: Array<Codon>
+
     init {
         name = name?: "unnamed $NOW"
         CODON_LENGTH = codonLength
+        startCodons = codons.filter { it.isStart }.toTypedArray()
+        stopCodons = codons.filter { it.isStop  }.toTypedArray()
     }
 
     /** Sets up all BIO_C */
@@ -72,42 +71,58 @@ data class BioConstants(var name: String? = "unnamed $NOW",
             val codons = codonperms.await()
 
             println("Number of start codons: ")
-            var startCodons: Int
+            var nStartCodons: Int
             do {
                  try {
                     val L = scan.nextLine().toInt()
                     if (L > codons.size - 2) {
-                        System.err.println("Too many! Choose a number between 1 and ${codons.size - 2}")
+                        elog("Too many! Choose a number between 1 and ${codons.size - 2}")
                         continue
                     } else {
-                        startCodons = L
+                        nStartCodons = L
                         break
                     }
                 } catch (e: Exception) {
                      elog("Value empty, set to default: 3")
-                    startCodons = 3
+                    nStartCodons = 3
                      break
                 }
             } while (true)
             println("Number of stop codons: ")
-            var stopCodons: Int
+            var nStopCodons: Int
             do {
                 try {
                     val L = scan.nextLine().toInt()
-                    if (L > codons.size - startCodons - 1) {
-                        System.err.println("""Too many! Choose a number between
-                            1 and ${codons.size - startCodons - 1}""".trimIndent())
+                    if (L > codons.size - nStartCodons - 1) {
+                        elog("""Too many! Choose a number between
+                            1 and ${codons.size - nStartCodons - 1}""".trimIndent())
                         continue
                     } else {
-                        stopCodons = L
+                        nStopCodons = L
                         break
                     }
                 } catch (e: Exception) {
                     elog("Value empty, set to default: 1")
-                    stopCodons = 1
+                    nStopCodons = 1
                     break
                 }
             } while (true)
+
+            codons.sortWith(Comparator {x, y ->
+                return@Comparator when {
+                    x.isStart -> when {
+                        y.isStart -> 0
+                        else      -> 1
+                    }
+                    x.isStop  -> when {
+                        y.isStart -> -1
+                        y.isStop  -> 0
+                        else      -> 1
+                    }
+                    y.isStart -> -1
+                    else      -> 0
+                }
+            })
 
             println("Intron Marker Length: ")
             var signalLength: Int = try {
@@ -116,6 +131,7 @@ data class BioConstants(var name: String? = "unnamed $NOW",
                 elog("Value empty, set to default: 2")
                 2
             }
+
             val intronSignal = Pair(
                     Array<RNA>(signalLength) { RNA.values()[random(0, 3)] },
                     Array<RNA>(signalLength) { RNA.values()[random(0, 3)] }
@@ -164,28 +180,28 @@ data class BioConstants(var name: String? = "unnamed $NOW",
 
             println("Set up Done\n")
 
-            val con = BioConstants(name, codonLength, scoreRange, startCodons,
-                    stopCodons, intronSignal, chromatidLengthRange, chromasomeSize,
+            slog("Start Codons: ")
+            for (i in 0..nStartCodons) {
+                val temp = Random().nextInt(codons.size)
+                if (!codons[temp].isStart && !codons[temp].isStart) {
+                    codons[temp].function = CodonFunction.START
+                    slog(codons[temp].toString())
+                }
+            }
+
+            slog("Stop Codons: ")
+            for (i in 0 until nStopCodons) {
+                val temp = Random().nextInt(codons.size)
+                if (!codons[temp].isStart && !codons[temp].isStop) {
+                    codons[temp].function = CodonFunction.STOP
+                    slog(codons[temp].toString() + "  ")
+                }
+            }
+
+            val con = BioConstants(name, codonLength, scoreRange, nStartCodons,
+                    nStopCodons, intronSignal, chromatidLengthRange, chromasomeSize,
                     startingChromosomes, startingDnaLength, minGeneLength, codons)
 
-
-            print("Start Codons: ")
-            for (i in 0..startCodons) {
-                val temp = Random().nextInt(con.codons.size)
-                if (!con.codons[temp].isStart && !con.codons[temp].isStart) {
-                    con.codons[temp].function = CodonFunction.START
-                    print(con.codons[temp].toString() + " ")
-                }
-            }
-
-            print("\nStop Codons: ")
-            for (i in 0 until con.stopCodons) {
-                val temp = Random().nextInt(con.codons.size)
-                if (!con.codons[temp].isStart && !con.codons[temp].isStop) {
-                    con.codons[temp].function = CodonFunction.STOP
-                    print(con.codons[temp].toString() + "  ")
-                }
-            }
 
             println("\nCodon Score Range: ${con.codonScoreRange}")
 
