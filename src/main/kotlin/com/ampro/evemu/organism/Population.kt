@@ -43,6 +43,16 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
                 }))
     }
 
+    val medianAge: Double get() = synchronized(this.population) {
+        population.sortWith(kotlin.Comparator { o1, o2 -> o1.age - o2.age })
+        if (size % 2 == 0) {
+            (this[(size - 1) / 1].age + this[size / 2].age) / 2.0
+        } else {
+            this[size / 2].age.toDouble()
+        }
+    }
+
+
     /**
      * Returns a List of organisms produced by cloning, sex, or both depending
      * on the organism ReproductiveType

@@ -8,10 +8,10 @@ import com.ampro.evemu.ribonucleic.score
 import com.ampro.evemu.util.InternalLog
 import com.ampro.evemu.util.NOW
 import com.ampro.evemu.util.Timer
+import com.ampro.evemu.util.random
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.awaitAll
 import kotlinx.coroutines.experimental.runBlocking
-import kotlin.collections.ArrayList
 import kotlin.coroutines.experimental.coroutineContext
 import kotlin.system.measureTimeMillis
 
@@ -96,9 +96,9 @@ class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
 
         val bestPreFilialOrg = async (FIXED_POOL) { bestOrg(pop.population.toList()) }
 
-        val filial = ArrayList<O>()
+        val filial = Population<O>("f")
         val reproTime = measureTimeMillis {
-            filial.addAll(pop.reproduce(pop.size / 2, 4, 5))
+            filial.addAll(pop.reproduce(random(pop.size / 10, pop.size * 2), 4, 5))
         }
         val time = reproTime + measureTimeMillis {
             pop.addAll(filial)
@@ -107,40 +107,15 @@ class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
 
             scorePopulation(pop)
 
-            /* TODO
-            println("\nPre-Culling average " + generation
-                    + " Organism Score>>" + filial!!.getAverageFitness())
-            System.out.println("\nCulling " + filial!!.getGeneration()
-                    + "\nPopulation Size before culling>>"
-                    + filial!!.getPopulation().size())
-            if (i % 1000 == 0) {
-                val numToCull = filial!!.getPopulation().size() / (5 + Random().nextInt(11))
-                val cutOff = filial!!.getAverageFitness() - 1f * filial!!.getScoreDeviation()
-                println(
-                        "\nCulling $numToCull Below>>>$cutOff")
-                Die_Off.cull(filial, numToCull, cutOff)
-            } else {
-                val numToCull = filial!!.getPopulation().size() / (20 + Random().nextInt(21))
-                val cutOff = filial!!.getAverageFitness() - 2.5f * filial!!.getScoreDeviation()
-                println("Culling $numToCull Below>>>$cutOff")
-                Die_Off.cull(filial, numToCull, cutOff)
-            }
-            System.out.println("Population Size after culling>>" + filial!!.getPopulation().size())
-            println("\nChecking Best Specimen of Generation "
-                    + generation + "\n")
-            */
+            tempLog.logAndPrint("Pre-Cull status : $pop")
 
-            val it = pop.population.listIterator()
-            while (it.hasNext()) {
-                val o = it.next()
-                //System.out.println(o);
-                if (o.fitness < pop.avgFitness - 3 * pop.stdDeviation
-                    || o.age >= 20 || o.fitness <= 0) {
-                    o.die()
-                    it.remove()
-                }
-                o.age++
+            pop.population.removeIf {
+                it.fitness < pop.avgFitness - 3 * pop.stdDeviation
+                        || it.age >= 20 || it.fitness <= 0
+                        || (it.age++ == -1) //this is here so we don't iterate twice to age up
             }
+
+            tempLog.logAndPrint("Post-Cull status : $pop")
         }
 
         val bestPostFilialOrg = async (FIXED_POOL) { bestOrg(pop.population) }
