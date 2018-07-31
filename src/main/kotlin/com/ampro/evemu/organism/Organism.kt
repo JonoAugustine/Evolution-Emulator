@@ -1,11 +1,13 @@
 package com.ampro.evemu.organism
 
 import com.ampro.evemu.BIO_C
-import com.ampro.evemu.dna.Chromosome
-import com.ampro.evemu.dna.generateChromosomes
+import com.ampro.evemu.ribonucleic.Chromosome
+import com.ampro.evemu.ribonucleic.generateChromosomes
 import com.ampro.evemu.FIXED_POOL
 import com.ampro.evemu.organism.ReproductiveType.CLONE
+import com.ampro.evemu.organism.ReproductiveType.SEX
 import com.ampro.evemu.util.SequentialNamer
+import com.ampro.evemu.util.random
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
 import java.util.*
@@ -15,8 +17,31 @@ class SimpleOrganism(generation: Int = 0,
                      parents: Array<Organism>? = null,
                      reproductiveType: ReproductiveType = CLONE,
                      chromosomes: Array<Chromosome> = generateChromosomes())
-
     : Organism(generation, name, parents, reproductiveType, chromosomes) {
+
+    override fun sex(partner: Organism): Organism {
+        if (reproductiveType != SEX || partner.reproductiveType != SEX
+            || partner !is SimpleOrganism) {
+            throw IllegalArgumentException(
+                    "Cannot sex a SimpleOrganism with ${partner.javaClass.simpleName}")
+        }
+        //generate child chromosomes from random parent chromatids
+        //For each Chromosome (zome), generate a new chromosome from the
+        // chromatids of the parents
+        val zygote = Array (chromosomes.size) {zome ->
+            Chromosome(Array (chromosomes[zome].size) { tid ->
+                val rand = random(1, 2)
+                if (rand == 1) {
+                    chromosomes[zome].chromatids[tid]
+                } else {
+                    partner.chromosomes[zome].chromatids[tid]
+                }
+            })
+        }
+        return SimpleOrganism(Math.max(generation, partner.generation),
+                parents = arrayOf(this, partner), reproductiveType = SEX,
+                chromosomes = zygote)
+    }
 
     override fun clone(): Organism = SimpleOrganism(generation, name, parents,
             reproductiveType, chromosomes)
@@ -66,6 +91,14 @@ abstract class Organism(val generation: Int,
 
     fun die() { this.alive = false }
 
+    /**
+     * @param partner The organism to breed with
+     * @return A new organism resulting from the combination of this and the
+     *          given organism
+     */
+    abstract fun sex(partner: Organism) : Organism
+
+    /** @return an exact clone of this Organism */
     abstract fun clone(): Organism
 
     override fun compareTo(other: Organism): Int {

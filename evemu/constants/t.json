@@ -3,27 +3,9 @@
     {
       "score": 0.0,
       "bases": [
-        "A",
-        "U",
-        "C"
-      ],
-      "function": "START"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
         "C",
-        "A"
-      ],
-      "function": "START"
-    },
-    {
-      "score": 0.0,
-      "bases": [
         "U",
-        "G",
-        "C"
+        "G"
       ],
       "function": "START"
     }
@@ -32,34 +14,43 @@
     {
       "score": 0.0,
       "bases": [
-        "C",
-        "C",
+        "A",
+        "U",
+        "G"
+      ],
+      "function": "STOP"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
         "A"
       ],
       "function": "STOP"
     }
   ],
   "name": "t",
-  "codonLength": 3,
+  "codonSize": 3,
   "codonScoreRange": {
     "min": -1.0,
     "max": 1.0
   },
-  "nStartCodons": 3,
-  "nStopCodons": 1,
+  "nStartCodons": 1,
+  "nStopCodons": 3,
   "intronSignal": {
     "left": [
-      "G",
-      "C"
+      "A",
+      "A"
     ],
     "right": [
-      "G",
-      "C"
+      "U",
+      "G"
     ]
   },
   "chromatidLengthRange": {
-    "min": 100,
-    "max": 100
+    "min": 1000,
+    "max": 1000
   },
   "chromosomeSize": 2,
   "startingChromosomes": 4,
@@ -127,7 +118,7 @@
         "U",
         "C"
       ],
-      "function": "START"
+      "function": "NOTHING"
     },
     {
       "score": 0.0,
@@ -136,7 +127,7 @@
         "U",
         "G"
       ],
-      "function": "NOTHING"
+      "function": "STOP"
     },
     {
       "score": 0.0,
@@ -145,7 +136,7 @@
         "C",
         "A"
       ],
-      "function": "START"
+      "function": "NOTHING"
     },
     {
       "score": 0.0,
@@ -323,117 +314,117 @@
       "bases": [
         "U",
         "G",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "C"
-      ],
-      "function": "START"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "C",
         "A"
       ],
       "function": "STOP"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "G"
+      ],
+      "function": "START"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "C",
+        "A"
+      ],
+      "function": "NOTHING"
     },
     {
       "score": 0.0,

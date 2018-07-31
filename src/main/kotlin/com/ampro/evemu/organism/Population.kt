@@ -1,8 +1,14 @@
 package com.ampro.evemu.organism
 
+import com.ampro.evemu.organism.ReproductiveType.CLONE
+import com.ampro.evemu.organism.ReproductiveType.SEX
+import com.ampro.evemu.util.Pair
 import com.ampro.evemu.util.SequentialNamer
+import com.ampro.evemu.util.permute
 import com.ampro.evemu.util.random
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * This class defines the object Population
@@ -25,11 +31,102 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
     }
 
     val stdDeviation: Double get() {
-        var sum = 0.0
-        this.forEach {
-            (it.fitness - this.avgFitness).times(it.fitness - this.avgFitness)
+        val avg = this.avgFitness
+        val size = this.size
+        return Math.sqrt(
+                (1.0 / size).times(this.let { pop ->
+                    var sumVar = 0.0
+                    pop.forEach { org ->
+                        sumVar += (org.fitness - avg) * (org.fitness - avg)
+                    }
+                    return@let sumVar
+                }))
+    }
+
+    /**
+     * Returns a List of organisms produced by cloning, sex, or both depending
+     * on the organism ReproductiveType
+     *
+     * @param numOffspring
+     * @param maxChildrenPerPair
+     * @return ArrayList<\Organism>
+     */
+    fun reproduce(numOffspring: Int, maxChildrenPerPair: Int, minAge: Int)
+            : List<O> {
+        return when {
+            this[0].reproductiveType == CLONE -> {
+                this.clone(numOffspring, minAge)
+            }
+            this[0].reproductiveType == SEX   -> {
+                this.sex(numOffspring, maxChildrenPerPair, minAge)
+            }
+            else                              -> {
+                //this.sexAndClone(numOffspring, maxChildrenPerPair, minAge)
+                listOf() //TODO
+            }
         }
-        return Math.sqrt(sum / this.size)
+    }
+
+    /**
+     * @return A List of Organisms produced by cloning the members of the population
+     */
+    private fun clone(num: Int, minAge: Int) : List<O> {
+        val legal = this.filter{ it.age >= minAge }
+        return if (legal.isEmpty()) listOf() else List (num) {
+            legal[random(max = legal.size - 1)].clone() as O
+        }
+    }
+
+    private fun sex(numOffspring: Int,
+                    maxChildrenPerPair: Int = numOffspring/(size/2),
+                    minAge: Int) : List<O> {
+
+        //List of of-age organisms
+        val parents = this.filter { it.age >= minAge && it.reproductiveType == SEX }
+        //List of organisms to be produced through reproduction
+        val offspring = ArrayList<O>()
+
+        //Generate pairings bases of the indecies within the population
+        val pairMap = ConcurrentHashMap<Pair<Int, Int>, AtomicInteger>()
+        val permute = permute(Array(parents.size){it}, 2)
+        if (permute.isEmpty()) return listOf()
+        permute.forEach { pairMap[Pair(it[0], it[1])] = AtomicInteger(0) }
+        val pairs = pairMap.keys.toMutableList()
+
+        println()
+
+        while (offspring.size <= numOffspring) {
+            /** Get a pair, reset the list and map if we run out of pairs */
+            fun getPair() : Pair<Int, Int> {
+                while (true) {
+                    if (pairs.isEmpty()) {
+                        pairs.addAll(pairMap.keys)
+                        pairMap.forEach { it.value.set(0) }
+                    }
+                    val random = random(max = pairs.size - 1)
+                    val pair: Pair<Int, Int> = pairs[random]
+                    if (pairMap[pair]!!.get() > maxChildrenPerPair) {
+                        pairs.removeAt(random)
+                    } else return pair
+                }
+            }
+
+            //Get a pair of Organisms
+            val pair = getPair()
+            val p1 = parents[pair.left]
+            val p2 = parents[pair.right]
+            //Check if they can mate
+            if (p1.chromosomes.size != p2.chromosomes.size) {
+                //Remove the pair if they cannot mate
+                pairMap.remove(pair)
+                pairs.remove(pair)
+                continue
+            }
+
+            //Mate and add offspring to the list
+            offspring.add(p1.sex(p2) as O)
+        }
+        return offspring
     }
 
     /**
@@ -69,9 +166,8 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
         Collections.sort(this.population, comparator)
     }
 
-    override fun toString(): String = """
-        $name | size=$size avgFit=$avgFitness fitDeviation=$stdDeviation
-    """.trimIndent()
+    override fun toString(): String
+    = "$name | size=$size avgFit=$avgFitness fitDeviation=$stdDeviation"
 
     /**
      * Clear the population of all Organisms.
@@ -100,147 +196,8 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
     fun add(o: O) { this.population.add(o) }
     fun addAll(collection: Collection<O>) { this.population.addAll(collection) }
     fun addAll(pop: Population<O>) { this.population.addAll(pop.population) }
+    val isEmpty: Boolean get() = this.population.isEmpty()
 
     override fun iterator(): Iterator<O> = population.iterator()
 
 }
-
-/**
- * Returns a array of Organisms produced by combining the chromatids of 2 parent organisms
- * @param numOffspring
- * @param maxChildrenPerPair
- * @return ArrayList<\Organism>
- *
-internal fun matingSeason(numOffspring: Int, maxChildrenPerPair: Int,
-                          minAge: Int): ArrayList<Organism> {
-
-    //New List of organisms to be produced through reproduction
-    val offspring = ArrayList<Organism>()
-    //Add current population to temp List for manipulation
-    val parents = ArrayList<Organism>()
-    for (o in this.population)
-        if (o.getAge() >= minAge) parents.add(o.copy())
-
-    val pairs = ArrayList<IntArray>()
-
-    for (i in 0 until ToolBox.permute(this.population.size, 2))
-        for (k in i + 1 until this.population.size)
-            pairs.add(intArrayOf(i, k))
-
-    if (maxChildrenPerPair != 0) {
-        val tempPairs = ArrayList<IntArray>()
-        for (i in 0 until maxChildrenPerPair)
-            for (k in pairs.indices)
-                tempPairs.add(intArrayOf(pairs[k][0], pairs[k][1]))
-        pairs.addAll(tempPairs)
-    }
-
-
-    if (EvolutionRunner.DEBUG_MATING) {
-        for (i in pairs)
-            println("Mating Pair  " + i[0] + "|" + i[1])
-        println(pairs.size.toString() + " pairs")
-    }
-
-    var i = 0
-    while (i < numOffspring) {
-
-
-        if (pairs.isEmpty()) {
-            for (int A = 0; A < ToolBox.permuteSize(this.population.size(), 2); A++)
-            for (int k = A + 1; k < this.population.size(); k++)
-            pairs.add(new int []{ A, k });
-            if (maxChildrenPerPair != 0) {
-                List < int[] > tempPairs = new ArrayList < > ();
-                for (int B = 0; B < maxChildrenPerPair; B++)
-                for (int k = 0; k < pairs.size(); k++)
-                tempPairs.add(new int []{ pairs.get(k)[0], pairs.get(k)[1] });
-                pairs.addAll(tempPairs);
-            }
-
-            if (EvolutionRunner.DEBUG_MATING) {
-                for (int[] V : pairs)
-                System.out.println("Mating Pairs  " + V[0] + "|" + V[1]);
-                System.out.println(pairs.size() + " pairs");
-            }
-        }
-
-        //get pair
-        val pair: IntArray
-        val index: Int
-        try {
-            index = Random().nextInt(pairs.size)
-            pair = pairs[index]
-        } catch (e: IllegalArgumentException) {
-            i++
-            continue
-        }
-
-        val parent_1 = this.population.get(pair[0])
-        val parent_2 = this.population.get(pair[1])
-        //if they aren't sexual
-        if (!parent_1.isSexual() || !parent_2.isSexual()
-            || parent_1.getAge() < minAge || parent_2.getAge() < minAge) {
-            pairs.removeAt(index)
-            if (i != 0)
-                i--
-            else
-                i = 0
-            i++
-            continue
-        }
-        //If they dont have the same number of chromosomes they cant breed
-        if (parent_1.getChromosomes().size != parent_2.getChromosomes().size) {
-            if (i != 0)
-                i--
-            else
-                i = 0
-            i++
-            continue
-        }
-
-        //generate child chromosomes from random parent chromatids
-        val zygote = ArrayList<Chromosome>()
-        for (a in 0 until parent_1.getChromosomes().size) {
-
-            val tempCha = arrayOfNulls<Chromatid>(CHROMATID_per_CHROMOSOME)
-
-            var k = 0
-            while (k < CHROMATID_per_CHROMOSOME) {
-                tempCha[k] = parent_1.getChromosomes().get(a).getChromatids()[Random().nextInt(
-                        CHROMATID_per_CHROMOSOME)]
-                tempCha[k + 1] = parent_2.getChromosomes().get(a).getChromatids()[Random().nextInt(
-                        CHROMATID_per_CHROMOSOME)]
-                k += 2
-            }
-
-            zygote.add(Chromosome(*tempCha))
-        }
-
-        //Setting up the child
-        var child: Organism? = null
-        //Generation
-        var generation = 0
-        if (parent_1.getGeneration() != null && parent_1.getGeneration() != null)
-            generation = Math.max(parent_1.getGenNum(), parent_2.getGenNum()) + 1
-
-        //Construct child Organism
-        if (parent_1 is Producer)
-            child = Producer("F$generation", null, zygote, true)
-        else if (parent_1 is Predator)
-            child = Predator("F$generation", null, zygote, true)
-        else
-            child = Organism("F$generation", null, zygote, true)
-
-        //set parents
-        child!!.setParents(parent_1, parent_2)
-
-        //add organism to return
-        offspring.add(child)
-        i++
-
-    }
-
-    return offspring
-}
-*/

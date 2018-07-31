@@ -1,11 +1,19 @@
 package com.ampro.evemu
 
 import com.ampro.evemu.constants.BioConstants
-import com.ampro.evemu.constants.DIR_CONST
-import com.ampro.evemu.constants.DIR_ROOT
+import com.ampro.evemu.emulation.SimpleEmulator
+import com.ampro.evemu.emulation.SimpleEnvironment
 import com.ampro.evemu.organism.Organism
+import com.ampro.evemu.organism.Population
+import com.ampro.evemu.organism.ReproductiveType
+import com.ampro.evemu.organism.ReproductiveType.*
 import com.ampro.evemu.organism.SimpleOrganism
-import com.ampro.evemu.util.slog
+import com.ampro.evemu.util.*
+import com.ampro.evemu.util.Timer
+import com.ampro.evemu.util.io.DIR_CONST
+import com.ampro.evemu.util.io.DIR_ENVIR
+import com.ampro.evemu.util.io.DIR_LOGS
+import com.ampro.evemu.util.io.DIR_ROOT
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.experimental.*
 import org.apache.commons.io.FileUtils
@@ -15,27 +23,44 @@ import java.io.FileWriter
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
+import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.collections.ArrayList
 import kotlin.system.measureTimeMillis
 
 
 val scan = Scanner(System.`in`)
-var FIXED_POOL = newFixedThreadPoolContext(16, "FixedPool")
 var BIO_C: BioConstants = loadOrBuild()
 
 val CACHED_POOL =  Executors.newCachedThreadPool().asCoroutineDispatcher()
+var FIXED_POOL = newFixedThreadPoolContext(2_000, "FixedPool")
 
 fun main(args: Array<String>) = runBlocking {
-    //Build environments
-    //Start emulator coroutines
-    //Fixedy stuff
-    test()
+
+    slog("Building populations...")
+    val pList = ArrayList<Population<Organism>>(3)
+    val time = measureTimeMillis {
+        pList.apply {
+            (1..1).forEach {
+                this.add(Population(population = ArrayList<Organism>().apply {
+                    addAll(test(1_000))
+                }))
+            }
+        }
+    }
+    slog("...done (time=${Timer.format(time)})\n")
+
+    val emu = SimpleEmulator(environment = SimpleEnvironment(pList), years = 15)
+
+    emu.run()
+
+
 
     FIXED_POOL.close()
 }
 
-internal suspend fun test(testSize: Int = 10_000) {
-    val prodMap = ConcurrentHashMap<String, AtomicInteger>(mapOf(
+fun test(testSize: Int = 10_000): Array<Organism> {
+    val prodMap = ConcurrentHashMap<String, AtomicInteger>()/*(mapOf(
             "FixedPool-1" to AtomicInteger(), "FixedPool-2" to AtomicInteger(),
             "FixedPool-3" to AtomicInteger(), "FixedPool-4" to AtomicInteger(),
             "FixedPool-5" to AtomicInteger(), "FixedPool-6" to AtomicInteger(),
@@ -44,42 +69,42 @@ internal suspend fun test(testSize: Int = 10_000) {
             "FixedPool-11" to AtomicInteger(), "FixedPool-12" to AtomicInteger(),
             "FixedPool-13" to AtomicInteger(), "FixedPool-14" to AtomicInteger(),
             "FixedPool-15" to AtomicInteger(), "FixedPool-16" to AtomicInteger()
-    ))
-    val arr = arrayOfNulls<Organism>(testSize)
+    ))*/
+    val arr = ArrayList<Organism>(testSize)
     val time = measureTimeMillis {
         val jobs = List(testSize) {index: Int ->
             // launch a lot of coroutines and list their jobs
             async (FIXED_POOL) {
-                prodMap[Thread.currentThread().name]?.incrementAndGet()
-                arr[index] = SimpleOrganism()
+                prodMap.putIfAbsent(Thread.currentThread().name, AtomicInteger(1))
+                    ?.incrementAndGet()
+                arr.add(SimpleOrganism(reproductiveType = SEX))
             }
         }
         runBlocking { jobs.awaitAll() }
     }
-    arr.forEach { slog(it?: "null") }
-    println("${time / 1000} sec")
-    println(prodMap.toSortedMap(kotlin.Comparator { n, n2 ->
-        prodMap[n2]!!.toInt() - prodMap[n]!!.toInt()
-    }).toString())
+    slog("${time / 1_000} sec")
+    //val srt = prodMap.toSortedMap(Comparator{n, n2 -> prodMap[n2]!! - prodMap[n]!!})
+    slog(prodMap)
     var min: Int = testSize
     var max: Int = 0
-    println("Max-Min dif=" + prodMap.let {
-        it.forEach { val value = it.value.toInt()
+    slog("Max-Min dif=" + prodMap.let {
+        it.forEach {
+            val value = it.value.toInt()
             if (value < min) min = value
             else if (value > max) max = value
         }
         max - min
-    }
-            + "\nDif % of max=${((max-min).toDouble()/testSize.toDouble()) * 100}")
+    } + "\tDif % of max=${((max-min).toDouble()/testSize.toDouble()) * 100}\n")
+    return arr.toTypedArray()
 }
 
 fun loadOrBuild() : BioConstants {
     val gson = GsonBuilder().setPrettyPrinting().create()
     buildDirs()
     var set: Boolean
-    println("Load previous BioConstants? (y/n)")
+    slog("Load previous BioConstants? (y/n): ")
     if (scan.nextLine().equals("y", true)) {
-        println("BioConstants JSON file name: ")
+        slog("BioConstants JSON file name: ")
         val filename = scan.nextLine()
         val file = File(DIR_CONST, "$filename.json")
         if (file.exists()) {
@@ -88,11 +113,11 @@ fun loadOrBuild() : BioConstants {
                 BIO_C = gson.fromJson(reader, BioConstants::class.java)
                 set = true
             } catch (e: Exception) {
-                System.err.println("Failed to load file '$filename'.\n${e.cause}")
+                elog("Failed to load file '$filename'.\n${e.cause}")
                 set = false
             }
         } else {
-            System.err.println("Failed to load file '$filename'.\nFile not found")
+            elog("Failed to load file '$filename'.\nFile not found")
             set = false
         }
     } else {
@@ -100,7 +125,7 @@ fun loadOrBuild() : BioConstants {
     }
     return if (!set) {
         val build = runBlocking { BioConstants.build() }
-        println("Would you like to save these settings? (y,n)")
+        slog("Would you like to save these settings? (y,n)")
         scan.reset()
         if (scan.nextLine().equals("y", true)) {
             try {
@@ -108,7 +133,7 @@ fun loadOrBuild() : BioConstants {
                 gson.toJson(build, writer)
                 writer.close()
             } catch (e: Exception) {
-                System.err.println("Save Failed! :\n${e.cause}")
+                elog("Save Failed! :\n${e.cause}")
             }
         }
         scan.close()
@@ -117,8 +142,14 @@ fun loadOrBuild() : BioConstants {
 }
 
 fun buildDirs() {
+    elog("Building Directories...")
     if (!DIR_ROOT.exists())
         FileUtils.forceMkdir(DIR_ROOT)
     if (!DIR_CONST.exists())
         FileUtils.forceMkdir(DIR_CONST)
+    if (!DIR_ENVIR.exists())
+        FileUtils.forceMkdir(DIR_ENVIR)
+    if (!DIR_LOGS.exists())
+        FileUtils.forceMkdir(DIR_LOGS)
+    elog("Directories Built")
 }

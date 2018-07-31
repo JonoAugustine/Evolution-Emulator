@@ -1,4 +1,4 @@
-package com.ampro.evemu.dna
+package com.ampro.evemu.ribonucleic
 
 /**
  * A Gene is a sequence of Codons.

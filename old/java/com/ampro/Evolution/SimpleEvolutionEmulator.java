@@ -156,6 +156,7 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 				ToolBox.sleep(1);
 				//this.displays[0].update(p.getName(), i+1, new double[]{.3*p.size(),p.size()});
 			}
+
 			cycleDurations[i] = cycleTimer.getElapsedTime();
 			System.out.println("Cycle " + (i+1) + " duration<<<<>>>>" + cycleTimer);
 			this.Log.addLines("\tYear " + (i+1) + " duration: " + cycleTimer.reset());
@@ -261,7 +262,6 @@ public class SimpleEvolutionEmulator extends BioConstants implements Runnable {
 
 				population.clean();
 			}
-
 
 	}
 

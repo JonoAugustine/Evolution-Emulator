@@ -1,4 +1,4 @@
-package com.ampro.evemu.dna
+package com.ampro.evemu.ribonucleic
 
 /**
  * This file contains elements representing the basis of all
@@ -9,13 +9,18 @@ package com.ampro.evemu.dna
  */
 
 import com.ampro.evemu.BIO_C
-import com.ampro.evemu.constants.CODON_LENGTH
 import java.util.*
 import com.ampro.evemu.util.IntRange
 import com.ampro.evemu.util.random
 
 enum class DNA {
     A, T, C, G;
+    fun toRNA() : RNA = when(this) {
+        DNA.A -> RNA.A
+        DNA.T -> RNA.U
+        DNA.C -> RNA.C
+        DNA.G -> RNA.G
+    }
     companion object {
         val comparator: Comparator<DNA> = Comparator { x, y ->
             return@Comparator when (x) {
@@ -72,6 +77,26 @@ data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
 
     override fun iterator(): Iterator<DNA> = bases.iterator()
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Chromatid
+
+        if (!Arrays.equals(bases, other.bases)) return false
+        if (genes != other.genes) return false
+        if (score != other.score) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = Arrays.hashCode(bases)
+        result = 31 * result + (genes?.hashCode() ?: 0)
+        result = 31 * result + score.hashCode()
+        return result
+    }
+
 }
 
 data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
@@ -95,6 +120,24 @@ data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
         val sb = StringBuilder("[")
         chromatids.forEach { sb.append("[$it]") }
         return sb.append("]").toString()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Chromosome
+
+        if (!Arrays.equals(chromatids, other.chromatids)) return false
+        if (score != other.score) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = Arrays.hashCode(chromatids)
+        result = 31 * result + score.hashCode()
+        return result
     }
 }
 

@@ -14,7 +14,8 @@ class SequentialNamer(val prefix: String = "", val maxInt: Int = 99_000,
 
     @Throws(NoSuchElementException::class)
     fun next(secondPrefix: Any = "") : String {
-        val sb = StringBuilder("${prefix}_${secondPrefix}_")
+        val sb = StringBuilder("${prefix}_${
+        if (secondPrefix == "") "" else "${secondPrefix}_"}")
         return synchronized(this) {
             if (nextNumber !in 0..maxInt) {
                 nextNumber = 0

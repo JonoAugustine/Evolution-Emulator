@@ -102,7 +102,7 @@ public class Population extends BioConstants implements Iterable<Organism>{
 
 		for(int i=0; i < numOffspring; i++){
 
-			/*
+
 			if(pairs.isEmpty()){
 				for(int A=0; A < ToolBox.permuteSize(this.population.size(), 2); A++)
 					for(int k=A+1; k < this.population.size(); k++)
@@ -121,7 +121,7 @@ public class Population extends BioConstants implements Iterable<Organism>{
 					System.out.println(pairs.size() + " pairs");
 				}
 			}
-			 */
+
 			//get pair
 			int[] pair;
 			int index;

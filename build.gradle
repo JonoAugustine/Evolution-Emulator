@@ -10,6 +10,10 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://dl.bintray.com/kyonifer/maven"
+        jcenter()
+    }
 }
 
 dependencies {
@@ -21,6 +25,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.5'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
+    //Graphing
+    // https://mvnrepository.com/artifact/no.tornado/tornadofx
+    compile group: 'no.tornado', name: 'tornadofx', version: '1.7.16'
 }
 
 compileKotlin {

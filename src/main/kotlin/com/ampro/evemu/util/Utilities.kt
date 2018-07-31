@@ -1,10 +1,10 @@
 package com.ampro.evemu.util
 
-import java.math.BigInteger
+import com.ampro.evemu.ribonucleic.DNA
+import com.ampro.evemu.ribonucleic.RNA
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import java.util.concurrent.ThreadLocalRandom
 
 fun <E> ArrayList<E>.addAll(arr: Array<E>) = arr.forEach { this.add(it) }
 fun <E> ArrayList<E>.addAll(insert: Int, arr: Array<E>) {
@@ -20,9 +20,8 @@ fun <E> ArrayList<E>.addAll(insert: Int, arr: Array<E>) {
 }
 
 /** @return The current local date and time. dd-MM-yyyy HH:mm:ss */
-val NOW: String
-    get() = LocalDateTime.now().format(
-                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
+val NOW: String get() = LocalDateTime.now().format(
+        DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
 
 /**
  * A Timer object contains a start-time (long) that is defined upon creation.<br></br>
@@ -30,41 +29,45 @@ val NOW: String
  *
  * @author Jonathan Augustine
  */
-class Timer(private var startTime: Long = System.nanoTime()) {
+class Timer(private var startTime: Long = System.currentTimeMillis()) {
 
-    var runnin: Boolean = true
+    private var running: Boolean = true
 
     private var elapsedTime: Long = -1
 
     fun getElapsedTime() : Long {
-        return if (!runnin) {
+        return if (!running) {
             elapsedTime
         } else {
-            System.nanoTime() - startTime
+            System.currentTimeMillis() - startTime
         }
     }
 
     /** @return The current duration of the timer's run time in HH:MMM:SS */
-    fun formattedTime(): String {
-        var seconds = this.elapsedTime / Math.pow(10.0, 9.0)
-        var hours = 0
-        var min = 0
-        if (seconds > 60) {
-            var i = 0
-            while (i < seconds) {
-                if (i == 60) {
-                    min++
-                    seconds -= 60.0
-                    i = 0
-                    if (min == 60) {
-                        hours++
-                        min -= 60
+    fun formattedTime(): String = format(this.getElapsedTime())
+
+    companion object {
+        fun format(millis: Long) : String {
+            var seconds = (millis / 1_000).toDouble()//Math.pow(10.0, 9.0)
+            var hours = 0
+            var min = 0
+            if (seconds > 60) {
+                var i = 0
+                while (i < seconds) {
+                    if (i == 60) {
+                        min++
+                        seconds -= 60.0
+                        i = 0
+                        if (min == 60) {
+                            hours++
+                            min -= 60
+                        }
                     }
+                    i++
                 }
-                i++
             }
+            return "$hours:$min:$seconds"
         }
-        return "$hours:$min:$seconds"
     }
 
     /** @return The current duration of the timer's run time in HH:MMM:SS */
@@ -77,7 +80,7 @@ class Timer(private var startTime: Long = System.nanoTime()) {
      */
     fun reset() : String {
         val lastTime = this.formattedTime()
-        this.startTime = System.nanoTime()
+        this.startTime = System.currentTimeMillis()
         return lastTime
     }
 
@@ -87,8 +90,8 @@ class Timer(private var startTime: Long = System.nanoTime()) {
      * @return The formatted duration
      */
     fun stop() : String {
-        this.elapsedTime = System.nanoTime()
-        this.runnin = false
+        this.elapsedTime = System.currentTimeMillis()
+        this.running = false
         return this.formattedTime()
     }
 
@@ -98,7 +101,7 @@ class Timer(private var startTime: Long = System.nanoTime()) {
  * @param timers Array of Timers
  * @return The average duration of the provided Timers, formatted HH:MMM:SS
  */
-fun timerAverage(timers: Array<Timer>): String {
+fun timerAvg(timers: Array<Timer>): String {
 
     var AverageNanoTime: Long = 0
 
@@ -127,87 +130,14 @@ fun timerAverage(timers: Array<Timer>): String {
     return "$hours:$min:$seconds"
 }
 
-fun <T> permute(list: List<T>) : List<List<T>> {
-    if(list.size==1) return listOf(list)
-    val perms=mutableListOf<List<T>>()
-    val sub=list[0]
-    for(perm in permute(list.drop(1))) {
-        for (i in 0..perm.size) {
-            val newPerm = perm.toMutableList()
-            newPerm.add(i, sub)
-            perms.add(newPerm)
-        }
-    }
-    return perms
+fun Array<DNA>.stringify() : String {
+    var s = ""
+    this.forEach { s += it.name }
+    return s
 }
 
-inline fun <reified T> permute(src: Array<T>, size: Int) : List<List<T>> {
-    val n = src.size
-    val idx = IntArray(size)
-    val perm = arrayOfNulls<T>(size)
-    val out = ArrayList<List<T>>()
-    while (true) {
-        for (k in 0 until size) perm[k] = src[idx[k]]
-        out.add(perm.toList() as List<T>)
-        // generate the next permutation
-        var i = idx.size - 1
-        while (i >= 0) {
-            if (++idx[i] < n) break
-            idx[i--] = 0
-        }
-        // if the first index wrapped around then we're done
-        if (i < 0)
-            break
-    }
-    return out
+fun Array<RNA>.stringify() : String {
+    var s = ""
+    this.forEach { s += it.name }
+    return s
 }
-
-/**
- * Returns the number of permutations of the pool of size "size"
- *
- * @param size
- * @param pool
- * @return number of permutations
- */
-fun permuteSize(pool: Int, size: Int): Int {
-    if (size == 0) return 0
-    return try {
-        factorial(pool).divide(factorial(pool - size)).toInt()
-    } catch (e: ArithmeticException) {
-        0
-    }
-}
-
-fun factorial(i: Int): BigInteger {
-    var retu = BigInteger.valueOf(i.toLong())
-    for (k in 1..i) {
-        retu = retu.multiply(BigInteger.valueOf(k.toLong()))
-    }
-    return retu
-}
-
-/**
- * Removes all letters from the input String and returns the resulting number sequence
- * @param input String
- * @return int
- */
-fun removeLetters(input: String): Int = try {
-    Integer.parseInt(input.replace("[^\\d]", ""))
-} catch (e: NumberFormatException) {
-    -1
-}
-
-/**
- * Takes a string and returns true if the string is a digit
- * @param input
- * @return boolean
- */
-private fun isInteger(input: String): Boolean = try {
-    Integer.parseInt(input)
-    true
-} catch (e: Exception) {
-    false
-}
-
-fun random(min: Int = 0, max: Int) : Int
-        = ThreadLocalRandom.current().nextInt(min, max + 1)

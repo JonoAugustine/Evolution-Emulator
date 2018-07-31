@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.ranges.IntRange
 
 /** A pair of values */
-data class Pair<L, R>(var left: L? = null, var right: R? = null)
+data class Pair<L, R>(var left: L, var right: R)
 
 /** An inclusive range of values */
 abstract class Range<V>(var min: V, var max: V) {
