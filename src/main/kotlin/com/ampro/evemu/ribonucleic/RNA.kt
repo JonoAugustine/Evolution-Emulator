@@ -2,7 +2,6 @@ package com.ampro.evemu.ribonucleic
 
 import com.ampro.evemu.constants.CODON_LENGTH
 import com.ampro.evemu.ribonucleic.CodonFunction.NOTHING
-import com.ampro.evemu.util.elog
 import java.util.*
 
 enum class RNA {
@@ -46,6 +45,15 @@ enum class RNA {
 enum class CodonFunction { NOTHING, STOP, START }
 
 fun Array<Codon>.get(codon: Codon) : Codon? {
+    for (cd in this) {
+        if (cd == codon) {
+            return cd
+        }
+    }
+    return null
+}
+
+fun List<Codon>.get(codon: Codon) : Codon? {
     for (cd in this) {
         if (cd == codon) {
             return cd

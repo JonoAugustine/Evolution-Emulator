@@ -8,6 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger
 fun random(min: Int = 0, max: Int) : Int = if (min >= max) { 0 }
 else { ThreadLocalRandom.current().nextInt(min, max + 1) }
 
+/** @return (this / of) * 100 */
+fun Number.percent(of: Number) = (this.toDouble() / of.toDouble()) * 100
+
 operator fun AtomicInteger.minus(other: AtomicInteger) = this.get() - other.get()
 
 inline fun <reified T> permute(src: Array<T>, size: Int = src.size) : List<List<T>> {

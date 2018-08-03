@@ -3,17 +3,21 @@ package com.ampro.evemu.util
 import com.ampro.evemu.util.io.DIR_LOGS
 import com.ampro.evemu.util.io.toFile
 import jdk.nashorn.internal.ir.annotations.Ignore
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.newSingleThreadContext
-import java.beans.Transient
 import java.io.PrintStream
 
+val threadName: String get() = Thread.currentThread().name
 
 fun slog(any: Any = "", inline: Boolean = false)
-        = print("${if(inline) "" else "\n"}[${Thread.currentThread().name}] $any")
-fun elog(any: Any = "", inline: Boolean = false)
-        = System.err.print(
-        "${if(inline) "" else "\n"}[${Thread.currentThread().name}] $any")
+        = print("${if(inline) "" else "\n"}[$threadName] $any")
+fun elog(any: Any = "", inline: Boolean = false) = System.err.print(
+        "${if(inline) "" else "\n"}[$threadName] $any"
+)
+
+data class Slogger(val name: String = "") {
+    fun slog(any: Any = "") = println("[$name] [$threadName] $any")
+    fun elog(any: Any = "") = System.err.print("[$name] [$threadName] $any")
+}
 
 /**
  * A Logger that keeps all messages sent to it in an internal list.
@@ -41,10 +45,10 @@ class InternalLog(val name: String = "log", initSize: Int = 100_000,
 
     /** Add a Message to the log */
     fun log(any: Any, err: Boolean = false) = synchronized(log) {
-        val logname = if (this.showName) name else ""
-        val thread = if (this.showThread) Thread.currentThread().name else ""
+        val logname = if (showName) name else ""
+        val thread = if (showThread) Thread.currentThread().name else ""
         val message = Message(any, err, logname, thread)
-        log.add(Message(any, err))
+        log.add(message)
         return@synchronized message
     }
 
@@ -72,8 +76,17 @@ class InternalLog(val name: String = "log", initSize: Int = 100_000,
      *
      * @return The created File
      */
-    fun toFile() = log.toFile("${DIR_LOGS.name}/$name.log")
+    fun toFile() = log.toFile("${DIR_LOGS.name}/${name}_$NOW_FILE.log")
 
     /** Add all lines from an InternalLog into this log */
     fun ingest(src: InternalLog) = synchronized(log) { this.log.addAll(src.log) }
+
+    /** Add all lines from an InternalLog into this log and print them */
+    fun ingestAndPrint(src: InternalLog) = synchronized(log) {
+        this.log.addAll(src.log)
+        src.log.forEach {
+            if (!it.err) println(it)
+            else System.err.println(it)
+        }
+    }
 }

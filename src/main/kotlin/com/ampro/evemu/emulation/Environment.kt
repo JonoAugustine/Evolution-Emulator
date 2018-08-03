@@ -11,14 +11,13 @@ import com.ampro.evemu.util.slog
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.awaitAll
 import kotlinx.coroutines.experimental.runBlocking
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.system.measureTimeMillis
 
-class SimpleEnvironment(populations: ArrayList<Population<Organism>> = ArrayList())
+class SimpleEnvironment(populations: ArrayList<Population<out Organism>> = ArrayList())
     : Environment(populations = populations) {
 
-    val scoreMap = ConcurrentHashMap<String, Array<Codon>>()
+    val scoreMap = ConcurrentHashMap<String, List<Codon>>()
 
     init {
         slog("[$name] Generating codon scores...")
@@ -49,19 +48,19 @@ class SimpleEnvironment(populations: ArrayList<Population<Organism>> = ArrayList
  * @since 1.0
  */
 abstract class Environment( val name: String = enviroNamer.next(),
-        val populations: ArrayList<Population<Organism>> = ArrayList(),
+        val populations: ArrayList<Population<out Organism>> = ArrayList(),
         val resouces: ConcurrentHashMap<ResourceType, ResourcePool>
         = ConcurrentHashMap(), var risk: Double = 0.0) {
 
     companion object { val enviroNamer = SequentialNamer("ENV") }
 
     protected fun scoreCodons(range: DoubleRange = BIO_C.codonScoreRange)
-            : Array<Codon> = Array(BIO_C.codons.size) {
+            = List (BIO_C.codons.size) {
         BIO_C.codons[it].clone().also { it.score = range.random() }
     }
 
-    operator fun get(x: Int) : Population<Organism> = populations[x]
-    operator fun set(x: Int, p: Population<Organism>) : Population<Organism> {
+    operator fun get(x: Int) : Population<out Organism> = populations[x]
+    operator fun set(x: Int, p: Population<out Organism>) : Population<out Organism> {
         val old = populations[x]
         populations[x] = p
         return old

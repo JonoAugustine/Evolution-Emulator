@@ -6,14 +6,17 @@ import com.ampro.evemu.emulation.SimpleEnvironment
 import com.ampro.evemu.organism.Organism
 import com.ampro.evemu.organism.Population
 import com.ampro.evemu.organism.ReproductiveType
-import com.ampro.evemu.organism.ReproductiveType.*
+import com.ampro.evemu.organism.ReproductiveType.CLONE
+import com.ampro.evemu.organism.ReproductiveType.SEX
 import com.ampro.evemu.organism.SimpleOrganism
-import com.ampro.evemu.util.*
+import com.ampro.evemu.util.Slogger
 import com.ampro.evemu.util.Timer
+import com.ampro.evemu.util.elog
 import com.ampro.evemu.util.io.DIR_CONST
 import com.ampro.evemu.util.io.DIR_ENVIR
 import com.ampro.evemu.util.io.DIR_LOGS
 import com.ampro.evemu.util.io.DIR_ROOT
+import com.ampro.evemu.util.slog
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.experimental.*
 import org.apache.commons.io.FileUtils
@@ -23,7 +26,6 @@ import java.io.FileWriter
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
-import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.ArrayList
 import kotlin.system.measureTimeMillis
@@ -33,33 +35,39 @@ val scan = Scanner(System.`in`)
 var BIO_C: BioConstants = loadOrBuild()
 
 val CACHED_POOL =  Executors.newCachedThreadPool().asCoroutineDispatcher()
-var FIXED_POOL = newFixedThreadPoolContext(2_000, "FixedPool")
+var FIXED_POOL = newFixedThreadPoolContext(7_000, "FixedPool")
 
 fun main(args: Array<String>) = runBlocking {
 
     slog("Building populations...")
-    val pList = ArrayList<Population<Organism>>(3)
+    val pList = ArrayList<Population<out Organism>>(5)
     val time = measureTimeMillis {
-        pList.apply {
-            (1..1).forEach {
-                this.add(Population(population = ArrayList<Organism>().apply {
-                    addAll(test(1_000))
-                }))
-            }
+        for (i in 1..8) {
+            slog("$i time=" + measureTimeMillis {
+                pList.add(Population(population = genTestOrgs(10_000, SEX)))
+            } / 1_000.0)
         }
     }
     slog("...done (time=${Timer.format(time)})\n")
 
-    val emu = SimpleEmulator(environment = SimpleEnvironment(pList), years = 15)
+    val emu = SimpleEmulator(environment = SimpleEnvironment(pList), years = 1000)
 
     emu.run()
 
-
-
     FIXED_POOL.close()
+    CACHED_POOL.close()
 }
 
-fun test(testSize: Int = 10_000): Array<Organism> {
+val testSlogger = Slogger("genTestOrgs")
+fun genTestOrgs(size: Int = 1_000, type: ReproductiveType = CLONE)
+        : ArrayList<SimpleOrganism> {
+    val out = ArrayList<SimpleOrganism>(size)
+    (0 until size).forEach { out.add(SimpleOrganism(reproductiveType = type)) }
+    return out
+}
+
+
+fun test(testSize: Int = 10_000, debug: Boolean = true): ArrayList<Organism> {
     val prodMap = ConcurrentHashMap<String, AtomicInteger>()/*(mapOf(
             "FixedPool-1" to AtomicInteger(), "FixedPool-2" to AtomicInteger(),
             "FixedPool-3" to AtomicInteger(), "FixedPool-4" to AtomicInteger(),
@@ -70,32 +78,35 @@ fun test(testSize: Int = 10_000): Array<Organism> {
             "FixedPool-13" to AtomicInteger(), "FixedPool-14" to AtomicInteger(),
             "FixedPool-15" to AtomicInteger(), "FixedPool-16" to AtomicInteger()
     ))*/
-    val arr = ArrayList<Organism>(testSize)
+    val out = ArrayList<Organism>(testSize)
     val time = measureTimeMillis {
-        val jobs = List(testSize) {index: Int ->
+        val jobs = List(testSize) { _ ->
             // launch a lot of coroutines and list their jobs
             async (FIXED_POOL) {
-                prodMap.putIfAbsent(Thread.currentThread().name, AtomicInteger(1))
-                    ?.incrementAndGet()
-                arr.add(SimpleOrganism(reproductiveType = SEX))
+                if (debug) {
+                    prodMap.putIfAbsent(Thread.currentThread().name, AtomicInteger(1))
+                        ?.incrementAndGet()
+                }
+                SimpleOrganism(reproductiveType = SEX)
             }
         }
-        runBlocking { jobs.awaitAll() }
+        runBlocking { out.addAll(jobs.awaitAll()) }
     }
     slog("${time / 1_000} sec")
-    //val srt = prodMap.toSortedMap(Comparator{n, n2 -> prodMap[n2]!! - prodMap[n]!!})
-    slog(prodMap)
-    var min: Int = testSize
-    var max: Int = 0
-    slog("Max-Min dif=" + prodMap.let {
-        it.forEach {
-            val value = it.value.toInt()
-            if (value < min) min = value
-            else if (value > max) max = value
-        }
-        max - min
-    } + "\tDif % of max=${((max-min).toDouble()/testSize.toDouble()) * 100}\n")
-    return arr.toTypedArray()
+    if (debug) {
+        slog(prodMap)
+        var min: Int = testSize
+        var max: Int = 0
+        slog("Max-Min dif=" + prodMap.let {
+            it.forEach {
+                val value = it.value.toInt()
+                if (value < min) min = value
+                else if (value > max) max = value
+            }
+            max - min
+        } + "\tDif % of max=${((max - min).toDouble() / testSize.toDouble()) * 100}\n")
+    }
+    return out
 }
 
 fun loadOrBuild() : BioConstants {

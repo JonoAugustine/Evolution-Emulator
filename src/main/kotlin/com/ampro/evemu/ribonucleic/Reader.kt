@@ -1,11 +1,7 @@
 package com.ampro.evemu.ribonucleic
 
 import com.ampro.evemu.BIO_C
-import com.ampro.evemu.CACHED_POOL
 import com.ampro.evemu.organism.Organism
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.awaitAll
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 import kotlinx.coroutines.experimental.runBlocking
 
 /**
@@ -14,8 +10,6 @@ import kotlinx.coroutines.experimental.runBlocking
  * @author Jonathan Augustine
  * @since 3.0
  */
-
-val READER_POOL = newFixedThreadPoolContext(3_000, "ReaderPool")
 
 internal data class Pre_mRNA(var sequence: Array<RNA>) {
     val size: Int get() = sequence.size
@@ -79,7 +73,7 @@ internal class RNAPolymerase(val sequence: Array<DNA>) {
  * @param chromatid The chromatid to transcribe
  * @return An array of scored mRNA transcribed from the chromatid
  */
-fun transcribe(chromatid: Chromatid) = runBlocking<Array<mRNA>> {
+fun transcribe(chromatid: Chromatid) = runBlocking<List<mRNA>> {
     fun Array<DNA>.isStart() : Boolean {
         BIO_C.startCodons.forEach {
             if (it.toDNA().contentEquals(this))
@@ -118,10 +112,8 @@ fun transcribe(chromatid: Chromatid) = runBlocking<Array<mRNA>> {
             preRnaBuildList.clear()
         }
     }
-
     //pre-mRNA -> mRNA
-    val jobs = List(p_rnalist.size){ async(READER_POOL){ splice(p_rnalist[it]) } }
-    return@runBlocking jobs.awaitAll().toTypedArray()
+    return@runBlocking List(p_rnalist.size) { splice(p_rnalist[it]) }
 }
 
 /**
@@ -146,7 +138,7 @@ internal fun splice(pre_mRNA: Pre_mRNA) : mRNA {
  * @param mRNA the mRNA to translate
  * @param scoredCodons An array of codons with Double scores
  */
-fun translate(mRNA: mRNA, scoredCodons: Array<Codon>) {
+fun translate(mRNA: mRNA, scoredCodons: List<Codon>) {
     mRNA.score = mRNA.codons.let {
         var score = 0.0
         it.forEach { codon ->
@@ -169,13 +161,15 @@ fun translate(mRNA: mRNA, scoredCodons: Array<Codon>) {
  * @param scoredCodons Array of Scored codons
  * @return The calculated score as a Double
  */
-fun score(org: Organism, scoredCodons: Array<Codon>) : Double {
+fun score(org: Organism, scoredCodons: List<Codon>) : Double {
     var score = 0.0
 
-    val mRNAlist = ArrayList<mRNA>()
+    val mRNAlist = ArrayList<mRNA>(org.chromosomes.size * 10)
 
     org.chromosomes.forEach { zome ->
-        zome.forEach { tid -> mRNAlist.addAll(transcribe(tid)) }
+        zome.forEach { tid ->
+            mRNAlist.addAll(transcribe(tid))
+        }
     }
 
     mRNAlist.forEach {

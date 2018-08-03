@@ -42,6 +42,7 @@ fun List<Any>.toFile(name: String = "file") : File {
     if (file.exists()) {
         throw FileAlreadyExistsException("File '$name' already exists.")
     } else {
+        file.createNewFile()
         val bw = file.bufferedWriter()
         this.forEach { bw.writeLn(it) }
         bw.close()

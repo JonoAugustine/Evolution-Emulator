@@ -1,11 +1,11 @@
 package com.ampro.evemu.organism
 
 import com.ampro.evemu.BIO_C
-import com.ampro.evemu.ribonucleic.Chromosome
-import com.ampro.evemu.ribonucleic.generateChromosomes
 import com.ampro.evemu.FIXED_POOL
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
+import com.ampro.evemu.ribonucleic.Chromosome
+import com.ampro.evemu.ribonucleic.generateChromosomes
 import com.ampro.evemu.util.SequentialNamer
 import com.ampro.evemu.util.random
 import kotlinx.coroutines.experimental.async
@@ -13,7 +13,7 @@ import kotlinx.coroutines.experimental.runBlocking
 import java.util.*
 
 class SimpleOrganism(generation: Int = 0,
-                     name: String = organismNamer.next("F$generation"), //ORG_F#_ID
+                     name: String = organismNamer.next("F$generation"),
                      parents: Array<Organism>? = null,
                      reproductiveType: ReproductiveType = CLONE,
                      chromosomes: Array<Chromosome> = generateChromosomes())
@@ -22,8 +22,7 @@ class SimpleOrganism(generation: Int = 0,
     override fun sex(partner: Organism): Organism {
         if (reproductiveType != SEX || partner.reproductiveType != SEX
             || partner !is SimpleOrganism) {
-            throw IllegalArgumentException(
-                    "Cannot sex a SimpleOrganism with ${partner.javaClass.simpleName}")
+            throw IllegalArgumentException("Cannot sex a SimpleOrganism with $partner")
         }
         //generate child chromosomes from random parent chromatids
         //For each Chromosome (zome), generate a new chromosome from the
@@ -38,7 +37,7 @@ class SimpleOrganism(generation: Int = 0,
                 }
             })
         }
-        return SimpleOrganism(Math.max(generation, partner.generation),
+        return SimpleOrganism(Math.max(generation, partner.generation) + 1,
                 parents = arrayOf(this, partner), reproductiveType = SEX,
                 chromosomes = zygote)
     }
@@ -47,6 +46,9 @@ class SimpleOrganism(generation: Int = 0,
             reproductiveType, chromosomes)
 
 }
+
+enum class ReproductiveType {SEX, CLONE, EITHER}
+internal val organismNamer = SequentialNamer("ORG", letterLength = 4)
 
 /**
  * A Class representing an Organism.
@@ -58,10 +60,6 @@ abstract class Organism(val generation: Int,
                         val chromosomes: Array<Chromosome> = generateChromosomes())
     : Comparable<Organism> {
 
-    companion object {
-        val organismNamer = SequentialNamer("ORG", letterLength = 4)
-    }
-
     //Macro data
     var alive: Boolean = true
     var age: Int = 0
@@ -70,7 +68,7 @@ abstract class Organism(val generation: Int,
     var fitness: Double = 0.0
 
     /** The number of base-pairs in the Organism genetic sequence */
-    val baseCount: Int get() = runBlocking<Int> {
+    val baseCount: Int get() = runBlocking {
         //An array of async jobs counting the number of bases across all chromosomes
         val jobs = Array(chromosomes.size) { chromosomeIndex ->
             async(FIXED_POOL) {
@@ -118,4 +116,3 @@ abstract class Organism(val generation: Int,
 
 }
 
-enum class ReproductiveType {SEX, CLONE, EITHER}

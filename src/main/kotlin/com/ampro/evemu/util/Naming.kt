@@ -6,8 +6,14 @@ import com.ampro.evemu.constants.ALPHABET
 class SequentialNamer(val prefix: String = "", val maxInt: Int = 99_000,
                       letterLength: Int = 2) {
 
-    private val let = permute(ALPHABET.toCharArray().toTypedArray(), letterLength)
-    private val letters = Array(let.size) { index -> let[index].joinToString(separator = "") }
+    private var letters: Array<String>
+
+    init {
+        elog("Building Sequential Namer : $prefix")
+        val let = permute(ALPHABET.toCharArray().toTypedArray(), letterLength)
+        letters = Array(let.size) { index -> let[index].joinToString(separator = "") }
+        elog("Sequential Namer Built : $prefix")
+    }
 
     var nextLetterIndex : Int = 0
     var nextNumber : Int = 0

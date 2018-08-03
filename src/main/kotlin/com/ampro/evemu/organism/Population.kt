@@ -1,26 +1,28 @@
 package com.ampro.evemu.organism
 
+import com.ampro.evemu.FIXED_POOL
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
-import com.ampro.evemu.util.Pair
+import com.ampro.evemu.util.IntRange
 import com.ampro.evemu.util.SequentialNamer
-import com.ampro.evemu.util.permute
 import com.ampro.evemu.util.random
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.awaitAll
+import kotlinx.coroutines.experimental.runBlocking
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.atomic.AtomicInteger
+
+internal val populationNamer = SequentialNamer("POP", letterLength = 2, maxInt = 1_000)
 
 /**
  * This class defines the object Population
- * A population consists of a group of {@link Organism}s
+ * A population consists of a group of Organisms
  *
  * @author Jonathan Augustine
+ * @since 1.0
  */
 data class Population<O: Organism>(val name: String = populationNamer.next(),
-                      val population: ArrayList<O> = ArrayList()) : Iterable<O> {
-    companion object {
-        val populationNamer = SequentialNamer("POP", letterLength = 5)
-    }
+                                   val population: ArrayList<O> = ArrayList())
+    : Iterable<O> {
 
     val size: Int get() = population.size
 
@@ -52,7 +54,6 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
         }
     }
 
-
     /**
      * Returns a List of organisms produced by cloning, sex, or both depending
      * on the organism ReproductiveType
@@ -61,14 +62,14 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
      * @param maxChildrenPerPair
      * @return ArrayList<\Organism>
      */
-    fun reproduce(numOffspring: Int, maxChildrenPerPair: Int, minAge: Int)
+    fun reproduce(numOffspring: Int, minAge: Int)
             : List<O> {
         return when {
             this[0].reproductiveType == CLONE -> {
                 this.clone(numOffspring, minAge)
             }
             this[0].reproductiveType == SEX   -> {
-                this.sex(numOffspring, maxChildrenPerPair, minAge)
+                this.sex(numOffspring, minAge)
             }
             else                              -> {
                 //this.sexAndClone(numOffspring, maxChildrenPerPair, minAge)
@@ -87,56 +88,30 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
         }
     }
 
-    private fun sex(numOffspring: Int,
-                    maxChildrenPerPair: Int = numOffspring/(size/2),
-                    minAge: Int) : List<O> {
+    private fun sex(numOffspring: Int, minAge: Int) : List<O> {
 
         //List of of-age organisms
         val parents = this.filter { it.age >= minAge && it.reproductiveType == SEX }
+        if (parents.size < 2) return listOf()
         //List of organisms to be produced through reproduction
         val offspring = ArrayList<O>()
 
-        //Generate pairings bases of the indecies within the population
-        val pairMap = ConcurrentHashMap<Pair<Int, Int>, AtomicInteger>()
-        val permute = permute(Array(parents.size){it}, 2)
-        if (permute.isEmpty()) return listOf()
-        permute.forEach { pairMap[Pair(it[0], it[1])] = AtomicInteger(0) }
-        val pairs = pairMap.keys.toMutableList()
+        val range = IntRange(0, parents.size - 1)
 
-        println()
-
-        while (offspring.size <= numOffspring) {
-            /** Get a pair, reset the list and map if we run out of pairs */
-            fun getPair() : Pair<Int, Int> {
-                while (true) {
-                    if (pairs.isEmpty()) {
-                        pairs.addAll(pairMap.keys)
-                        pairMap.forEach { it.value.set(0) }
-                    }
-                    val random = random(max = pairs.size - 1)
-                    val pair: Pair<Int, Int> = pairs[random]
-                    if (pairMap[pair]!!.get() > maxChildrenPerPair) {
-                        pairs.removeAt(random)
-                    } else return pair
-                }
+        val room = List(numOffspring) {
+            async (FIXED_POOL) {
+                var p1Dex: Int
+                var p2Dex: Int
+                do {
+                    p1Dex = range.random()
+                    p2Dex = range.random()
+                } while (p1Dex != p2Dex
+                    && parents[p1Dex].chromosomes.size != parents[p2Dex].chromosomes.size)
+                //Mate and add offspring to the list
+                parents[p1Dex].sex(parents[p2Dex]) as O
             }
-
-            //Get a pair of Organisms
-            val pair = getPair()
-            val p1 = parents[pair.left]
-            val p2 = parents[pair.right]
-            //Check if they can mate
-            if (p1.chromosomes.size != p2.chromosomes.size) {
-                //Remove the pair if they cannot mate
-                pairMap.remove(pair)
-                pairs.remove(pair)
-                continue
-            }
-
-            //Mate and add offspring to the list
-            offspring.add(p1.sex(p2) as O)
         }
-        return offspring
+        return offspring.apply { runBlocking { addAll(room.awaitAll()) } }
     }
 
     /**
@@ -176,6 +151,7 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
         Collections.sort(this.population, comparator)
     }
 
+    /** @return "name | size avgFitness fitnessStdDeviation" */
     override fun toString(): String
     = "$name | size=$size avgFit=$avgFitness fitDeviation=$stdDeviation"
 
