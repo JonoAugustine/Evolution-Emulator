@@ -2,6 +2,7 @@ package com.ampro.evemu.emulation
 
 import com.ampro.evemu.BIO_C
 import com.ampro.evemu.FIXED_POOL
+import com.ampro.evemu.constants.Alphabet.*
 import com.ampro.evemu.organism.Organism
 import com.ampro.evemu.organism.Population
 import com.ampro.evemu.ribonucleic.Codon
@@ -52,8 +53,6 @@ abstract class Environment( val name: String = enviroNamer.next(),
         val resouces: ConcurrentHashMap<ResourceType, ResourcePool>
         = ConcurrentHashMap(), var risk: Double = 0.0) {
 
-    companion object { val enviroNamer = SequentialNamer("ENV") }
-
     protected fun scoreCodons(range: DoubleRange = BIO_C.codonScoreRange)
             = List (BIO_C.codons.size) {
         BIO_C.codons[it].clone().also { it.score = range.random() }
@@ -70,6 +69,8 @@ abstract class Environment( val name: String = enviroNamer.next(),
     val size: Int get() = this.populations.size
 
 }
+
+val enviroNamer = SequentialNamer(listOf(E,N,V))
 
 data class ResourcePool(val type: ResourceType = ResourceType.FOOD,
                val quantity: Double = 0.0)

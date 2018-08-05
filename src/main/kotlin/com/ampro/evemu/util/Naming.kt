@@ -1,36 +1,48 @@
 package com.ampro.evemu.util
 
-import com.ampro.evemu.constants.ALPHABET
+import com.ampro.evemu.constants.Alphabet
 
 /** An object to name things sequentially */
-class SequentialNamer(val prefix: String = "", val maxInt: Int = 99_000,
-                      letterLength: Int = 2) {
-
-    private var letters: Array<String>
-
-    init {
-        elog("Building Sequential Namer : $prefix")
-        val let = permute(ALPHABET.toCharArray().toTypedArray(), letterLength)
-        letters = Array(let.size) { index -> let[index].joinToString(separator = "") }
-        elog("Sequential Namer Built : $prefix")
-    }
+class SequentialNamer(val prefix: List<Alphabet>, val maxInt: Int = 99_000,
+                      val letterLength: Int = 2) {
 
     var nextLetterIndex : Int = 0
     var nextNumber : Int = 0
 
+    var idx = IntArray(letterLength)
+
     @Throws(NoSuchElementException::class)
-    fun next(secondPrefix: Any = "") : String {
-        val sb = StringBuilder("${prefix}_${
-        if (secondPrefix == "") "" else "${secondPrefix}_"}")
+    fun next(vararg secondPrefix: Any) : String {
+        val sb = StringBuilder()
+        if (prefix.isNotEmpty()) {
+            sb.append("${prefix.joinToString("")}_")
+        }
+        if (secondPrefix.isNotEmpty()) {
+            sb.append(secondPrefix.joinToString("")).append("_")
+        }
+
+        val perm = ArrayList<Alphabet>(letterLength)
         return synchronized(this) {
+            //Build the next letter sequence
+            for (k in 0 until letterLength) {
+                perm.add(k, Alphabet.values()[idx[k]])
+            }
+
+            //If we reach the end of the numbers
             if (nextNumber !in 0..maxInt) {
-                nextNumber = 0
-                if (++nextLetterIndex !in 0 until letters.size) {
+                // generate the next permutation
+                var i = idx.size - 1
+                while (i >= 0) {
+                    if (++idx[i] < Alphabet.size) break
+                    idx[i--] = 0
+                }
+                // if the first index wrapped around then we're done
+                if (i < 0) {
                     throw NoSuchElementException("Exhausted Letter Names")
                 }
+                nextNumber = 0
             }
-            sb.append(letters[nextLetterIndex])//.append("_")
-                .append(nextNumber++)
+            sb.append(perm.joinToString("")).append(nextNumber++)
             sb.toString()
         }
     }

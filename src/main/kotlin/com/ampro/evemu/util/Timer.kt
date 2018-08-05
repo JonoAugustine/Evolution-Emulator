@@ -21,8 +21,6 @@ val NOW_FILE: String get() = NOW.replace(":", "-")
 /**
  * A Timer object contains a start-time (millisec) that is defined upon creation.
  *
- * TODO Add pausing functionality
- *
  * @author Jonathan Augustine
  * @since 2.0
  */

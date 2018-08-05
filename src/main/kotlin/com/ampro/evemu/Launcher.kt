@@ -10,7 +10,6 @@ import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
 import com.ampro.evemu.organism.SimpleOrganism
 import com.ampro.evemu.util.Slogger
-import com.ampro.evemu.util.Timer
 import com.ampro.evemu.util.elog
 import com.ampro.evemu.util.io.DIR_CONST
 import com.ampro.evemu.util.io.DIR_ENVIR
@@ -39,24 +38,32 @@ var FIXED_POOL = newFixedThreadPoolContext(7_000, "FixedPool")
 
 fun main(args: Array<String>) = runBlocking {
 
-    slog("Building populations...")
-    val pList = ArrayList<Population<out Organism>>(5)
-    val time = measureTimeMillis {
-        for (i in 1..8) {
-            slog("$i time=" + measureTimeMillis {
-                pList.add(Population(population = genTestOrgs(10_000, SEX)))
-            } / 1_000.0)
-        }
+    val emulators = 1
+    val pops = 5
+    val popSize = 10_000
+
+    val emus = List (emulators) {
+        SimpleEmulator(environment = genTestEnv(numPop = pops, popSize = popSize)[0])
     }
-    slog("...done (time=${Timer.format(time)})\n")
 
-    val emu = SimpleEmulator(environment = SimpleEnvironment(pList), years = 1000)
+    val emuJobs = List (emulators) {
+        launch (FIXED_POOL) { emus[it].run() }
+    }
 
-    emu.run()
+    emuJobs.joinAll()
 
     FIXED_POOL.close()
     CACHED_POOL.close()
 }
+
+fun genTestEnv(numEnv: Int = 1, numPop: Int = 1, popSize: Int = 1_000)
+        : List<SimpleEnvironment> =
+    List (numEnv) {
+        val list = ArrayList<Population<out Organism>>(List(numPop) {
+            Population(population = genTestOrgs(popSize))
+        })
+        SimpleEnvironment(populations = list)
+    }
 
 val testSlogger = Slogger("genTestOrgs")
 fun genTestOrgs(size: Int = 1_000, type: ReproductiveType = CLONE)
@@ -65,7 +72,6 @@ fun genTestOrgs(size: Int = 1_000, type: ReproductiveType = CLONE)
     (0 until size).forEach { out.add(SimpleOrganism(reproductiveType = type)) }
     return out
 }
-
 
 fun test(testSize: Int = 10_000, debug: Boolean = true): ArrayList<Organism> {
     val prodMap = ConcurrentHashMap<String, AtomicInteger>()/*(mapOf(

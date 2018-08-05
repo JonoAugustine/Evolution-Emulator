@@ -1,10 +1,19 @@
 package com.ampro.evemu.constants
 
-import java.io.File
-
 /** The standard US alphabet in upper case  */
-const val ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-/** digits 0 to 9  */
-const val DIGITS = "0123456789"
+enum class Alphabet {
+    A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z;
+    companion object { const val size = 26 }
+}
 
+fun List<Alphabet>.stringify() : String {
+    val sb = StringBuilder()
+    this.forEach { sb.append(it) }
+    return sb.toString()
+}
 
+fun Array<Alphabet>.stringify() : String {
+    val sb = StringBuilder()
+    this.forEach { sb.append(it) }
+    return sb.toString()
+}

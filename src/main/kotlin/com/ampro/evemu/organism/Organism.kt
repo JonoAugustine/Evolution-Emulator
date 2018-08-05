@@ -2,6 +2,7 @@ package com.ampro.evemu.organism
 
 import com.ampro.evemu.BIO_C
 import com.ampro.evemu.FIXED_POOL
+import com.ampro.evemu.constants.Alphabet.*
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
 import com.ampro.evemu.ribonucleic.Chromosome
@@ -48,7 +49,7 @@ class SimpleOrganism(generation: Int = 0,
 }
 
 enum class ReproductiveType {SEX, CLONE, EITHER}
-internal val organismNamer = SequentialNamer("ORG", letterLength = 4)
+internal val organismNamer = SequentialNamer(listOf(O,R,G), letterLength = 4)
 
 /**
  * A Class representing an Organism.

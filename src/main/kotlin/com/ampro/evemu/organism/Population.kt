@@ -1,17 +1,20 @@
 package com.ampro.evemu.organism
 
 import com.ampro.evemu.FIXED_POOL
+import com.ampro.evemu.constants.Alphabet.O
+import com.ampro.evemu.constants.Alphabet.P
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
 import com.ampro.evemu.util.IntRange
 import com.ampro.evemu.util.SequentialNamer
 import com.ampro.evemu.util.random
+import com.ampro.evemu.util.sqr
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.awaitAll
 import kotlinx.coroutines.experimental.runBlocking
 import java.util.*
 
-internal val populationNamer = SequentialNamer("POP", letterLength = 2, maxInt = 1_000)
+internal val populationNamer = SequentialNamer(listOf(P,O,P), letterLength = 2, maxInt = 1_000)
 
 /**
  * This class defines the object Population
@@ -38,15 +41,13 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
         return Math.sqrt(
                 (1.0 / size).times(this.let { pop ->
                     var sumVar = 0.0
-                    pop.forEach { org ->
-                        sumVar += (org.fitness - avg) * (org.fitness - avg)
-                    }
+                    pop.forEach { sumVar += (it.fitness - avg).sqr() }
                     return@let sumVar
                 }))
     }
 
     val medianAge: Double get() = synchronized(this.population) {
-        population.sortWith(kotlin.Comparator { o1, o2 -> o1.age - o2.age })
+        population.sortWith(Comparator { o1, o2 -> o1.age - o2.age })
         if (size % 2 == 0) {
             (this[(size - 1) / 1].age + this[size / 2].age) / 2.0
         } else {
@@ -82,14 +83,19 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
      * @return A List of Organisms produced by cloning the members of the population
      */
     private fun clone(num: Int, minAge: Int) : List<O> {
-        val legal = this.filter{ it.age >= minAge }
-        return if (legal.isEmpty()) listOf() else List (num) {
-            legal[random(max = legal.size - 1)].clone() as O
-        }
+        val legal = this.filter { it.age >= minAge }
+        return if (legal.isEmpty()) listOf()
+        else List (num) { legal[random(max = legal.size - 1)].clone() as O }
     }
 
+    /**
+     * TODO DOCS
+     *
+     * @param numOffspring
+     * @param minAge
+     * @return
+     */
     private fun sex(numOffspring: Int, minAge: Int) : List<O> {
-
         //List of of-age organisms
         val parents = this.filter { it.age >= minAge && it.reproductiveType == SEX }
         if (parents.size < 2) return listOf()

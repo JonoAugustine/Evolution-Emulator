@@ -1,6 +1,7 @@
 package com.ampro.evemu.emulation
 
 import com.ampro.evemu.FIXED_POOL
+import com.ampro.evemu.constants.Alphabet.*
 import com.ampro.evemu.organism.Organism
 import com.ampro.evemu.organism.Population
 import com.ampro.evemu.organism.ReproductiveType.SEX
@@ -9,19 +10,21 @@ import com.ampro.evemu.util.*
 import kotlinx.coroutines.experimental.*
 import kotlin.system.measureTimeMillis
 
+internal val envNamer = SequentialNamer(listOf(E,N,V), 100, 2)
+
 /**
  *
  *
  * @author Jonathan Augustine
  * @since 3.0
  */
-class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
-                     val environment: SimpleEnvironment, var years: Int = 100)
-    : Runnable {
+class SimpleEmulator(val name: String = envNamer.next(),
+                     val environment: SimpleEnvironment,
+                     var years: Int = 100) : Runnable {
 
     private val log = InternalLog(name,
-            initSize = years * environment.populations.size * 10,
-            showThread = true, showName = true)
+            years * environment.populations.size * 10,
+            true, true)
 
     private val cycleDurations = ArrayList<Long>(years * environment.populations.size)
     private val yearDurations  = ArrayList<Long>(years)
@@ -69,7 +72,6 @@ class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
         log.toFile()
     }
 
-
     /**
      *
      */
@@ -111,11 +113,18 @@ class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
         val preCullStatus = pop.toString()
 
         var cutoff: Double = 0.0
+        var culled = 0
         val cullTime = measureTimeMillis {
             cutoff = postMateAvg - random(2, 4) * pop.stdDeviation
-            pop.population.removeIf {
-                it.fitness < cutoff || it.age >= 40 || it.fitness <= 0
-                        || (it.age++ == -1) //this is here so we don't iterate twice to age up
+            val iterator = pop.population.listIterator()
+            while (iterator.hasNext()) {
+                val cur = iterator.next()
+                if (cur.fitness < cutoff || cur.age >= 40 || cur.fitness <= 0) {
+                    iterator.remove()
+                    culled++
+                } else {
+                    cur.age++
+                }
             }
         }
 
@@ -147,8 +156,7 @@ class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
         tempLog.log("Cull time : ${
         Timer.format(cullTime)} (${cullTime.percent(fullTime)}%)")
         tempLog.log("Culling cutoff=$cutoff")
-        tempLog.log("Pre-Cull status  : $preCullStatus")
-        tempLog.log("Post-Cull status : $postCullStatus")
+        tempLog.log("Orgs Culled=$culled")
         tempLog.log( "Avg Fitness:")
         tempLog.log("\tpre-mating=$preMateAvg")
         tempLog.log("\tpost-mating=$postMateAvg")
@@ -177,11 +185,9 @@ class SimpleEmulator(val name: String = SimpleEmulator::class.java.simpleName,
      * @param pop The population to score
      */
     private suspend fun <O: Organism> scorePopulation(pop: Population<O>) {
-        //val sum = AtomicInteger(0)
         val scoredCodons = environment.scoreMap[pop.name]!!
         List(pop.size) { i ->
-            launch (FIXED_POOL) { pop[i].fitness = score(pop[i], scoredCodons) }
+            launch(FIXED_POOL) { pop[i].fitness = score(pop[i], scoredCodons) }
         }.joinAll()
     }
-
 }
