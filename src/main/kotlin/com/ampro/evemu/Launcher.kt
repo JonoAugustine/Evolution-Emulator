@@ -60,7 +60,7 @@ fun genTestEnv(numEnv: Int = 1, numPop: Int = 1, popSize: Int = 1_000)
         : List<SimpleEnvironment> =
     List (numEnv) {
         val list = ArrayList<Population<out Organism>>(List(numPop) {
-            Population(population = genTestOrgs(popSize))
+            Population(population = genTestOrgs(popSize, SEX))
         })
         SimpleEnvironment(populations = list)
     }
@@ -102,7 +102,7 @@ fun test(testSize: Int = 10_000, debug: Boolean = true): ArrayList<Organism> {
     if (debug) {
         slog(prodMap)
         var min: Int = testSize
-        var max: Int = 0
+        var max = 0
         slog("Max-Min dif=" + prodMap.let {
             it.forEach {
                 val value = it.value.toInt()

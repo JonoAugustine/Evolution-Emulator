@@ -59,9 +59,8 @@ data class Population<O: Organism>(val name: String = populationNamer.next(),
      * Returns a List of organisms produced by cloning, sex, or both depending
      * on the organism ReproductiveType
      *
-     * @param numOffspring
-     * @param maxChildrenPerPair
-     * @return ArrayList<\Organism>
+     * @param numOffspring The number of offspring to make
+     * @return A List of the organisms produced
      */
     fun reproduce(numOffspring: Int, minAge: Int)
             : List<O> {

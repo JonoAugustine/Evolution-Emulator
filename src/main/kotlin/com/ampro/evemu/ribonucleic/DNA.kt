@@ -9,9 +9,9 @@ package com.ampro.evemu.ribonucleic
  */
 
 import com.ampro.evemu.BIO_C
-import java.util.*
 import com.ampro.evemu.util.IntRange
 import com.ampro.evemu.util.random
+import java.util.*
 
 enum class DNA {
     A, T, C, G;
@@ -54,13 +54,13 @@ enum class DNA {
 
 data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
 
-    var genes: ArrayList<Gene>? = null
-    var score: Float = 0f
+    var score: Double = 0.0
 
     init {
-        if (!BIO_C.chromatidLengthRange.contains(bases.size)) {
-            throw IllegalArgumentException("Chromatid size out of Range : " +
-                    "${BIO_C.chromatidLengthRange}")
+        if (bases.size !in BIO_C.chromatidLengthRange) {
+            throw IllegalArgumentException(
+                "Chromatid size out of Range : ${BIO_C.chromatidLengthRange}"
+            )
         }
     }
 
@@ -84,7 +84,6 @@ data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
         other as Chromatid
 
         if (!Arrays.equals(bases, other.bases)) return false
-        if (genes != other.genes) return false
         if (score != other.score) return false
 
         return true
@@ -92,7 +91,6 @@ data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
 
     override fun hashCode(): Int {
         var result = Arrays.hashCode(bases)
-        result = 31 * result + (genes?.hashCode() ?: 0)
         result = 31 * result + score.hashCode()
         return result
     }
@@ -154,7 +152,6 @@ fun generateChromosomes(quantity: Int = BIO_C.startingChromosomes,
                         size: Int = BIO_C.chromosomeSize,
                         chromaRange: IntRange = BIO_C.chromatidLengthRange)
         : Array<Chromosome> {
-
     return Array(quantity) {Chromosome(Array(size) {
             Chromatid(Array(chromaRange.random()) { DNA.values()[random(0, 3)] })
         })

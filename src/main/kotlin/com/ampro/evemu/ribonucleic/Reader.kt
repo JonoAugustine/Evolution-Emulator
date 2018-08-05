@@ -3,6 +3,7 @@ package com.ampro.evemu.ribonucleic
 import com.ampro.evemu.BIO_C
 import com.ampro.evemu.organism.Organism
 import kotlinx.coroutines.experimental.runBlocking
+import java.util.*
 
 /**
  * Methods for transcription and translation (scoring) DNA sequences and Codons
@@ -19,6 +20,21 @@ internal data class Pre_mRNA(var sequence: Array<RNA>) {
     override fun toString(): String {
         var s = "["; sequence.forEach { s += it }; s += "]"
         return s
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Pre_mRNA
+
+        if (!Arrays.equals(sequence, other.sequence)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return Arrays.hashCode(sequence)
     }
 }
 
@@ -76,8 +92,7 @@ internal class RNAPolymerase(val sequence: Array<DNA>) {
 fun transcribe(chromatid: Chromatid) = runBlocking<List<mRNA>> {
     fun Array<DNA>.isStart() : Boolean {
         BIO_C.startCodons.forEach {
-            if (it.toDNA().contentEquals(this))
-                return true
+            if (it.toDNA().contentEquals(this)) return true
         }
         return false
     }

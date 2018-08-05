@@ -17,6 +17,7 @@ class SequentialNamer(val prefix: List<Alphabet>, val maxInt: Int = 99_000,
         if (prefix.isNotEmpty()) {
             sb.append("${prefix.joinToString("")}_")
         }
+
         if (secondPrefix.isNotEmpty()) {
             sb.append(secondPrefix.joinToString("")).append("_")
         }

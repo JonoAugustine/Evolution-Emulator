@@ -42,7 +42,6 @@ enum class RNA {
         }
     }
 }
-enum class CodonFunction { NOTHING, STOP, START }
 
 fun Array<Codon>.get(codon: Codon) : Codon? {
     for (cd in this) {
@@ -61,6 +60,8 @@ fun List<Codon>.get(codon: Codon) : Codon? {
     }
     return null
 }
+
+enum class CodonFunction { NOTHING, STOP, START }
 
 /** An Object representing a Codon, a series of DNA Bases */
 data class Codon(var bases: Array<RNA>, var function: CodonFunction = NOTHING)

@@ -105,15 +105,15 @@ class Timer(private var startTime: Long = System.currentTimeMillis()) {
  * @param timers Array of Timers
  * @return The average duration of the provided Timers, formatted HH:MMM:SS
  */
-fun timerAvg(timers: Array<Timer>): String {
+fun timerAvg(timers: List<Timer>): String {
 
-    var AverageNanoTime: Long = 0
+    var averageNanoTime: Long = 0
 
-    timers.forEach { AverageNanoTime += it.getElapsedTime() }
+    timers.forEach { averageNanoTime += it.getElapsedTime() }
 
-    AverageNanoTime /= timers.size.toLong()
+    averageNanoTime /= timers.size.toLong()
 
-    var seconds = AverageNanoTime / Math.pow(10.0, 9.0)
+    var seconds = averageNanoTime / Math.pow(10.0, 9.0)
     var hours = 0
     var min = 0
     if (seconds > 60) {

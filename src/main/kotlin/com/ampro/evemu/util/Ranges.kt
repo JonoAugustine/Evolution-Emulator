@@ -1,7 +1,6 @@
 package com.ampro.evemu.util
 
 import java.util.concurrent.ThreadLocalRandom
-import kotlin.ranges.IntRange
 
 /** A pair of values */
 data class Pair<L, R>(var left: L, var right: R)

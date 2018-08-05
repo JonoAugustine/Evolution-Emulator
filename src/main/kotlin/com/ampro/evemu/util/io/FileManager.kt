@@ -12,7 +12,7 @@ val DIR_ENVIR = File(DIR_ROOT, "environments")
 val DIR_LOGS  = File(DIR_ROOT, "logs")
 
 val GSON = GsonBuilder().enableComplexMapKeySerialization()
-    .setExclusionStrategies().setPrettyPrinting().create()
+    .setExclusionStrategies().setPrettyPrinting().create()!!
 
 /**
  * Read a file's text.
@@ -78,7 +78,6 @@ fun Any.saveJson(file: File): Int {
  * Load the given file form JSON.
  *
  * @param file The file to load from
- * @param objClass The object type
  * @return The parsed object or null if it was not found or an exception was thrown.
  */
 @Synchronized
