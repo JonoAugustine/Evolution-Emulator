@@ -148,7 +148,7 @@ data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
  * @param chromaRange The size range of each chromatid
  * @return Array of Chromosomes
  */
-fun generateChromosomes(quantity: Int = BIO_C.startingChromosomes,
+fun generateChromosomes(quantity: Int = BIO_C.initChromoNum,
                         size: Int = BIO_C.chromosomeSize,
                         chromaRange: IntRange = BIO_C.chromatidLengthRange)
         : Array<Chromosome> {

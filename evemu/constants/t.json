@@ -3,9 +3,9 @@
     {
       "score": 0.0,
       "bases": [
-        "C",
         "U",
-        "G"
+        "A",
+        "U"
       ],
       "function": "START"
     }
@@ -15,17 +15,26 @@
       "score": 0.0,
       "bases": [
         "A",
-        "U",
-        "G"
+        "A",
+        "U"
       ],
       "function": "STOP"
     },
     {
       "score": 0.0,
       "bases": [
+        "C",
         "U",
+        "C"
+      ],
+      "function": "STOP"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
         "G",
-        "A"
+        "C"
       ],
       "function": "STOP"
     }
@@ -33,29 +42,25 @@
   "name": "t",
   "codonSize": 3,
   "codonScoreRange": {
-    "min": -1.0,
+    "min": -10.0,
     "max": 1.0
   },
-  "nStartCodons": 1,
-  "nStopCodons": 3,
   "intronSignal": {
     "left": [
-      "A",
-      "A"
+      "C",
+      "U"
     ],
     "right": [
-      "U",
-      "G"
+      "G",
+      "C"
     ]
   },
   "chromatidLengthRange": {
     "min": 1000,
-    "max": 1000
+    "max": 5000
   },
   "chromosomeSize": 2,
-  "startingChromosomes": 4,
-  "startingDnaLength": 1000,
-  "minGeneLength": 1000,
+  "initChromoNum": 4,
   "codons": [
     {
       "score": 0.0,
@@ -73,66 +78,66 @@
         "A",
         "U"
       ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
-        "A",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
-        "A",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
-        "U",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
-        "U",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
-        "U",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "A",
-        "U",
-        "G"
-      ],
       "function": "STOP"
     },
     {
       "score": 0.0,
       "bases": [
         "A",
+        "A",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "A",
+        "A",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "A",
+        "U",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "A",
+        "U",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "A",
+        "U",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "A",
+        "U",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "A",
         "C",
         "A"
       ],
@@ -216,210 +221,210 @@
         "U",
         "A",
         "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "A",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "A",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "U",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "U",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "U",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "U",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "C",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "C",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "C",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "C",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "A"
-      ],
-      "function": "STOP"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "U",
-        "G",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "A",
-        "G"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "A"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "U"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "C"
-      ],
-      "function": "NOTHING"
-    },
-    {
-      "score": 0.0,
-      "bases": [
-        "C",
-        "U",
-        "G"
       ],
       "function": "START"
     },
     {
       "score": 0.0,
       "bases": [
+        "U",
+        "A",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "A",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "U",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "U",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "U",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "U",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "C",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "C",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "C",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "C",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "U",
+        "G",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "C"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "A",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "A"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "U"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "C"
+      ],
+      "function": "STOP"
+    },
+    {
+      "score": 0.0,
+      "bases": [
+        "C",
+        "U",
+        "G"
+      ],
+      "function": "NOTHING"
+    },
+    {
+      "score": 0.0,
+      "bases": [
         "C",
         "C",
         "A"
@@ -478,7 +483,7 @@
         "G",
         "C"
       ],
-      "function": "NOTHING"
+      "function": "STOP"
     },
     {
       "score": 0.0,

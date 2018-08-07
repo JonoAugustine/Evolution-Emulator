@@ -110,8 +110,6 @@ class SimpleEmulator(val name: String = envNamer.next(),
         //Score the new filial generation
         val scoringTime = measureTimeMillis { if (filial.isEmpty) else scorePopulation(filial) }
 
-        val preCullStatus = pop.toString()
-
         var cutoff: Double = 0.0
         var culled = 0
         val cullTime = measureTimeMillis {
@@ -127,8 +125,6 @@ class SimpleEmulator(val name: String = envNamer.next(),
                 }
             }
         }
-
-        val postCullStatus = pop.toString()
 
         val bestPostFOrg = if (pop.population.isNotEmpty()) {
             async (FIXED_POOL) {

@@ -11,12 +11,8 @@ import com.ampro.evemu.organism.ReproductiveType.SEX
 import com.ampro.evemu.organism.SimpleOrganism
 import com.ampro.evemu.util.Slogger
 import com.ampro.evemu.util.elog
-import com.ampro.evemu.util.io.DIR_CONST
-import com.ampro.evemu.util.io.DIR_ENVIR
-import com.ampro.evemu.util.io.DIR_LOGS
-import com.ampro.evemu.util.io.DIR_ROOT
+import com.ampro.evemu.util.io.*
 import com.ampro.evemu.util.slog
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.experimental.*
 import org.apache.commons.io.FileUtils
 import java.io.File
@@ -30,11 +26,11 @@ import kotlin.collections.ArrayList
 import kotlin.system.measureTimeMillis
 
 
-val scan = Scanner(System.`in`)
-var BIO_C: BioConstants = loadOrBuild()
-
 val CACHED_POOL =  Executors.newCachedThreadPool().asCoroutineDispatcher()
 var FIXED_POOL = newFixedThreadPoolContext(7_000, "FixedPool")
+
+val scan = Scanner(System.`in`)
+var BIO_C: BioConstants = loadOrBuild()
 
 fun main(args: Array<String>) = runBlocking {
 
@@ -74,16 +70,7 @@ fun genTestOrgs(size: Int = 1_000, type: ReproductiveType = CLONE)
 }
 
 fun test(testSize: Int = 10_000, debug: Boolean = true): ArrayList<Organism> {
-    val prodMap = ConcurrentHashMap<String, AtomicInteger>()/*(mapOf(
-            "FixedPool-1" to AtomicInteger(), "FixedPool-2" to AtomicInteger(),
-            "FixedPool-3" to AtomicInteger(), "FixedPool-4" to AtomicInteger(),
-            "FixedPool-5" to AtomicInteger(), "FixedPool-6" to AtomicInteger(),
-            "FixedPool-7" to AtomicInteger(), "FixedPool-8" to AtomicInteger(),
-            "FixedPool-9" to AtomicInteger(), "FixedPool-10" to AtomicInteger(),
-            "FixedPool-11" to AtomicInteger(), "FixedPool-12" to AtomicInteger(),
-            "FixedPool-13" to AtomicInteger(), "FixedPool-14" to AtomicInteger(),
-            "FixedPool-15" to AtomicInteger(), "FixedPool-16" to AtomicInteger()
-    ))*/
+    val prodMap = ConcurrentHashMap<String, AtomicInteger>()
     val out = ArrayList<Organism>(testSize)
     val time = measureTimeMillis {
         val jobs = List(testSize) { _ ->
@@ -116,7 +103,6 @@ fun test(testSize: Int = 10_000, debug: Boolean = true): ArrayList<Organism> {
 }
 
 fun loadOrBuild() : BioConstants {
-    val gson = GsonBuilder().setPrettyPrinting().create()
     buildDirs()
     var set: Boolean
     slog("Load previous BioConstants? (y/n): ")
@@ -127,7 +113,7 @@ fun loadOrBuild() : BioConstants {
         if (file.exists()) {
             try {
                 val reader = FileReader(file)
-                BIO_C = gson.fromJson(reader, BioConstants::class.java)
+                BIO_C = GSON.fromJson(reader, BioConstants::class.java)
                 set = true
             } catch (e: Exception) {
                 elog("Failed to load file '$filename'.\n${e.cause}")
@@ -147,8 +133,9 @@ fun loadOrBuild() : BioConstants {
         if (scan.nextLine().equals("y", true)) {
             try {
                 val writer = FileWriter(File(DIR_CONST, "${build.name}.json"))
-                gson.toJson(build, writer)
+                GSON.toJson(build, writer)
                 writer.close()
+                slog("Saved")
             } catch (e: Exception) {
                 elog("Save Failed! :\n${e.cause}")
             }

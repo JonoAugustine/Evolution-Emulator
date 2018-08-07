@@ -14,15 +14,6 @@ val DIR_LOGS  = File(DIR_ROOT, "logs")
 val GSON = GsonBuilder().enableComplexMapKeySerialization()
     .setExclusionStrategies().setPrettyPrinting().create()!!
 
-/**
- * Read a file's text.
- * @param file The file to read
- * @return A String Array, each index representing a line in the file
- * @throws IOException
- */
-@Throws(IOException::class)
-fun readFile(file: File): List<String> = Files.readAllLines(file.toPath())
-
 fun BufferedWriter.writeLn(line: Any) {
     this.write(line.toString())
     this.newLine()

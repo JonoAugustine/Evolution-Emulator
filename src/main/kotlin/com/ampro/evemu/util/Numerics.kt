@@ -30,13 +30,13 @@ inline fun <reified T> permute(src: Array<T>, size: Int = src.size) : List<List<
     if (src.isEmpty()) return listOf()
     val n = src.size
     val idx = IntArray(size)
-    val perm = ArrayList<T>(size)
     val out = ArrayList<List<T>>()
     while (true) {
+        val perm = ArrayList<T>(size)
         for (k in 0 until size) {
             perm.add(k, src[idx[k]])
         }
-        out.add(perm.toList())
+        out.add(perm)
         // generate the next permutation
         var i = idx.size - 1
         while (i >= 0) {

@@ -46,7 +46,7 @@ internal class Ribosome(val sequence: Array<RNA>) {
 
     inline fun stepFrom(index: Int = 0, size: Int = BIO_C.codonSize,
                         action: (Int, Array<RNA>) -> Unit) {
-        val list = ArrayList<Array<RNA>>(BIO_C.startingDnaLength / 2)
+        val list = ArrayList<Array<RNA>>(BIO_C.chromatidLengthRange.max / 2)
         val smList = ArrayList<RNA>(sequence.size)
         for (i in (index * size) until sequence.size) {
             smList.add(sequence[i])
@@ -68,7 +68,7 @@ internal class RNAPolymerase(val sequence: Array<DNA>) {
 
     inline fun stepFrom(index: Int = 0, size: Int = BIO_C.codonSize,
                         action: (Int, Array<DNA>) -> Unit) {
-        val list = ArrayList<Array<DNA>>(BIO_C.startingDnaLength / 2)
+        val list = ArrayList<Array<DNA>>(BIO_C.chromatidLengthRange.max / 2)
         val smList = ArrayList<DNA>(sequence.size)
         for (i in (index * size) until sequence.size) {
             smList.add(sequence[i])
