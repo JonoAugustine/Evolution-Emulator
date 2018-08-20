@@ -99,8 +99,6 @@ data class Chromatid(val bases: Array<DNA>) : Iterable<DNA> {
 
 data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
 
-    var score: Float = 0f
-
     init {
         if (chromatids.size != BIO_C.chromosomeSize) {
             throw IllegalArgumentException("Chromosome missized")
@@ -123,20 +121,13 @@ data class Chromosome(val chromatids: Array<Chromatid>) : Iterable<Chromatid> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-
         other as Chromosome
-
         if (!Arrays.equals(chromatids, other.chromatids)) return false
-        if (score != other.score) return false
-
         return true
     }
 
-    override fun hashCode(): Int {
-        var result = Arrays.hashCode(chromatids)
-        result = 31 * result + score.hashCode()
-        return result
-    }
+    override fun hashCode(): Int = Arrays.hashCode(chromatids)
+
 }
 
 /**

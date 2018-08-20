@@ -3,21 +3,14 @@ package com.ampro.evemu
 import com.ampro.evemu.constants.BioConstants
 import com.ampro.evemu.emulation.SimpleEmulator
 import com.ampro.evemu.emulation.SimpleEnvironment
-import com.ampro.evemu.organism.Organism
-import com.ampro.evemu.organism.Population
-import com.ampro.evemu.organism.ReproductiveType
+import com.ampro.evemu.organism.*
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
-import com.ampro.evemu.organism.SimpleOrganism
-import com.ampro.evemu.util.Slogger
-import com.ampro.evemu.util.elog
+import com.ampro.evemu.util.*
 import com.ampro.evemu.util.io.*
-import com.ampro.evemu.util.slog
 import kotlinx.coroutines.experimental.*
 import org.apache.commons.io.FileUtils
-import java.io.File
-import java.io.FileReader
-import java.io.FileWriter
+import java.io.*
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
@@ -30,7 +23,12 @@ val CACHED_POOL =  Executors.newCachedThreadPool().asCoroutineDispatcher()
 var FIXED_POOL = newFixedThreadPoolContext(7_000, "FixedPool")
 
 val scan = Scanner(System.`in`)
-var BIO_C: BioConstants = loadOrBuild()
+var BIO_C : BioConstants = try {
+    GSON.fromJson(FileReader(File(DIR_CONST, "t.json")), BioConstants::class.java)
+} catch (e: Exception) {
+    runBlocking { BioConstants.build() }
+}
+
 
 fun main(args: Array<String>) = runBlocking {
 
@@ -39,7 +37,7 @@ fun main(args: Array<String>) = runBlocking {
     val popSize = 10_000
 
     val emus = List (emulators) {
-        SimpleEmulator(environment = genTestEnv(numPop = pops, popSize = popSize)[0])
+        SimpleEmulator(environment = genTestEnv(numPop = pops, popSize = popSize))
     }
 
     val emuJobs = List (emulators) {
@@ -52,20 +50,17 @@ fun main(args: Array<String>) = runBlocking {
     CACHED_POOL.close()
 }
 
-fun genTestEnv(numEnv: Int = 1, numPop: Int = 1, popSize: Int = 1_000)
-        : List<SimpleEnvironment> =
-    List (numEnv) {
-        val list = ArrayList<Population<out Organism>>(List(numPop) {
-            Population(population = genTestOrgs(popSize, SEX))
-        })
-        SimpleEnvironment(populations = list)
-    }
+fun genTestEnv(numPop: Int = 1, popSize: Int = 1_000) = runBlocking {
+    val pops = ArrayList<Population<out Organism>>()
+    pops.addAll( List(numPop) { Population(population = test(popSize, true)) } )
+    return@runBlocking SimpleEnvironment(pops)
+}
 
 val testSlogger = Slogger("genTestOrgs")
 fun genTestOrgs(size: Int = 1_000, type: ReproductiveType = CLONE)
         : ArrayList<SimpleOrganism> {
     val out = ArrayList<SimpleOrganism>(size)
-    (0 until size).forEach { out.add(SimpleOrganism(reproductiveType = type)) }
+    out.addAll(List(size) {SimpleOrganism(reproductiveType = type)})
     return out
 }
 
@@ -143,6 +138,23 @@ fun loadOrBuild() : BioConstants {
         scan.close()
         build
     } else BIO_C
+}
+
+fun loadDefaultBioConstants() : BioConstants {
+    buildDirs()
+    val filename = "t"
+    val file = File(DIR_CONST, "$filename.json")
+    if (file.exists()) {
+        try {
+            val reader = FileReader(file)
+            BIO_C = GSON.fromJson(reader, BioConstants::class.java)
+        } catch (e: Exception) {
+            elog("Failed to load file '$filename'.\n${e.cause}")
+        }
+    } else {
+        elog("Failed to load file '$filename'.\nFile not found")
+    }
+    return BIO_C
 }
 
 fun buildDirs() {

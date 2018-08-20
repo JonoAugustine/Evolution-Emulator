@@ -9,9 +9,7 @@ import com.ampro.evemu.ribonucleic.Codon
 import com.ampro.evemu.util.DoubleRange
 import com.ampro.evemu.util.SequentialNamer
 import com.ampro.evemu.util.slog
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.awaitAll
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.system.measureTimeMillis
 
@@ -22,16 +20,18 @@ class SimpleEnvironment(populations: ArrayList<Population<out Organism>> = Array
 
     init {
         slog("[$name] Generating codon scores...")
-        val time = measureTimeMillis {
-            runBlocking {
-                List(populations.size) {
-                    async(FIXED_POOL) {
-                        scoreMap.put(populations[it].name, scoreCodons())
-                    }
-                }.awaitAll()
-            }
-        }
+        val time = setScoreCodons()
         slog("[$name] ...done (time=${time/(1_000)})")
+    }
+
+    fun setScoreCodons() = measureTimeMillis {
+        runBlocking {
+            List(populations.size) {
+                launch (FIXED_POOL) {
+                    scoreMap[populations[it].name] = scoreCodons()
+                }
+            }.joinAll()
+        }
     }
 
 }

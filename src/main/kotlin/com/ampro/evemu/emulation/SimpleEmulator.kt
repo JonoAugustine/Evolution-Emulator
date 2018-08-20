@@ -5,6 +5,7 @@ import com.ampro.evemu.constants.Alphabet.*
 import com.ampro.evemu.organism.Organism
 import com.ampro.evemu.organism.Population
 import com.ampro.evemu.organism.ReproductiveType.SEX
+import com.ampro.evemu.ribonucleic.READ_POOL
 import com.ampro.evemu.ribonucleic.score
 import com.ampro.evemu.util.*
 import kotlinx.coroutines.experimental.*
@@ -23,8 +24,7 @@ class SimpleEmulator(val name: String = envNamer.next(),
                      var years: Int = 100) : Runnable {
 
     private val log = InternalLog(name,
-            years * environment.populations.size * 10,
-            true, true)
+            years * environment.populations.size * 10, true, true)
 
     private val cycleDurations = ArrayList<Long>(years * environment.populations.size)
     private val yearDurations  = ArrayList<Long>(years)
@@ -35,13 +35,14 @@ class SimpleEmulator(val name: String = envNamer.next(),
         val startupTime = measureTimeMillis {
             runBlocking {
                 List(environment.size) { i ->
-                    launch (FIXED_POOL) { scorePopulation(environment[i]) }
-                }.joinAll()
+                    async (FIXED_POOL) {
+                        measureTimeMillis { scorePopulation(environment[i]) }
+                    }
+                }.awaitAll().forEach { long -> elog("time=${long.div(1_000)}") }
             }
         }
         log.logAndPrint("...DONE (time=${startupTime/1_000})")
         environment.populations.forEach { log.logAndPrint(it) }
-        log.logAndPrint("")
 
         val fullTimer = Timer()
 
@@ -140,32 +141,44 @@ class SimpleEmulator(val name: String = envNamer.next(),
         val fullTime = reproTime + avergingTime + scoringTime  + cullTime
                              + prePair.right + postPair.right
 
-        tempLog.log("${pop.name} Post Cycle $year Analysis:")
-        tempLog.log("Cycle Duration=${Timer.format(fullTime)}")
-        tempLog.log("Filial generation time : ${
-        Timer.format(reproTime)} (${reproTime.percent(fullTime)}%)")
-        tempLog.log("\tsize=${filial.size}")
-        tempLog.log("Averaging time : ${
-        Timer.format(avergingTime)} (${avergingTime.percent(fullTime)}%)")
-        tempLog.log("Scoring time : ${
-        Timer.format(scoringTime)} (${scoringTime.percent(fullTime)}%)")
-        tempLog.log("Cull time : ${
-        Timer.format(cullTime)} (${cullTime.percent(fullTime)}%)")
-        tempLog.log("Culling cutoff=$cutoff")
-        tempLog.log("Orgs Culled=$culled")
-        tempLog.log( "Avg Fitness:")
-        tempLog.log("\tpre-mating=$preMateAvg")
-        tempLog.log("\tpost-mating=$postMateAvg")
-        tempLog.log("\tPost-culling=${pop.avgFitness}")
-        tempLog.log("Best Organism Pre-Filial Time : ${
-        Timer.format(prePair.right)} (${prePair.right.percent(fullTime)}%)")
-        tempLog.log("Best Organism Post-Filial Time: ${
-        Timer.format(postPair.right)} (${postPair.right.percent(fullTime)}%)")
-        tempLog.log("Best Org Pre-filial =${prePair.left}")
-        tempLog.log("Best Org Post-Filial=${postPair.left}\n")
-        log.ingestAndPrint(tempLog)
-        cycleDurations.add(fullTime)
+        //////////////////////////////////////////////////////
+
+        endCyleStats(tempLog, pop, year, fullTime, reproTime, filial, avergingTime,
+                scoringTime, cullTime, cutoff, culled, preMateAvg, postMateAvg, prePair,
+                postPair)
         return@runBlocking
+    }
+
+    fun <O : Organism> endCyleStats(log: InternalLog, pop: Population<O>, year: Int,
+                                    fullTime: Long, reproTime: Long,
+                                    filial: Population<O>, avergingTime: Long,
+                                    scoringTime: Long, cullTime: Long, cutoff: Double,
+                                    culled: Int, preMateAvg: Double, postMateAvg: Double,
+                                    prePair: Pair<O, Long>, postPair: Pair<O, Long>) {
+        log.log("${pop.name} Post Cycle $year Analysis:")
+        log.log("Cycle Duration=${Timer.format(fullTime)}")
+        log.log("Filial generation time : ${Timer.format(reproTime)} (${reproTime.percent(
+                fullTime)}%)")
+        log.log("\tsize=${filial.size}")
+        log.log("Averaging time : ${Timer.format(avergingTime)} (${avergingTime.percent(
+                fullTime)}%)")
+        log.log("Scoring time : ${Timer.format(scoringTime)} (${scoringTime.percent(
+                fullTime)}%)")
+        log.log("Cull time : ${Timer.format(cullTime)} (${cullTime.percent(fullTime)}%)")
+        log.log("Culling cutoff=$cutoff")
+        log.log("Orgs Culled=$culled")
+        log.log("Avg Fitness:")
+        log.log("\tpre-mating=$preMateAvg")
+        log.log("\tpost-mating=$postMateAvg")
+        log.log("\tPost-culling=${pop.avgFitness}")
+        log.log("Best Organism Pre-Filial Time : ${Timer.format(
+                prePair.right)} (${prePair.right.percent(fullTime)}%)")
+        log.log("Best Organism Post-Filial Time: ${Timer.format(
+                postPair.right)} (${postPair.right.percent(fullTime)}%)")
+        log.log("Best Org Pre-filial =${prePair.left}")
+        log.log("Best Org Post-Filial=${postPair.left}\n")
+        this.log.ingestAndPrint(log)
+        cycleDurations.add(fullTime)
     }
 
     /** @return The organism with the highest fitness (or first if same score) */
@@ -181,9 +194,23 @@ class SimpleEmulator(val name: String = envNamer.next(),
      * @param pop The population to score
      */
     private suspend fun <O: Organism> scorePopulation(pop: Population<O>) {
-        val scoredCodons = environment.scoreMap[pop.name]!!
+        slog("${pop.name} scoring START")
+        val sc = environment.scoreMap[pop.name]!!
+        /*
+        for (i in 0 until pop.size) {
+            slog("Time $i=" +
+                    measureTimeMillis { pop[i].fitness = score(pop[i], sc) }.toDouble()
+                            .div(1_000.0))
+        }
+        *////*
         List(pop.size) { i ->
-            launch(FIXED_POOL) { pop[i].fitness = score(pop[i], scoredCodons) }
+            launch (FIXED_POOL) {
+                slog("Time=" + measureTimeMillis {
+                            pop[i].fitness = score(pop[i], sc) }.toDouble().div(1_000)
+                )
+            }
         }.joinAll()
+        //*/
+        slog("${pop.name} scoring DONE")
     }
 }

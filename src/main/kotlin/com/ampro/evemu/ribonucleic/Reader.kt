@@ -1,9 +1,12 @@
 package com.ampro.evemu.ribonucleic
 
-import com.ampro.evemu.BIO_C
+import com.ampro.evemu.*
 import com.ampro.evemu.organism.Organism
-import kotlinx.coroutines.experimental.runBlocking
+import com.ampro.evemu.util.elog
+import com.ampro.evemu.util.slog
+import kotlinx.coroutines.experimental.*
 import java.util.*
+import kotlin.system.measureTimeMillis
 
 /**
  * Methods for transcription and translation (scoring) DNA sequences and Codons
@@ -11,6 +14,8 @@ import java.util.*
  * @author Jonathan Augustine
  * @since 3.0
  */
+
+val READ_POOL = newFixedThreadPoolContext(7_000, "Read-Pool")
 
 internal data class Pre_mRNA(var sequence: Array<RNA>) {
     val size: Int get() = sequence.size
@@ -152,8 +157,9 @@ internal fun splice(pre_mRNA: Pre_mRNA) : mRNA {
  *
  * @param mRNA the mRNA to translate
  * @param scoredCodons An array of codons with Double scores
+ * @return The weight x the score
  */
-fun translate(mRNA: mRNA, scoredCodons: List<Codon>) {
+fun translate(mRNA: mRNA, scoredCodons: List<Codon>) : Double {
     mRNA.score = mRNA.codons.let {
         var score = 0.0
         it.forEach { codon ->
@@ -165,8 +171,9 @@ fun translate(mRNA: mRNA, scoredCodons: List<Codon>) {
     mRNA.weight = mRNA.codons.size * mRNA.codons.let {
         var sum = 0.0
         it.forEach { codon ->  sum += scoredCodons.get(codon)?.score ?: 0.0 }
-        return@let sum / it.size
-    } * 0.1
+        return@let sum / it.size } * 0.1
+
+    return mRNA.weight * mRNA.score
 }
 
 /**
@@ -176,21 +183,37 @@ fun translate(mRNA: mRNA, scoredCodons: List<Codon>) {
  * @param scoredCodons Array of Scored codons
  * @return The calculated score as a Double
  */
-fun score(org: Organism, scoredCodons: List<Codon>) : Double {
-    var score = 0.0
-
-    val mRNAlist = ArrayList<mRNA>(org.chromosomes.size * 10)
-
+suspend fun score(org: Organism, scoredCodons: List<Codon>): Double {
+    /*
+    val scores = ArrayList<Deferred<Double>>(org.chromosomes.size * 100)
     org.chromosomes.forEach { zome ->
         zome.forEach { tid ->
-            mRNAlist.addAll(transcribe(tid))
+            scores.add(async (READ_POOL) {
+                if (tid.score == 0.0) {
+                    transcribe(tid).forEach {
+                        tid.score += translate(it, scoredCodons)
+                    }
+                }
+                tid.score
+            })
         }
     }
-
-    mRNAlist.forEach {
-        translate(it, scoredCodons)
-        score += it.score * it.weight
+    return scores.awaitAll().sum()
+    */
+    val scores = ArrayList<Double>(org.chromosomes.size * 100)
+    org.chromosomes.forEach { zome ->
+        zome.forEach { tid ->
+            scores.add( kotlin.run {
+                if (tid.score == 0.0) {
+                    slog("Transcribe/late=" + measureTimeMillis {
+                        transcribe(tid).forEach {
+                            tid.score += translate(it, scoredCodons)
+                        }
+                    }.toDouble().div(1_000.0))
+                }
+                tid.score
+            })
+        }
     }
-
-    return score
+    return scores.sum()
 }

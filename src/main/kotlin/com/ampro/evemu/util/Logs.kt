@@ -8,11 +8,8 @@ import java.io.PrintStream
 
 val threadName: String get() = Thread.currentThread().name
 
-fun slog(any: Any = "", inline: Boolean = false)
-        = print("${if(inline) "" else "\n"}[$threadName] $any")
-fun elog(any: Any = "", inline: Boolean = false) = System.err.print(
-        "${if(inline) "" else "\n"}[$threadName] $any"
-)
+fun slog(any: Any = "") = println("[$threadName] $any")
+fun elog(any: Any = "") = System.err.println("[$threadName] $any")
 
 data class Slogger(val name: String = "") {
     fun slog(any: Any = "") = println("[$name] [$threadName] $any")
@@ -52,6 +49,7 @@ class InternalLog(val name: String = "log", initSize: Int = 100_000,
         return@synchronized message
     }
 
+    /** Add a line to the log and print to the print stream */
     fun logAndPrint(any: Any, err: Boolean = false) {
         if (!err) println(log(any, err))
         else System.err.println(log(any, err))

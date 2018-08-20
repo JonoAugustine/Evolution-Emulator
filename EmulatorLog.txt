@@ -1,4 +1,0 @@
-EMULATORLOG
-+++++++++++++++
-Initiallizing Timers
-Generating Codon Scores
