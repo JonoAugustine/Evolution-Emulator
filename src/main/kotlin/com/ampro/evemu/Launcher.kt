@@ -3,14 +3,21 @@ package com.ampro.evemu
 import com.ampro.evemu.constants.BioConstants
 import com.ampro.evemu.emulation.SimpleEmulator
 import com.ampro.evemu.emulation.SimpleEnvironment
-import com.ampro.evemu.organism.*
+import com.ampro.evemu.organism.Organism
+import com.ampro.evemu.organism.Population
+import com.ampro.evemu.organism.ReproductiveType
 import com.ampro.evemu.organism.ReproductiveType.CLONE
 import com.ampro.evemu.organism.ReproductiveType.SEX
-import com.ampro.evemu.util.*
+import com.ampro.evemu.organism.SimpleOrganism
+import com.ampro.evemu.util.Slogger
+import com.ampro.evemu.util.elog
 import com.ampro.evemu.util.io.*
+import com.ampro.evemu.util.slog
 import kotlinx.coroutines.experimental.*
 import org.apache.commons.io.FileUtils
-import java.io.*
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
@@ -25,11 +32,11 @@ var FIXED_POOL = newFixedThreadPoolContext(7_000, "FixedPool")
 val scan = Scanner(System.`in`)
 var BIO_C : BioConstants = try {
     GSON.fromJson(FileReader(File(DIR_CONST, "t.json")), BioConstants::class.java)
-} catch (e: Exception) {
-    runBlocking { BioConstants.build() }
-}
+} catch (e: Exception) { runBlocking { BioConstants.build() } }
 
-
+/**
+ *
+ */
 fun main(args: Array<String>) = runBlocking {
 
     val emulators = 1

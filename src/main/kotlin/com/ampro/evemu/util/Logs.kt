@@ -3,7 +3,6 @@ package com.ampro.evemu.util
 import com.ampro.evemu.util.io.DIR_LOGS
 import com.ampro.evemu.util.io.toFile
 import jdk.nashorn.internal.ir.annotations.Ignore
-import kotlinx.coroutines.experimental.newSingleThreadContext
 import java.io.PrintStream
 
 val threadName: String get() = Thread.currentThread().name
@@ -37,7 +36,6 @@ class InternalLog(val name: String = "log", initSize: Int = 100_000,
     }
 
     @Ignore
-    val logThread = newSingleThreadContext("LOG")
     val log = ArrayList<Message>(initSize)
 
     /** Add a Message to the log */

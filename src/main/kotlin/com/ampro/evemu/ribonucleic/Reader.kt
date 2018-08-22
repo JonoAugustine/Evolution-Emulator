@@ -1,12 +1,10 @@
 package com.ampro.evemu.ribonucleic
 
-import com.ampro.evemu.*
+import com.ampro.evemu.BIO_C
 import com.ampro.evemu.organism.Organism
-import com.ampro.evemu.util.elog
-import com.ampro.evemu.util.slog
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.newFixedThreadPoolContext
+import kotlinx.coroutines.experimental.runBlocking
 import java.util.*
-import kotlin.system.measureTimeMillis
 
 /**
  * Methods for transcription and translation (scoring) DNA sequences and Codons
@@ -203,13 +201,11 @@ suspend fun score(org: Organism, scoredCodons: List<Codon>): Double {
     val scores = ArrayList<Double>(org.chromosomes.size * 100)
     org.chromosomes.forEach { zome ->
         zome.forEach { tid ->
-            scores.add( kotlin.run {
+            scores.add(kotlin.run {
                 if (tid.score == 0.0) {
-                    slog("Transcribe/late=" + measureTimeMillis {
-                        transcribe(tid).forEach {
-                            tid.score += translate(it, scoredCodons)
-                        }
-                    }.toDouble().div(1_000.0))
+                    transcribe(tid).forEach {
+                        tid.score += translate(it, scoredCodons)
+                    }
                 }
                 tid.score
             })

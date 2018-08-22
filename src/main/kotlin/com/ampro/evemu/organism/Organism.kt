@@ -69,33 +69,36 @@ abstract class Organism(val generation: Int,
     var fitness: Double = 0.0
 
     /** The number of base-pairs in the Organism genetic sequence */
-    val baseCount: Int get() = runBlocking {
-        //An array of async jobs counting the number of bases across all chromosomes
-        val jobs = Array(chromosomes.size) { chromosomeIndex ->
-            async(FIXED_POOL) {
-                var count = 0
-                chromosomes[chromosomeIndex].chromatids.forEach {
-                    count += it.size
+    val baseCount: Int
+        get() = runBlocking {
+            //An array of async jobs counting the number of bases across all chromosomes
+            val jobs = Array(chromosomes.size) { chromosomeIndex ->
+                async(FIXED_POOL) {
+                    var count = 0
+                    chromosomes[chromosomeIndex].chromatids.forEach {
+                        count += it.size
+                    }
+                    count
                 }
-                count
             }
+            jobs.let { var count = 0; it.forEach { count += it.await() }; count }
         }
-        jobs.let { var count = 0; it.forEach{ count+=it.await() }; count }
-    }
 
     fun getChromosomeSize(): Int = BIO_C.chromosomeSize
 
     /** @return a random Int within the defined IntRange */
     fun getChromoatidLength(): Int = BIO_C.chromatidLengthRange.random()
 
-    fun die() { this.alive = false }
+    fun die() {
+        this.alive = false
+    }
 
     /**
      * @param partner The organism to breed with
      * @return A new organism resulting from the combination of this and the
      *          given organism
      */
-    abstract fun sex(partner: Organism) : Organism
+    abstract fun sex(partner: Organism): Organism
 
     /** @return an exact clone of this Organism */
     abstract fun clone(): Organism
@@ -109,11 +112,13 @@ abstract class Organism(val generation: Int,
             .compare(this, other)
     }
 
-    override fun toString(): String {
-        return "$name | ${if (alive) "alive" else "dead"} age=$age, " +
-                "Reproductive=$reproductiveType fitness=$fitness | " +
-                "[${chromosomes.let { var s = ""; it.forEach {s += it}; s}}]"
-    }
+    fun toString(chromo: Boolean): String = toString() +
+            if (chromo) {
+                "[${chromosomes.let { val s=StringBuilder(); it.forEach{ s.append(it) }; s }}]"
+            } else ""
+
+    override fun toString(): String = "$name | ${if (alive) "alive" else "dead"} age=$age, " +
+            "Repro=$reproductiveType fitness=$fitness"
 
 }
 

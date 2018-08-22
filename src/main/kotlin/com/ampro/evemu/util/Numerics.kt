@@ -2,6 +2,7 @@ package com.ampro.evemu.util
 
 import java.math.BigInteger
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -14,12 +15,11 @@ fun Number.percent(of: Number) = (this.toDouble() / of.toDouble()) * 100
 /** @return The number squared */
 fun Number.sqr() = this.toDouble() * this.toDouble()
 
- //                        \\
 // AtomicInteger extensions \\
-
 operator fun AtomicInteger.unaryMinus() = -this.get()
 operator fun AtomicInteger.minus(other: AtomicInteger) = getAndAdd(-other)
 operator fun AtomicInteger.plus(other: AtomicInteger)  = getAndAdd(other.get())
+
 
 /**
  * @param src The source list of things to permute
@@ -75,24 +75,24 @@ fun factorial(i: Int): BigInteger {
 }
 
 /**
- * Removes all letters from the input String and returns the resulting number sequence
- * @param input String
- * @return int
+ * A data class for keeping track of numbers and stuff.
+ *
+ * @param A [ConcurrentHashMap] of tracks statistics
+ *
+ * @author Jonathan Augustine
+ * @since 3.0
  */
-fun removeLetters(input: String): Int = try {
-    Integer.parseInt(input.replace("[^\\d]", ""))
-} catch (e: NumberFormatException) {
-    -1
-}
+data class StatTrack(private val map: ConcurrentHashMap<String, Any> = ConcurrentHashMap()) {
 
-/**
- * Takes a string and returns true if the string is a digit
- * @param input
- * @return boolean
- */
-private fun isInteger(input: String): Boolean = try {
-    Integer.parseInt(input)
-    true
-} catch (e: Exception) {
-    false
+    /**
+     * Put the map pair in the map or get the current value at that key.
+     *
+     * @param key The [String] key
+     * @param value The [Any] value
+     * @return Null or the value currently mapped to the given key
+     */
+    fun putElseGet(key: String, value: Any) = map.putIfAbsent(key,  value)
+
+    fun get(key: String) = map[key]
+
 }
